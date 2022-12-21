@@ -1,5 +1,8 @@
 /** @type {import('vite').UserConfig} */
-
 export default {
-  base: '/Recipe_finder/'
-}
+    // ...
+    build: {
+      emptyOutDir: true
+    },
+    base: '/Recipe_finder/'
+  }

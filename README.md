@@ -1,4 +1,4 @@
-[Live preview](https://kepmon.github.io/Recipe_generator/)
+[Live preview](https://kepmon.github.io/Recipe_finder/)
 
 **Sources:**
 1. Nutrition data provider: [edamam.com](https://www.edamam.com/)

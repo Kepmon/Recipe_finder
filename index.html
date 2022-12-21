@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindMeRecipe - recipe generator</title>
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
+    <link rel="icon" type="image/png" href="/assets/favicon-c32378cb.png">
+    <script src="https://kit.fontawesome.com/00a26088af.js" crossorigin="anonymous"></script>
+    <script type="module" crossorigin src="/assets/index-96332d92.js"></script>
+    <link rel="stylesheet" href="/assets/index-c17d7384.css">
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="header__background">
+          <div class="header__shadow">
+              <h1 class="header__title">Welcome to our recipe generator</h1>
+              <p class="header__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil numquam, nostrum vel exercitationem hic molestiae dolores laborum. Optio, repellat rem.</p>
+          </div>
+          <a href="#main"><i class="fa-solid fa-angle-down header__arrow"></i></a>
+      </div>
+    </header>
+
+    <main class="main" id="main">
+        <div class="container">
+            <form class="main__form">
+                <h2 class="main__form-title">Choose desired criteria for your recipe</h2>
+                <div class="main__form-options">
+                    <div class="main__form-option">
+                        <label for="name" class="main__form-label margin">Name:</label>
+                        <input type="text" id="name" class="main__form-input"  name="q">
+                    </div>
+                    <div class="main__form-option">
+                        <label for="calorie" class="main__form-label margin">Caloric range (kcal):</label>
+                        <div class="main__form-calorie">
+                            <input type="number" id="calorie" class="main__form-range" name="caloriesFrom"> - <input type="number" class="main__form-range" name="caloriesTo">
+                        </div>
+                    </div>
+                    <div class="main__form-option">
+                        <div class="main__form-option-header">
+                            <p class="main__form-label pointer">Diet type <i class="fa-solid fa-angle-down down-arrow"></i></p>
+                        </div>
+                        <div class="main__form-option-btns">
+                            <input type="button" class="main__form-option-btn" name="diet" value="Balanced"></input>
+                            <input type="button" class="main__form-option-btn" name="diet" value="High-fiber"></input>
+                            <input type="button" class="main__form-option-btn" name="diet" value="High-protein"></input>
+                            <input type="button" class="main__form-option-btn" name="diet" value="Low-carb"></input>
+                            <input type="button" class="main__form-option-btn" name="diet" value="Low-fat"></input>
+                            <input type="button" class="main__form-option-btn" name="diet" value="Low-sodium"></input>
+                        </div>
+                    </div>
+                    <div class="main__form-option">
+                        <div class="main__form-option-header">
+                            <p class="main__form-label pointer">Dish type <i class="fa-solid fa-angle-down down-arrow"></i></p>
+                        </div>
+                        <div class="main__form-option-btns">
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Alcohol cocktail"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Biscuits and cookies"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Bread"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Cereals"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Condiments and sauces"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Desserts"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Drinks"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Egg"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Ice cream and custard"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Main course"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Pancake"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Pasta"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Pastry"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Pies and tarts"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Pizza"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Preps"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Preserve"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Salad"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Sandwiches"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Seafood"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Side dish"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Soup"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Special occasions"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Starter"></input>
+                            <input type="button" class="main__form-option-btn" name="dishType" value="Sweets"></input>
+                        </div>
+                    </div>
+                    <div class="main__form-option">
+                        <div class="main__form-option-header">
+                            <p class="main__form-label pointer">Cuisine type <i class="fa-solid fa-angle-down down-arrow"></i></p>
+                        </div>
+                        <div class="main__form-option-btns">
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="American"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Asian"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="British"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Caribbean"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Central europe"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Chinese"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Eastern europe"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="French"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Greek"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Indian"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Italian"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Japanese"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Korean"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Kosher"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Mediterranean"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Mexican"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Middle eastern"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Nordic"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="South american"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="South east asian"></input>
+                            <input type="button" class="main__form-option-btn" name="cuisineType" value="World"></input>
+                        </div>
+                    </div>
+                    <div class="main__form-option">
+                        <div class="main__form-option-header">
+                            <p class="main__form-label pointer">Health label <i class="fa-solid fa-angle-down down-arrow"></i></p>
+                        </div>
+                        <div class="main__form-option-btns">
+                            <input type="button" class="main__form-option-btn" name="health" value="Alcohol-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Dairy-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="DASH"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Egg-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Fish-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="FODMAP-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Gluten-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Keto-friendly"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Kidney-friendly"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Low-sugar"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Paleo"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Peanut-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Pescatarian"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Soy-free"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Vegan"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Vegetarian"></input>
+                            <input type="button" class="main__form-option-btn" name="health" value="Wheat-free"></input>
+                        </div>
+                    </div>
+                    <div class="main__form-option">
+                        <div class="main__form-option-header">
+                            <p class="main__form-label margin">Ingredients:</p>
+                        </div>
+                        <div class="main__form-option-inputs">
+                            <input type="text" class="main__form-option-input" name="ingredient">
+
+                            <template class="main__form-option-box">
+                                <input type="text" class="main__form-option-input" name="ingredient">
+                            </template>
+                        </div>
+                        <button class="add-more">Add more ingredients <i class="fa-regular fa-square-plus"></i></button>
+                    </div>
+                </div>
+                <button class="main__form-find">Find recipes</button>
+            </form>
+            <div class="main__contribution">
+                <img src="/assets/Edamam_Badge_Transparent-73dddbda.svg" alt="The image of contribution of Edamam API" class="edamam-img">
+            </div>
+        </div>
+
+        <div class="main__results">
+            <div class="container">
+                <h3 class="main__results-header">Recipes you're looking for:</h3>
+                <div class="main__result-cards">
+                    <template class="main__result-box">
+                        <div class="main__result-card">
+                            <p class="main__result-card-title"></p>
+                            <div class="main__result-card-body">
+                                <img src="" alt="The image of a given meal" class="main__result-card-img">
+                                <p class="main__result-card-calories">Calories: <span class="calories-number"></span></p>
+                                <ul class="main__result-card-ingredients">Ingredients:</ul>
+                                <p class="main__result-card-more"><a href="" class="read-more-link">Read more</a></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright">Copyright &copy; FindMeRecipe <span class="footer__year"></span></p>
+    </footer>
+    
+    
+  </body>
+</html>

@@ -13,7 +13,7 @@ export const makeApiCall = () => {
         const contribution = document.querySelector('.main__contribution')
         const dataResults = data.hits
 
-        contribution.style.backgroundColor = 'var(--background-brown)';
+        contribution.style.backgroundColor = 'var(--background-brown)'
         
         dataResults.forEach(result => {
             const cardsContainer = document.querySelector('.main__result-cards')
@@ -32,6 +32,8 @@ export const makeApiCall = () => {
                 resultCard.querySelector('.main__result-card-ingredients').appendChild(ingredientLine)
             })
             cardsContainer.appendChild(resultCard)
+
+            contribution.scrollIntoView()
         })
     })
 }

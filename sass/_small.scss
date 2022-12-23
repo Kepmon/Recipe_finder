@@ -34,6 +34,25 @@
                 font-size: 1.3rem;
             }
         }
+
+        &__contribution, .edamam-img {
+            max-width: 80vw;
+        }
+
+        &__results-header {
+            font-size: 1.3rem;
+        }
+
+        &__result {
+            &-cards {
+                padding: 1rem;
+            }
+
+            &-card-title {
+                height: 3rem;
+                font-size: 1.2rem;
+            }
+        }
     }
 }
 

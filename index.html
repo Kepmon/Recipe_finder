@@ -8,8 +8,8 @@
     <script src="https://developer.edamam.com/attribution/badge.js"></script>
     <link rel="icon" type="image/png" href="/Recipe_finder/assets/favicon-c32378cb.png">
     <script src="https://kit.fontawesome.com/00a26088af.js" crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="/Recipe_finder/assets/index-ba812642.js"></script>
-    <link rel="stylesheet" href="/Recipe_finder/assets/index-afd32b96.css">
+    <script type="module" crossorigin src="/Recipe_finder/assets/index-f0960502.js"></script>
+    <link rel="stylesheet" href="/Recipe_finder/assets/index-451197cf.css">
   </head>
   <body>
 
@@ -165,14 +165,102 @@
                             <p class="main__result-card-title"></p>
                             <div class="main__result-card-body">
                                 <img src="" alt="The image of a given meal" class="main__result-card-img">
-                                <p class="main__result-card-calories">Calories: <span class="calories-number"></span></p>
+                                <p class="main__result-card-calories">Calories per 100g: <span class="calories-number"></span></p>
                                 <ul class="main__result-card-ingredients">Ingredients:</ul>
-                                <p class="main__result-card-more"><a href="" class="read-more-link">Read more</a></p>
+                                <p class="main__result-card-more"><a href="#" class="read-more-link">Read more</a></p>
                             </div>
                         </div>
                     </template>
                 </div>
             </div>
+        </div>
+
+        <div class="main__details">
+            <template class="details-template">
+                <div class="container">
+                    <h3 class="main__details-header"></h3>
+                    <img src="" alt="The image of the clicked food" class="clicked-food">
+                    <div class="main__details-info">
+                        <div class="main__details-general">
+                            <p class="bold">Cuisine type: <span class="cuisine-type"></span></p>
+                            <p class="bold">Diet labels: 
+                                <ul class="diet-labels">
+                                </ul>
+                            </p>
+                            <p class="bold">Health labels: 
+                                <ul class="health-labels">
+                                </ul>
+                            </p>
+                            <p class="bold">Ingredients: 
+                                <ul class="ingredients">
+                                </ul>
+                            </p>
+                        </div>
+    
+                        <div class="main__details-nutrition-facts">
+                            <h4 class="nutrition-facts-header">Nutrition Facts</h4>
+                            <p>Serving size: <span class="serving-size"></span></p>
+                            <div class="black-block"></div>
+                            <table class="nutrition-facts-table">
+                                <thead>
+                                    <th colspan="2">Amount per serving</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Calories</td>
+                                        <td class="calories-per-serving"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Calories from fat</td>
+                                        <td class="calories-fat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total fat</td>
+                                        <td class="total-fat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Saturated fat</td>
+                                        <td class="saturated-fat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Trans fat</td>
+                                        <td class="trans-fat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cholesterol</td>
+                                        <td class="cholesterol"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total carbohydrate</td>
+                                        <td class="total-carbohydrate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Dietary fiber</td>
+                                        <td class="dietary-fiber"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Sugars</td>
+                                        <td class="sugars"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">Sugar alcohol</td>
+                                        <td class="sugar-alcohol"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Protein</td>
+                                        <td class="protein"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-border-bottom">Sodium</td>
+                                        <td class="table-border-bottom sodium"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="margin-top"><a href="#" class="see-recipe" target="_blank">See full recipe</a></p>
+                </div>
+            </template>
         </div>
     </main>
 

@@ -88,7 +88,7 @@ body
         max-width: 50vw;
         border-radius: 30px;
         background-color: var(--form-color);
-        box-shadow: 1px 1px 5px var(--black-text);
+        box-shadow: 2px 2px 10px var(--shadow-color);
 
         &-title
         {
@@ -188,7 +188,7 @@ body
 
         &-input:focus, &-range:focus, &-option-input:focus
         {
-            box-shadow: 1px 1px 5px var(--black-text);
+            box-shadow: 1px 1px 5px var(--shadow-color);
         }
 
         &-find
@@ -301,6 +301,136 @@ body
         .ingredient-item {
             list-style: inside;
             font-weight: normal;
+        }
+    }
+
+    &__details {
+        display: none;
+        padding: 3rem 0 1rem 0;
+        width: 100vw;
+        background-color: var(--background-grey);
+        color: var(--white-text);
+
+        &-header {
+            margin-bottom: 2rem;
+            color: var(--white-text);
+            font-size: 2rem;
+        }
+
+        .clicked-food {
+            min-width: 400px;
+            width: 35vw;
+            border-radius: 10px;
+        }
+
+        &-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        &-general {
+            max-width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .bold {
+                margin-top: 2rem;
+                font-weight: bold;
+            }
+
+            .bold:first-of-type {
+                margin-top: 0;
+            }
+
+            .cuisine-type {
+                font-weight: normal;
+            }
+
+            .diet-labels, .health-labels {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 40vw;
+                width: 300px;
+
+                li {
+                    margin-left: 2rem;
+                }
+            }
+
+            .ingredients {
+                list-style: inside;
+            }
+        }
+
+        &-nutrition-facts {
+            margin-left: 10rem;
+            padding: 1rem;
+            background-color: var(--background-white);
+            color: var(--black-color);
+            text-align: left;
+            box-shadow: 5px 5px 15px var(--shadow-color);
+            border-radius: 5px;
+
+            .nutrition-facts-header {
+                font-size: 1.6rem;
+            }
+
+            .black-block {
+                height: 10px;
+                background-color: var(--black-color);
+            }
+
+            .nutrition-facts-table {
+                border-collapse: collapse;
+
+                th {
+                    border-bottom: 5px solid var(--black-color);
+                    text-align: right;
+                }
+
+                td {
+                    border-bottom: 1px solid var(--background-grey);
+                }
+                
+                td:nth-child(odd) {
+                    width: 150px;
+                    font-weight: bold;
+                }
+
+                td:nth-child(even) {
+                    width: 100px;
+                    text-align: right;
+                }
+
+                td.table-left {
+                    padding-left: 1rem;
+                    font-weight: normal;
+                }
+
+                .table-border-bottom {
+                    border-bottom: 5px solid var(--black-color);
+                }
+            }
+        }
+
+        .margin-top {
+            margin-top: 2rem;
+        }
+
+        .see-recipe {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--yellow-color);
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
         }
     }
 }

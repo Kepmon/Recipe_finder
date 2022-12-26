@@ -6,7 +6,7 @@ const addMoreBtn = document.querySelector('.add-more')
 const form = document.querySelector('.main__form')
 const optionBtns = document.querySelectorAll('.main__form-option-btn')
 const downArrows = Array.from(document.querySelectorAll('.down-arrow'))
-const findButton = document.querySelector('.main__form-find')
+export const findButton = document.querySelector('.main__form-find')
 
 let selectedOptions = {}
 let selectedButtons = []

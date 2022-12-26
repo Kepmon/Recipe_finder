@@ -54,6 +54,31 @@
                 font-size: 1.1rem;
             }
         }
+
+        &__details {
+            .clicked-food {
+                min-width: 400px;
+                width: 50vw;
+            }
+
+            &-info {
+                margin-top: 3rem;
+            }
+
+            &-general {
+                padding: 0;
+
+                .diet-labels, .health-labels {
+                    display: flex;
+                    list-style: disc;
+                    padding: 1rem;
+
+                    li {
+                        margin-left: 1.5rem;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -86,10 +111,75 @@
     {
         &__form
         {
+            border-radius: 15px;
+
             &-title
             {
                 font-size: 1.2rem;
             }
         }
+
+        &__contribution {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        &__details {
+            padding: 1rem;
+
+            .container {
+                flex-direction: column;
+                justify-content: center;
+            }
+    
+            .clicked-food {
+                min-width: 250px;
+                width: 50vw;
+            }
+
+            &-info {
+                flex-direction: column;
+                margin-top: 0;
+                width: 100vw;
+            }
+
+            &-general {
+                margin-top: 2rem;
+                margin-right: 0;
+                max-width: 100%;
+                
+                .diet-labels, .health-labels {
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 100%;
+                    list-style: inside;
+                    transform: translateX(0);
+
+                    li {
+                        margin-left: -.5rem;
+                    }
+                }
+            }
+
+            &-nutrition-facts {
+                margin-top: 3rem;
+                max-width: 80%;
+            }
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .main
+    {
+        &__details {
+            &-general {
+                max-width: 90%;
+            }
+            &-nutrition-facts {
+                max-width: 90%;
+            }
+        }
+        
     }
 }

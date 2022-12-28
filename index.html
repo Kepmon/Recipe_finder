@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="recipes, recipe finder, meals, diet, health, cuisine, cooking">
+    <meta name="description" content="This website serves for searching recipes based on many different criteria you can choose, filling a simple form.">
     <title>FindMeRecipe - recipe generator</title>
     <script src="https://developer.edamam.com/attribution/badge.js"></script>
     <link rel="icon" type="image/png" href="/Recipe_finder/assets/favicon-c32378cb.png">
     <script src="https://kit.fontawesome.com/00a26088af.js" crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="/Recipe_finder/assets/index-f0960502.js"></script>
-    <link rel="stylesheet" href="/Recipe_finder/assets/index-451197cf.css">
+    <script type="module" crossorigin src="/Recipe_finder/assets/index-ac7424e2.js"></script>
+    <link rel="stylesheet" href="/Recipe_finder/assets/index-ecde9b41.css">
   </head>
   <body>
 
@@ -17,7 +19,7 @@
       <div class="header__background">
           <div class="header__shadow">
               <h1 class="header__title">Welcome to our recipe finder</h1>
-              <p class="header__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil numquam, nostrum vel exercitationem hic molestiae dolores laborum. Optio, repellat rem.</p>
+              <p class="header__text">Find a recipe that is most suitable for your needs. By filling a simple form below you may choose different criteria, e.g. preferred ingredients, cuisine type, health labels and so forth. This will allow you to find recipes based on your own preferences.</p>
           </div>
           <a href="#main"><i class="fa-solid fa-angle-down header__arrow"></i></a>
       </div>
@@ -27,6 +29,7 @@
         <div class="container">
             <form class="main__form">
                 <h2 class="main__form-title">Choose desired criteria for your recipe</h2>
+                <p class="hint">HINT: You need to fill at least one form field.</p>
                 <div class="main__form-options">
                     <div class="main__form-option">
                         <label for="name" class="main__form-label margin">Name:</label>
@@ -34,6 +37,7 @@
                     </div>
                     <div class="main__form-option">
                         <label for="calorie" class="main__form-label margin">Caloric range (kcal):</label>
+                        <p class="hint">HINT: You need to fill both fields.</p>
                         <div class="main__form-calorie">
                             <input type="number" id="calorie" class="main__form-range" name="caloriesFrom"> - <input type="number" class="main__form-range" name="caloriesTo">
                         </div>
@@ -150,6 +154,7 @@
                     </div>
                 </div>
                 <button class="main__form-find">Find recipes</button>
+                <p class="main__form-error"></p>
             </form>
             <div class="main__contribution">
                 <img src="/Recipe_finder/assets/Edamam_Badge_Transparent-73dddbda.svg" alt="The image of contribution of Edamam API" class="edamam-img">

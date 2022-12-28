@@ -58,6 +58,11 @@ body
         font-size: 3rem;
     }
 
+    &__text {
+        max-width: 1200px;
+        font-size: 1.1rem;
+    }
+
     &__arrow
     {
         position: absolute;
@@ -90,9 +95,15 @@ body
         background-color: var(--form-color);
         box-shadow: 2px 2px 10px var(--shadow-color);
 
+        .hint {
+            margin-bottom: 1rem;
+            color: var(--grey-text);
+            font-size: 0.9rem;
+        }
+
         &-title
         {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-align: center;
             font-size: 1.5rem;
         }
@@ -209,6 +220,13 @@ body
         &-find:hover
         {
             background-color: var(--white-text);
+        }
+
+        &-error {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--red-text);
         }
     }
 

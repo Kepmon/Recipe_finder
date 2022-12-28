@@ -8,37 +8,45 @@ const resultWindow = document.querySelector('.main__results')
 let detailLinks
 
 export const makeApiCall = () => {
-    const linkQuery = linkOptions.reduce((previousOption, currentOption) => previousOption + currentOption, core)
-    
-    fetch(linkQuery)
-    .then(res => res.json())
-    .then(data => {
-        const contribution = document.querySelector('.main__contribution')
-        const dataResults = data.hits
-        const cardsContainer = document.querySelector('.main__result-cards')
+    const formError = document.querySelector('.main__form-error')
+
+    if (linkOptions.length !== 0) {
+        const linkQuery = linkOptions.reduce((previousOption, currentOption) => previousOption + currentOption, core)
         
-        contribution.style.backgroundColor = 'var(--background-brown)'
-        resultWindow.style.display = 'block'
+        formError.textContent = ''
 
-        dataResults.forEach(result => {
-            const resultTemplate = document.querySelector('.main__result-box')
-            const resultCard = resultTemplate.content.cloneNode(true)
+        fetch(linkQuery)
+        .then(res => res.json())
+        .then(data => {
+            const contribution = document.querySelector('.main__contribution')
+            const dataResults = data.hits
+            const cardsContainer = document.querySelector('.main__result-cards')
+            
+            contribution.style.backgroundColor = 'var(--background-brown)'
+            resultWindow.style.display = 'block'
 
-            resultCard.querySelector('.main__result-card-title').textContent = result.recipe.label
-            resultCard.querySelector('.main__result-card-img').setAttribute('src', result.recipe.image)
-            resultCard.querySelector('.calories-number').textContent = parseInt(result.recipe.calories / result.recipe.totalWeight * 100)
-            result.recipe.ingredientLines.forEach(line => {
-                const ingredientLine = document.createElement('li')
-                ingredientLine.classList.add('ingredient-item')
-                ingredientLine.textContent = line
-                resultCard.querySelector('.main__result-card-ingredients').append(ingredientLine)
+            dataResults.forEach(result => {
+                const resultTemplate = document.querySelector('.main__result-box')
+                const resultCard = resultTemplate.content.cloneNode(true)
+
+                resultCard.querySelector('.main__result-card-title').textContent = result.recipe.label
+                resultCard.querySelector('.main__result-card-img').setAttribute('src', result.recipe.image)
+                resultCard.querySelector('.calories-number').textContent = parseInt(result.recipe.calories / result.recipe.totalWeight * 100)
+                result.recipe.ingredientLines.forEach(line => {
+                    const ingredientLine = document.createElement('li')
+                    ingredientLine.classList.add('ingredient-item')
+                    ingredientLine.textContent = line
+                    resultCard.querySelector('.main__result-card-ingredients').append(ingredientLine)
+                })
+                cardsContainer.append(resultCard)
+                contribution.scrollIntoView()
             })
-            cardsContainer.append(resultCard)
-            contribution.scrollIntoView()
+            detailLinks = Array.from(cardsContainer.querySelectorAll('.read-more-link'))
+            detailLinks.forEach(link => link.addEventListener('click', showMealDetails))
         })
-        detailLinks = Array.from(cardsContainer.querySelectorAll('.read-more-link'))
-        detailLinks.forEach(link => link.addEventListener('click', showMealDetails))
-    })
+    } else {
+        formError.textContent = 'You have not filled any form field.'
+    }
 }
 
 export const showMealDetails = e => {

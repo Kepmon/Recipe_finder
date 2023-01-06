@@ -52,5 +52,5 @@ jobs:
 
       - name: Setting secrets
         env:
-            API_ID: ${{ secrets.API_ID }}
-            API_KEY: ${{ secrets.API_KEY }}
+            VITE_API_ID: ${{ secrets.API_ID }}
+            VITE_API_KEY: ${{ secrets.API_KEY }}

@@ -29,8 +29,7 @@ jobs:
         run: npm run build
 
       - name: Print name
-        run: echo "${{ secrets.VITE_API_ID }}"
-        run: echo "${{ secrets.VITE_API_KEY }}"
+        run: echo "${{ secrets.VITE_API_ID }} and ${{ secrets.VITE_API_KEY }}"
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2

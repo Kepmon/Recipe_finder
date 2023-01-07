@@ -33,7 +33,7 @@ jobs:
 
       - name: Setting secrets
         uses: peaceiris/actions-gh-pages@v3
-        env:
+        with:
             VITE_API_ID: ${{ secrets.VITE_API_ID }}
             VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 

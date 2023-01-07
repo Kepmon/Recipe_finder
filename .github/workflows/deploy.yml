@@ -30,6 +30,9 @@ jobs:
 
       - name: Print name
         run: echo "${{ secrets.VITE_API_ID }} and ${{ secrets.VITE_API_KEY }}"
+        env:
+          VITE_API_ID: ${{ secrets.VITE_API_ID }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2

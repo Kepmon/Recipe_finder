@@ -23,6 +23,9 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build project
+        env:
+          VITE_API_ID: ${{ secrets.VITE_API_ID }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
         run: npm run build
 
       - name: Upload production-ready build files
@@ -30,12 +33,6 @@ jobs:
         with:
           name: production-files
           path: ./dist
-
-      - name: Setting secrets
-        uses: peaceiris/actions-gh-pages@v3
-        env:
-            VITE_API_ID: ${{ secrets.VITE_API_ID }}
-            VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
   deploy:
     name: Deploy

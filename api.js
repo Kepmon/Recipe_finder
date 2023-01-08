@@ -5,7 +5,6 @@ import { makeQueries } from "./script"
 const env = import.meta.env
 const URL = 'https://api.edamam.com/api/recipes/v2'
 const core = `${URL}?app_id=${env.VITE_API_ID}&app_key=${env.VITE_API_KEY}&type=public`
-export const findButton = document.querySelector('.main__form-find')
 const resultWindow = document.querySelector('.main__results')
 let detailLinks
 

@@ -1,12 +1,11 @@
 import './sass/style.scss'
-import { makeApiCall } from './api'
+import { fetchData } from './api'
 
-const optionHeaders = Array.from(document.querySelectorAll('.pointer'))
 const addMoreBtn = document.querySelector('.add-more')
 const form = document.querySelector('.main__form')
 const optionBtns = document.querySelectorAll('.main__form-option-btn')
 const downArrows = Array.from(document.querySelectorAll('.down-arrow'))
-export const findButton = document.querySelector('.main__form-find')
+const findButton = document.querySelector('.main__form-find')
 
 let selectedOptions = {}
 let selectedButtons = []
@@ -19,6 +18,7 @@ export let linkOptions = []
 
 const showBtns = e => {
     const btnsBoxes = document.querySelectorAll('.main__form-option-btns')
+    const optionHeaders = Array.from(document.querySelectorAll('.pointer'))
     let clickedIndex = optionHeaders.indexOf(e.target)
 
     if (e.target.classList.contains('fa-solid')) {
@@ -53,7 +53,7 @@ const readSelectedInputs = e => {
     }
 }
 
-const collectSelectedButtons = () => {
+export const collectSelectedButtons = () => {
     selectedButtons = []
     dietArray = []
     dishArray = []
@@ -95,7 +95,7 @@ const collectSelectedButtons = () => {
     selectedOptions['health'] = healthArray
 }
 
-const makeQueries = () => {
+export const makeQueries = () => {
     if(selectedOptions.q !== undefined) {
         const nameQuery = `&q=${selectedOptions.q}`
         linkOptions.push(nameQuery)
@@ -127,9 +127,8 @@ form.addEventListener('keyup', preventDefault)
 form.addEventListener('change', readSelectedInputs)
 optionBtns.forEach(btn => btn.addEventListener('change', readSelectedInputs))
 optionBtns.forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('btn-chosen')))
-optionHeaders.forEach(header => header.addEventListener('click', showBtns, {capture: true}))
+document.querySelectorAll('.pointer').forEach(header => header.addEventListener('click', showBtns, {capture: true}))
 addMoreBtn.addEventListener('click', addMoreInputs)
-findButton.addEventListener('click', collectSelectedButtons)
-findButton.addEventListener('click', makeQueries)
-findButton.addEventListener('click', makeApiCall)
+// findButton.addEventListener('click', makeApiCall)
+findButton.addEventListener('click', fetchData)
 window.addEventListener('DOMContentLoaded', displayYear)

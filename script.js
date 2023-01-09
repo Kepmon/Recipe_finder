@@ -1,5 +1,8 @@
 import './sass/style.scss'
-import { fetchData } from './api'
+import { renderCardsSection } from './api'
+import { showMealDetails } from './api'
+import { resultWindow } from './api'
+import { detailLinks } from './api'
 
 const addMoreBtn = document.querySelector('.add-more')
 const form = document.querySelector('.main__form')
@@ -14,7 +17,7 @@ let dietArray = []
 let dishArray = []
 let cuisineArray = []
 let healthArray = []
-export let linkOptions = []
+let linkOptions = []
 
 const showBtns = e => {
     const btnsBoxes = document.querySelectorAll('.main__form-option-btns')
@@ -53,7 +56,7 @@ const readSelectedInputs = e => {
     }
 }
 
-export const collectSelectedButtons = () => {
+const collectSelectedButtons = () => {
     selectedButtons = []
     dietArray = []
     dishArray = []
@@ -131,6 +134,21 @@ export const makeQueryLink = () => {
         
     } else {
         formError.textContent = 'You have not filled any form field.'
+    }
+}
+
+const fetchData = async () => {
+    const res = await fetch(makeQueryLink())
+    const data = await res.json()
+
+    renderCardsSection(data)
+
+    if (resultWindow.style.display === 'block') {
+        detailLinks.forEach(link => link.addEventListener('click', e => {
+            e.preventDefault()
+
+            showMealDetails(e, data)
+        }))
     }
 }
 

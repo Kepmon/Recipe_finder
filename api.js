@@ -1,24 +1,7 @@
-import { linkOptions } from "./script"
-import { collectSelectedButtons } from "./script"
-import { makeQueries } from "./script"
-import { makeQueryLink } from "./script"
+export const resultWindow = document.querySelector('.main__results')
+export let detailLinks
 
-
-const resultWindow = document.querySelector('.main__results')
-let detailLinks
-
-export const fetchData = async () => {
-    const res = await fetch(makeQueryLink())
-    const data = await res.json()
-
-    renderCardsSection(data)
-
-    if (resultWindow.style.display === 'block') {
-        detailLinks.forEach(link => link.addEventListener('click', showMealDetails(data)))
-    }
-}
-
-const renderCardsSection = data => {
+export const renderCardsSection = data => {
     const contribution = document.querySelector('.main__contribution')
     const dataResults = data.hits
     const cardsContainer = document.querySelector('.main__result-cards')
@@ -47,8 +30,6 @@ const renderCardsSection = data => {
 }
 
 export const showMealDetails = async (e, data) => {
-    e.preventDefault()
-   
     const dataResult = data.hits
     const detailWindow = document.querySelector('.main__details')
     const detailsTemplate = document.querySelector('.details-template')

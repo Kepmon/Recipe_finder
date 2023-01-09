@@ -1,33 +1,24 @@
 import { linkOptions } from "./script"
 import { collectSelectedButtons } from "./script"
 import { makeQueries } from "./script"
+import { makeQueryLink } from "./script"
 
-const env = import.meta.env
-const URL = 'https://api.edamam.com/api/recipes/v2'
-const core = `${URL}?app_id=${env.VITE_API_ID}&app_key=${env.VITE_API_KEY}&type=public`
+
 const resultWindow = document.querySelector('.main__results')
 let detailLinks
 
 export const fetchData = async () => {
-    collectSelectedButtons()
-    makeQueries()
+    const res = await fetch(makeQueryLink())
+    const data = await res.json()
 
-    const formError = document.querySelector('.main__form-error')
-    const linkQuery = linkOptions.reduce((previousOption, currentOption) => previousOption + currentOption, core)
+    renderCardsSection(data)
 
-    if (linkOptions.length !== 0) {
-        formError.textContent = ''
-
-        const res = await fetch(linkQuery)
-        const data = await res.json()
-        
-        renderFirstSection(data)
-    } else {
-        formError.textContent = 'You have not filled any form field.'
+    if (resultWindow.style.display === 'block') {
+        detailLinks.forEach(link => link.addEventListener('click', showMealDetails(data)))
     }
 }
 
-const renderFirstSection = data => {
+const renderCardsSection = data => {
     const contribution = document.querySelector('.main__contribution')
     const dataResults = data.hits
     const cardsContainer = document.querySelector('.main__result-cards')
@@ -53,16 +44,11 @@ const renderFirstSection = data => {
     })
 
     detailLinks = Array.from(cardsContainer.querySelectorAll('.read-more-link'))
-    detailLinks.forEach(link => link.addEventListener('click', showMealDetails))
 }
 
-export const showMealDetails = async (e) => {
+export const showMealDetails = async (e, data) => {
     e.preventDefault()
-    const linkQuery = linkOptions.reduce((previousOption, currentOption) => previousOption + currentOption, core)
-
-    const res = await fetch(linkQuery)
-    const data = await res.json()
-
+   
     const dataResult = data.hits
     const detailWindow = document.querySelector('.main__details')
     const detailsTemplate = document.querySelector('.details-template')

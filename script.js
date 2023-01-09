@@ -115,6 +115,25 @@ export const makeQueries = () => {
     }
 }
 
+export const makeQueryLink = () => {
+    collectSelectedButtons()
+    makeQueries()
+    
+    const formError = document.querySelector('.main__form-error')
+    const env = import.meta.env
+    const URL = 'https://api.edamam.com/api/recipes/v2'
+    const core = `${URL}?app_id=${env.VITE_API_ID}&app_key=${env.VITE_API_KEY}&type=public`
+    let linkQuery
+
+    if (linkOptions.length !== 0) {
+        formError.textContent = ''
+        return linkQuery = linkOptions.reduce((previousOption, currentOption) => previousOption + currentOption, core)
+        
+    } else {
+        formError.textContent = 'You have not filled any form field.'
+    }
+}
+
 const displayYear = () => {
     const year = document.querySelector('.footer__year')
     const currentYear = new Date().getFullYear()
@@ -129,6 +148,5 @@ optionBtns.forEach(btn => btn.addEventListener('change', readSelectedInputs))
 optionBtns.forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('btn-chosen')))
 document.querySelectorAll('.pointer').forEach(header => header.addEventListener('click', showBtns, {capture: true}))
 addMoreBtn.addEventListener('click', addMoreInputs)
-// findButton.addEventListener('click', makeApiCall)
 findButton.addEventListener('click', fetchData)
 window.addEventListener('DOMContentLoaded', displayYear)

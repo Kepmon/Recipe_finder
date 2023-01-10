@@ -1,6 +1,8 @@
 export const resultWindow = document.querySelector('.main__results')
 export let detailLinks
 
+import { createList } from "./lists"
+
 export const renderCardsSection = data => {
     const contribution = document.querySelector('.main__contribution')
     const dataResults = data.hits
@@ -16,16 +18,12 @@ export const renderCardsSection = data => {
         resultCard.querySelector('.main__result-card-title').textContent = result.recipe.label
         resultCard.querySelector('.main__result-card-img').setAttribute('src', result.recipe.image)
         resultCard.querySelector('.calories-number').textContent = parseInt(result.recipe.calories / result.recipe.totalWeight * 100)
-        result.recipe.ingredientLines.forEach(line => {
-            const ingredientLine = document.createElement('li')
-            ingredientLine.classList.add('ingredient-item')
-            ingredientLine.textContent = line
-            resultCard.querySelector('.main__result-card-ingredients').append(ingredientLine)
-        })
+        const createdList = createList('Ingredients', 'main__result-card-ingredients', result.recipe.ingredientLines)
+        resultCard.querySelector('.main__result-card-ul').append(createdList)
         cardsContainer.append(resultCard)
-        contribution.scrollIntoView()
     })
-
+    
+    contribution.scrollIntoView()
     detailLinks = Array.from(cardsContainer.querySelectorAll('.read-more-link'))
 }
 
@@ -41,21 +39,14 @@ export const showMealDetails = async (e, data) => {
     detailsBox.querySelector('.main__details-header').textContent = clickedMeal.recipe.label
     detailsBox.querySelector('.clicked-food').setAttribute('src', clickedMeal.recipe.image)
     detailsBox.querySelector('.cuisine-type').textContent = clickedMeal.recipe.cuisineType
-    clickedMeal.recipe.dietLabels.forEach(label => {
-        const dietLabel = document.createElement('li')
-        dietLabel.textContent = label
-        detailsBox.querySelector('.diet-labels').append(dietLabel)
-    })
-    clickedMeal.recipe.healthLabels.forEach(label => {
-        const healthLabel = document.createElement('li')
-        healthLabel.textContent = label
-        detailsBox.querySelector('.health-labels').append(healthLabel)
-    })
-    clickedMeal.recipe.ingredientLines.forEach(line => {
-        const ingredientLine = document.createElement('li')
-        ingredientLine.textContent = line
-        detailsBox.querySelector('.ingredients').append(ingredientLine)
-    })
+    
+    const dietUl = createList('', 'diet-labels', clickedMeal.recipe.dietLabels)
+    detailsBox.querySelector('.main__details-diet').append(dietUl)
+    const healthUl = createList('', 'health-labels', clickedMeal.recipe.healthLabels)
+    detailsBox.querySelector('.main__details-health').append(healthUl)
+    const ingredientsUl = createList('', 'ingredients', clickedMeal.recipe.ingredientLines)
+    detailsBox.querySelector('.main__details-ingredients').append(ingredientsUl)
+    
     detailsBox.querySelector('.serving-size').textContent = parseInt(clickedMeal.recipe.totalWeight)
     detailsBox.querySelector('.calories-per-serving').textContent = parseInt(clickedMeal.recipe.calories)
     detailsBox.querySelector('.calories-fat').textContent = parseInt(clickedMeal.recipe.totalNutrients.FAT.quantity * 9)

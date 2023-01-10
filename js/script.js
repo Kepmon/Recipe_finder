@@ -1,8 +1,8 @@
-import './sass/style.scss'
-import { renderCardsSection } from './api'
-import { showMealDetails } from './api'
-import { resultWindow } from './api'
-import { detailLinks } from './api'
+import '../sass/style.scss'
+import { renderCardsSection } from './templates'
+import { showMealDetails } from './templates'
+import { resultWindow } from './templates'
+import { detailLinks } from './templates'
 
 const addMoreBtn = document.querySelector('.add-more')
 const form = document.querySelector('.main__form')

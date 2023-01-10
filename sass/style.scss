@@ -302,6 +302,7 @@ body
             display: flex;
             flex-direction: column;
             justify-content: center;
+            list-style: inside;
             flex-grow: 1;
         }
 
@@ -313,11 +314,6 @@ body
         }
 
         .dish-type, .calories-number {
-            font-weight: normal;
-        }
-
-        .ingredient-item {
-            list-style: inside;
             font-weight: normal;
         }
     }

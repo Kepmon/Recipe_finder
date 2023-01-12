@@ -10,8 +10,8 @@
     <script src="https://developer.edamam.com/attribution/badge.js"></script>
     <link rel="icon" type="image/png" href="/Recipe_finder/assets/favicon-c32378cb.png">
     <script src="https://kit.fontawesome.com/00a26088af.js" crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="/Recipe_finder/assets/index-01c97ce4.js"></script>
-    <link rel="stylesheet" href="/Recipe_finder/assets/index-2c8ec9ad.css">
+    <script type="module" crossorigin src="/Recipe_finder/assets/index-e90d7a77.js"></script>
+    <link rel="stylesheet" href="/Recipe_finder/assets/index-1c8efc1b.css">
   </head>
   <body>
 
@@ -33,110 +33,313 @@
                 <div class="main__form-options">
                     <div class="main__form-option">
                         <label for="name" class="main__form-label margin">Name:</label>
-                        <input type="text" id="name" class="main__form-input"  name="q">
+                        <input type="text" id="name" name="q" class="main__form-input" name="q">
                     </div>
                     <div class="main__form-option">
                         <label for="calorie" class="main__form-label margin">Caloric range (kcal):</label>
                         <p class="hint">HINT: You need to fill both fields.</p>
                         <div class="main__form-calorie">
-                            <input type="number" id="calorie" class="main__form-range" name="caloriesFrom"> - <input type="number" class="main__form-range" name="caloriesTo">
+                            <input type="number" id="calorie" class="main__form-range" name="calories"> - <input type="number" class="main__form-range" name="calories">
                         </div>
                     </div>
                     <div class="main__form-option">
                         <div class="main__form-option-header">
                             <p class="main__form-label pointer">Diet type <i class="fa-solid fa-angle-down down-arrow"></i></p>
                         </div>
-                        <div class="main__form-option-btns">
-                            <input type="button" class="main__form-option-btn" name="diet" value="Balanced"></input>
-                            <input type="button" class="main__form-option-btn" name="diet" value="High-fiber"></input>
-                            <input type="button" class="main__form-option-btn" name="diet" value="High-protein"></input>
-                            <input type="button" class="main__form-option-btn" name="diet" value="Low-carb"></input>
-                            <input type="button" class="main__form-option-btn" name="diet" value="Low-fat"></input>
-                            <input type="button" class="main__form-option-btn" name="diet" value="Low-sodium"></input>
+                        <div class="main__form-option-checkboxes">
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="balanced">
+                                Balanced
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="high-fiber">
+                                High-fiber
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="high-protein">
+                                High-protein
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="low-carb">
+                                Low-carb
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="low-fat">
+                                Low-fat
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="diet" class="checkbox" value="low-sodium">
+                                Low-sodium
+                            </label>
                         </div>
                     </div>
                     <div class="main__form-option">
                         <div class="main__form-option-header">
                             <p class="main__form-label pointer">Dish type <i class="fa-solid fa-angle-down down-arrow"></i></p>
                         </div>
-                        <div class="main__form-option-btns">
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Alcohol cocktail"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Biscuits and cookies"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Bread"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Cereals"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Condiments and sauces"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Desserts"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Drinks"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Egg"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Ice cream and custard"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Main course"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Pancake"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Pasta"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Pastry"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Pies and tarts"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Pizza"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Preps"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Preserve"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Salad"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Sandwiches"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Seafood"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Side dish"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Soup"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Special occasions"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Starter"></input>
-                            <input type="button" class="main__form-option-btn" name="dishType" value="Sweets"></input>
+                        <div class="main__form-option-checkboxes">
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="biscuits and cookies">
+                                Biscuits and cookies
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="bread">
+                                Bread
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="cereals">
+                                Cereals
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="condiments and sauces">
+                                Condiments and sauces
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="desserts">
+                                Desserts
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="drinks">
+                                Drinks
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="egg">
+                                Egg
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="ice cream and custard">
+                                Ice cream and custard
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="main course">
+                                Main course
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="pancake">
+                                Pancake
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="pasta">
+                                Pasta
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="pastry">
+                                Pastry
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="pies and tarts">
+                                Pies and tarts
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="pizza">
+                                Pizza
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="preps">
+                                Preps
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="preserve">
+                                Preserve
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="salad">
+                                Salad
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="sandwiches">
+                                Sandwiches
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="seafood">
+                                Seafood
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="side dish">
+                                Side dish
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="soup">
+                                Soup
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="special occasions">
+                                Special occasions
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="starter">
+                                Starter
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="dishType" class="checkbox" value="sweets">
+                                Sweets
+                            </label>
                         </div>
                     </div>
                     <div class="main__form-option">
                         <div class="main__form-option-header">
                             <p class="main__form-label pointer">Cuisine type <i class="fa-solid fa-angle-down down-arrow"></i></p>
                         </div>
-                        <div class="main__form-option-btns">
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="American"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Asian"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="British"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Caribbean"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Central europe"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Chinese"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Eastern europe"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="French"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Greek"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Indian"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Italian"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Japanese"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Korean"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Kosher"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Mediterranean"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Mexican"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Middle eastern"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="Nordic"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="South american"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="South east asian"></input>
-                            <input type="button" class="main__form-option-btn" name="cuisineType" value="World"></input>
+                        <div class="main__form-option-checkboxes">
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="american">
+                                American
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="asian">
+                                Asian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="british">
+                                British
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="caribbean">
+                                Caribbean
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="central europe">
+                                Central europe
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="chinese">
+                                Chinese
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="eastern europe">
+                                Eastern europe
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="french">
+                                French
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="greek">
+                                Greek
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="indian">
+                                Indian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="italian">
+                                Italian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="japanese">
+                                Japanese
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="korean">
+                                Korean
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="kosher">
+                                Kosher
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="mediterranean">
+                                Mediterranean
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="mexican">
+                                Mexican
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="middle eastern">
+                                Middle eastern
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="nordic">
+                                Nordic
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="south american">
+                                South american
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="south east asian">
+                                South east asian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="cuisineType" class="checkbox" value="world">
+                                World
+                            </label>
                         </div>
                     </div>
                     <div class="main__form-option">
                         <div class="main__form-option-header">
                             <p class="main__form-label pointer">Health label <i class="fa-solid fa-angle-down down-arrow"></i></p>
                         </div>
-                        <div class="main__form-option-btns">
-                            <input type="button" class="main__form-option-btn" name="health" value="Alcohol-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Dairy-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="DASH"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Egg-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Fish-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="FODMAP-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Gluten-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Keto-friendly"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Kidney-friendly"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Low-sugar"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Paleo"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Peanut-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Pescatarian"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Soy-free"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Vegan"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Vegetarian"></input>
-                            <input type="button" class="main__form-option-btn" name="health" value="Wheat-free"></input>
+                        <div class="main__form-option-checkboxes">
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="alcohol-free">
+                                Alcohol-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="dairy-free">
+                                Dairy-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="DASH">
+                                DASH
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="egg-free">
+                                Egg-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="fish-free">
+                                Fish-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="FODMAP-free">
+                                FODMAP-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="gluten-free">
+                                Gluten-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="keto-friendly">
+                                Keto-friendly
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="kidney-friendly">
+                                Kidney-friendly
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="low-sugar">
+                                Low-sugar
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="paleo">
+                                Paleo
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="peanut-free">
+                                Peanut-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="pescatarian">
+                                Pescatarian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="soy-free">
+                                Soy-free
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="vegan">
+                                Vegan
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="vegetarian">
+                                Vegetarian
+                            </label>
+                            <label class="main__form-option-check">
+                                <input type="checkbox" name="health" class="checkbox" value="wheat-free">
+                                Wheat-free
+                            </label>
                         </div>
                     </div>
                     <div class="main__form-option">
@@ -144,10 +347,10 @@
                             <p class="main__form-label margin">Ingredients:</p>
                         </div>
                         <div class="main__form-option-inputs">
-                            <input type="text" class="main__form-option-input" name="ingredient">
+                            <input type="text" class="main__form-option-input" name="ingredients">
 
                             <template class="main__form-option-box">
-                                <input type="text" class="main__form-option-input" name="ingredient">
+                                <input type="text" class="main__form-option-input" name="ingredients">
                             </template>
                         </div>
                         <button class="add-more">Add more ingredients <i class="fa-regular fa-square-plus"></i></button>

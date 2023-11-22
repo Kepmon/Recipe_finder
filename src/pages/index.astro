@@ -2,208 +2,180 @@
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title="Welcome to Astro.">
-	<header class="header">
-		<div class="header__background">
-				<div class="header__shadow">
-						<h1 class="header__title">Welcome to our recipe generator</h1>
-						<p class="header__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil numquam, nostrum vel exercitationem hic molestiae dolores laborum. Optio, repellat rem.</p>
-				</div>
-				<a href="#main"><i class="fa-solid fa-angle-down header__arrow"></i></a>
-		</div>
-</header>
+<Layout>
+  <header class="header">
+    <div class="header__background">
+      <div class="header__shadow">
+        <h1 class="header__title">Welcome to our recipe generator</h1>
+        <p class="header__text">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil
+          numquam, nostrum vel exercitationem hic molestiae dolores laborum.
+          Optio, repellat rem.
+        </p>
+      </div>
+      <a href="#main"><i class="fa-solid fa-angle-down header__arrow"></i></a>
+    </div>
+  </header>
 
-<main class="main" id="main">
-		<div class="container">
-				<form class="main__form">
-						<h2 class="main__form-title">Choose desired criteria for your recipe</h2>
-						<div class="main__form-options">
-								<div class="main__form-option">
-										<label for="name" class="main__form-label">Name:</label>
-										<input type="text" id="name" class="main__form-input">
-								</div>
-								<div class="main__form-option">
-										<label for="calorie" class="main__form-label">Caloric range (kcal):</label>
-										<div class="main__form-calorie">
-												<input type="number" id="calorie" class="main__form-range"> - <input type="number" class="main__form-range">
-										</div>
-								</div>
-								<div class="main__form-option">
-										<div class="main__form-option-header">
-												<p class="main__form-label pointer">Diet type <i class="fa-solid fa-angle-down"></i></p>
-										</div>
-										<div class="main__form-option-btns">
-												<button class="main__form-option-btn">Balanced</button>
-												<button class="main__form-option-btn">High-fiber</button>
-												<button class="main__form-option-btn">High-protein</button>
-												<button class="main__form-option-btn">Low-carb</button>
-												<button class="main__form-option-btn">Low-fat</button>
-												<button class="main__form-option-btn">Low-sodium</button>
-										</div>
-								</div>
-								<div class="main__form-option">
-										<div class="main__form-option-header">
-												<p class="main__form-label pointer">Dish type <i class="fa-solid fa-angle-down"></i></p>
-										</div>
-										<div class="main__form-option-btns">
-												<button class="main__form-option-btn">Alcohol cocktail</button>
-												<button class="main__form-option-btn">Biscuits and cookies</button>
-												<button class="main__form-option-btn">Bread</button>
-												<button class="main__form-option-btn">Cereals</button>
-												<button class="main__form-option-btn">Condiments and sauces</button>
-												<button class="main__form-option-btn">Desserts</button>
-												<button class="main__form-option-btn">Drinks</button>
-												<button class="main__form-option-btn">Egg</button>
-												<button class="main__form-option-btn">Ice cream and custard</button>
-												<button class="main__form-option-btn">Main course</button>
-												<button class="main__form-option-btn">Pancake</button>
-												<button class="main__form-option-btn">Pasta</button>
-												<button class="main__form-option-btn">Pastry</button>
-												<button class="main__form-option-btn">Pies and tarts</button>
-												<button class="main__form-option-btn">Pizza</button>
-												<button class="main__form-option-btn">Preps</button>
-												<button class="main__form-option-btn">Preserve</button>
-												<button class="main__form-option-btn">Salad</button>
-												<button class="main__form-option-btn">Sandwiches</button>
-												<button class="main__form-option-btn">Seafood</button>
-												<button class="main__form-option-btn">Side dish</button>
-												<button class="main__form-option-btn">Soup</button>
-												<button class="main__form-option-btn">Special occasions</button>
-												<button class="main__form-option-btn">Starter</button>
-												<button class="main__form-option-btn">Sweets</button>
-										</div>
-								</div>
-								<div class="main__form-option">
-										<div class="main__form-option-header">
-												<p class="main__form-label pointer">Cuisine type <i class="fa-solid fa-angle-down"></i></p>
-										</div>
-										<div class="main__form-option-btns">
-												<button class="main__form-option-btn">American</button>
-												<button class="main__form-option-btn">Asian</button>
-												<button class="main__form-option-btn">British</button>
-												<button class="main__form-option-btn">Caribbean</button>
-												<button class="main__form-option-btn">Central europe</button>
-												<button class="main__form-option-btn">Chinese</button>
-												<button class="main__form-option-btn">Eastern europe</button>
-												<button class="main__form-option-btn">French</button>
-												<button class="main__form-option-btn">Greek</button>
-												<button class="main__form-option-btn">Indian</button>
-												<button class="main__form-option-btn">Italian</button>
-												<button class="main__form-option-btn">Japanese</button>
-												<button class="main__form-option-btn">Korean</button>
-												<button class="main__form-option-btn">Kosher</button>
-												<button class="main__form-option-btn">Mediterranean</button>
-												<button class="main__form-option-btn">Mexican</button>
-												<button class="main__form-option-btn">Middle eastern</button>
-												<button class="main__form-option-btn">Nordic</button>
-												<button class="main__form-option-btn">South american</button>
-												<button class="main__form-option-btn">South east asian</button>
-												<button class="main__form-option-btn">World</button>
-										</div>
-								</div>
-								<div class="main__form-option">
-										<div class="main__form-option-header">
-												<p class="main__form-label pointer">Health label <i class="fa-solid fa-angle-down"></i></p>
-										</div>
-										<div class="main__form-option-btns">
-												<button class="main__form-option-btn">Alcohol-free</button>
-												<button class="main__form-option-btn">Dairy-free</button>
-												<button class="main__form-option-btn">DASH</button>
-												<button class="main__form-option-btn">Egg-free</button>
-												<button class="main__form-option-btn">Fish-free</button>
-												<button class="main__form-option-btn">FODMAP-free</button>
-												<button class="main__form-option-btn">Gluten-free</button>
-												<button class="main__form-option-btn">Keto-friendly</button>
-												<button class="main__form-option-btn">Kidney-friendly</button>
-												<button class="main__form-option-btn">Low-sugar</button>
-												<button class="main__form-option-btn">Paleo</button>
-												<button class="main__form-option-btn">Peanut-free</button>
-												<button class="main__form-option-btn">Pescatarian</button>
-												<button class="main__form-option-btn">Soy-free</button>
-												<button class="main__form-option-btn">Vegan</button>
-												<button class="main__form-option-btn">Vegetarian</button>
-												<button class="main__form-option-btn">Wheat-free</button>
-										</div>
-								</div>
-								<div class="main__form-option">
-										<div class="main__form-option-header">
-												<p class="main__form-label">Ingredients:</p>
-										</div>
-										<div class="main__form-option-inputs">
-												<input type="text" class="main__form-option-input">
-												<input type="text" class="main__form-option-input">
-												<input type="text" class="main__form-option-input">
-												<button class="add-more">Add more ingredients <i class="fa-regular fa-square-plus"></i></button>
-										</div>
-								</div>
-						</div>
-						<button class="main__form-find">Find recipes</button>
-				</form>
-		</div>
+  <main class="main" id="main">
+    <div class="container">
+      <form class="main__form">
+        <h2 class="main__form-title">
+          Choose desired criteria for your recipe
+        </h2>
+        <div class="main__form-options">
+          <div class="main__form-option">
+            <label for="name" class="main__form-label">Name:</label>
+            <input type="text" id="name" class="main__form-input" />
+          </div>
+          <div class="main__form-option">
+            <label for="calorie" class="main__form-label"
+              >Caloric range (kcal):</label
+            >
+            <div class="main__form-calorie">
+              <input type="number" id="calorie" class="main__form-range" /> - <input
+                type="number"
+                class="main__form-range"
+              />
+            </div>
+          </div>
+          <div class="main__form-option">
+            <div class="main__form-option-header">
+              <p class="main__form-label pointer">
+                Diet type <i class="fa-solid fa-angle-down"></i>
+              </p>
+            </div>
+            <div class="main__form-option-btns">
+              <button class="main__form-option-btn">Balanced</button>
+              <button class="main__form-option-btn">High-fiber</button>
+              <button class="main__form-option-btn">High-protein</button>
+              <button class="main__form-option-btn">Low-carb</button>
+              <button class="main__form-option-btn">Low-fat</button>
+              <button class="main__form-option-btn">Low-sodium</button>
+            </div>
+          </div>
+          <div class="main__form-option">
+            <div class="main__form-option-header">
+              <p class="main__form-label pointer">
+                Dish type <i class="fa-solid fa-angle-down"></i>
+              </p>
+            </div>
+            <div class="main__form-option-btns">
+              <button class="main__form-option-btn">Alcohol cocktail</button>
+              <button class="main__form-option-btn">Biscuits and cookies</button
+              >
+              <button class="main__form-option-btn">Bread</button>
+              <button class="main__form-option-btn">Cereals</button>
+              <button class="main__form-option-btn"
+                >Condiments and sauces</button
+              >
+              <button class="main__form-option-btn">Desserts</button>
+              <button class="main__form-option-btn">Drinks</button>
+              <button class="main__form-option-btn">Egg</button>
+              <button class="main__form-option-btn"
+                >Ice cream and custard</button
+              >
+              <button class="main__form-option-btn">Main course</button>
+              <button class="main__form-option-btn">Pancake</button>
+              <button class="main__form-option-btn">Pasta</button>
+              <button class="main__form-option-btn">Pastry</button>
+              <button class="main__form-option-btn">Pies and tarts</button>
+              <button class="main__form-option-btn">Pizza</button>
+              <button class="main__form-option-btn">Preps</button>
+              <button class="main__form-option-btn">Preserve</button>
+              <button class="main__form-option-btn">Salad</button>
+              <button class="main__form-option-btn">Sandwiches</button>
+              <button class="main__form-option-btn">Seafood</button>
+              <button class="main__form-option-btn">Side dish</button>
+              <button class="main__form-option-btn">Soup</button>
+              <button class="main__form-option-btn">Special occasions</button>
+              <button class="main__form-option-btn">Starter</button>
+              <button class="main__form-option-btn">Sweets</button>
+            </div>
+          </div>
+          <div class="main__form-option">
+            <div class="main__form-option-header">
+              <p class="main__form-label pointer">
+                Cuisine type <i class="fa-solid fa-angle-down"></i>
+              </p>
+            </div>
+            <div class="main__form-option-btns">
+              <button class="main__form-option-btn">American</button>
+              <button class="main__form-option-btn">Asian</button>
+              <button class="main__form-option-btn">British</button>
+              <button class="main__form-option-btn">Caribbean</button>
+              <button class="main__form-option-btn">Central europe</button>
+              <button class="main__form-option-btn">Chinese</button>
+              <button class="main__form-option-btn">Eastern europe</button>
+              <button class="main__form-option-btn">French</button>
+              <button class="main__form-option-btn">Greek</button>
+              <button class="main__form-option-btn">Indian</button>
+              <button class="main__form-option-btn">Italian</button>
+              <button class="main__form-option-btn">Japanese</button>
+              <button class="main__form-option-btn">Korean</button>
+              <button class="main__form-option-btn">Kosher</button>
+              <button class="main__form-option-btn">Mediterranean</button>
+              <button class="main__form-option-btn">Mexican</button>
+              <button class="main__form-option-btn">Middle eastern</button>
+              <button class="main__form-option-btn">Nordic</button>
+              <button class="main__form-option-btn">South american</button>
+              <button class="main__form-option-btn">South east asian</button>
+              <button class="main__form-option-btn">World</button>
+            </div>
+          </div>
+          <div class="main__form-option">
+            <div class="main__form-option-header">
+              <p class="main__form-label pointer">
+                Health label <i class="fa-solid fa-angle-down"></i>
+              </p>
+            </div>
+            <div class="main__form-option-btns">
+              <button class="main__form-option-btn">Alcohol-free</button>
+              <button class="main__form-option-btn">Dairy-free</button>
+              <button class="main__form-option-btn">DASH</button>
+              <button class="main__form-option-btn">Egg-free</button>
+              <button class="main__form-option-btn">Fish-free</button>
+              <button class="main__form-option-btn">FODMAP-free</button>
+              <button class="main__form-option-btn">Gluten-free</button>
+              <button class="main__form-option-btn">Keto-friendly</button>
+              <button class="main__form-option-btn">Kidney-friendly</button>
+              <button class="main__form-option-btn">Low-sugar</button>
+              <button class="main__form-option-btn">Paleo</button>
+              <button class="main__form-option-btn">Peanut-free</button>
+              <button class="main__form-option-btn">Pescatarian</button>
+              <button class="main__form-option-btn">Soy-free</button>
+              <button class="main__form-option-btn">Vegan</button>
+              <button class="main__form-option-btn">Vegetarian</button>
+              <button class="main__form-option-btn">Wheat-free</button>
+            </div>
+          </div>
+          <div class="main__form-option">
+            <div class="main__form-option-header">
+              <p class="main__form-label">Ingredients:</p>
+            </div>
+            <div class="main__form-option-inputs">
+              <input type="text" class="main__form-option-input" />
+              <input type="text" class="main__form-option-input" />
+              <input type="text" class="main__form-option-input" />
+              <button class="add-more"
+                >Add more ingredients <i class="fa-regular fa-square-plus"
+                ></i></button
+              >
+            </div>
+          </div>
+        </div>
+        <button class="main__form-find">Find recipes</button>
+      </form>
+    </div>
 
-		<!-- <img src="dist/img/Edamam_Badge_Transparent.svg" alt="The image of contribution of Edamam API" class="edamam_img"> -->
-</main>
+    <!-- <img src="dist/img/Edamam_Badge_Transparent.svg" alt="The image of contribution of Edamam API" class="edamam_img"> -->
+  </main>
 
-<footer class="footer">
-		<p class="footer__copyright">Copyright &copy; FindMeRecipe <span class="footer__year"></span></p>
-</footer>
+  <footer class="footer">
+    <p class="footer__copyright">
+      Copyright &copy; FindMeRecipe <span class="footer__year"></span>
+    </p>
+  </footer>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
-	}
-</style>
+<style></style>

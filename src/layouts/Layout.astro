@@ -13,6 +13,37 @@
   </body>
 </html>
 <style is:global lang="scss">
+  @font-face {
+    font-family: 'jost';
+    src:
+      local('Jost'),
+      url('/fonts/jost-font.woff2') format('woff2');
+    font-display: fallback;
+  }
+
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--light-black-color));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--gray-color));
+    border-radius: 100vmax;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--gray-color) / 0.75);
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
@@ -21,8 +52,11 @@
 
   :root {
     --black-color: 0 0% 10%;
+    --gray-color: 0 0% 40%;
+    --light-black-color: 0 0% 20%;
+    --pink-color: 13 100% 70%;
     --white-color: 0 0% 90%;
-    --yellow-color: 38 90% 69%;
+    --yellow-color: 39 100% 71%;
   }
 
   html {
@@ -31,9 +65,10 @@
 
   body {
     background-color: hsl(var(--yellow-color));
-    font-family: sans-serif;
+    font-family: jost, sans-serif;
     font-size: clamp(0.8rem, 0.7311rem + 0.3939vw, 1.125rem);
     color: hsl(var(--black-color));
+    line-height: 1.5;
   }
 
   img {
@@ -47,7 +82,7 @@
 
   .wrapper {
     margin-inline: auto;
-    width: min((100% - 3rem), 1200px);
+    width: min((100% - 3rem), 75rem);
   }
 
   .main {
@@ -63,8 +98,8 @@
       padding: 1rem;
       margin-top: 2rem;
       max-width: 50vw;
-      border-radius: 30px;
-      background-color: #c46352;
+      border-radius: 2.5rem;
+      background-color: hsl(var(--pink-color));
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
 
       .hint {
@@ -141,7 +176,7 @@
       }
 
       &-label {
-        font-weight: bold;
+        font-weight: 600;
       }
 
       &-input,
@@ -175,7 +210,7 @@
         border: none;
         border-radius: 10px;
         color: hsl(var(--black-color));
-        font-weight: bold;
+        font-weight: 600;
         background-color: #f7c469;
         outline: none;
         transition: background-color 0.3s;
@@ -188,7 +223,7 @@
 
       &-error {
         margin-top: 1rem;
-        font-weight: bold;
+        font-weight: 600;
         color: #900;
       }
     }
@@ -239,7 +274,7 @@
         justify-content: center;
         align-items: center;
         height: 5rem;
-        font-weight: bold;
+        font-weight: 600;
       }
 
       &-body {
@@ -256,7 +291,7 @@
 
       &-calories,
       &-ingredients {
-        font-weight: bold;
+        font-weight: 600;
       }
 
       &-calories {
@@ -274,7 +309,7 @@
       &-more {
         .read-more-link {
           color: #714433;
-          font-weight: bold;
+          font-weight: 600;
         }
       }
 
@@ -317,7 +352,7 @@
 
         .bold {
           margin-top: 2rem;
-          font-weight: bold;
+          font-weight: 600;
         }
 
         .bold:first-of-type {
@@ -374,7 +409,7 @@
 
           td:nth-child(odd) {
             width: 150px;
-            font-weight: bold;
+            font-weight: 600;
           }
 
           td:nth-child(even) {
@@ -398,7 +433,7 @@
       }
 
       .see-recipe {
-        font-weight: bold;
+        font-weight: 600;
         color: #f7c469;
         cursor: pointer;
       }
@@ -444,7 +479,7 @@
     padding: 3px 8px;
     width: 200px;
     color: hsl(var(--black-color));
-    font-weight: bold;
+    font-weight: 600;
     background: none;
     border-radius: 10px;
     border: 2px solid hsl(var(--black-color));

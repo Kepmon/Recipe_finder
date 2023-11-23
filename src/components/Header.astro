@@ -7,9 +7,9 @@ import DownChevron from './svgs/DownChevron.astro'
     <h1 class="header__title">Welcome to our recipe finder</h1>
     <p class="header__text">
       Find a recipe that is most suitable for your needs. By filling a simple
-      form form form form below you may choose different criteria, e.g.
-      preferred ingredients, cuisine type, health labels and so forth. This will
-      allow you to find recipes based on your own preferences.
+      form below you may choose different criteria, e.g. preferred ingredients,
+      cuisine type, health labels and so forth. This will allow you to find
+      recipes based on your own preferences.
     </p>
     <a href="#main" aria-label="click here to scroll down to the main section"
       ><DownChevron /></a
@@ -48,19 +48,18 @@ import DownChevron from './svgs/DownChevron.astro'
         font-size: clamp(1.5rem, 1.1818rem + 1.8182vw, 3rem);
         margin-block-end: 2rem;
       }
-    }
-  }
 
-  a {
-    --icon-width: 40px;
-    --icon-padding: 1rem;
-    display: grid;
-    place-content: center;
-    position: absolute;
-    bottom: 1rem;
-    bottom: var(--icon-padding);
-    left: calc(50% - var(--icon-padding) - calc(var(--icon-padding) * 1.5));
-    padding: var(--icon-padding);
-    width: max-content;
+      & a {
+        --icon-width: 40px;
+        --icon-padding: 1rem;
+        display: grid;
+        place-content: center;
+        position: absolute;
+        bottom: var(--icon-padding);
+        left: calc(50% - calc(var(--icon-width) / 2) - var(--icon-padding));
+        padding: var(--icon-padding);
+        width: max-content;
+      }
+    }
   }
 </style>

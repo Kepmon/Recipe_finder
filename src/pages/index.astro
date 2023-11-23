@@ -1,21 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 ---
 
 <Layout>
-  <header class="header">
-    <div class="header__background">
-      <div class="header__shadow">
-        <h1 class="header__title">Welcome to our recipe generator</h1>
-        <p class="header__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil
-          numquam, nostrum vel exercitationem hic molestiae dolores laborum.
-          Optio, repellat rem.
-        </p>
-      </div>
-      <a href="#main"><i class="fa-solid fa-angle-down header__arrow"></i></a>
-    </div>
-  </header>
+  <Header />
 
   <main class="main" id="main">
     <div class="container">
@@ -171,11 +161,7 @@ import Layout from '../layouts/Layout.astro'
     <!-- <img src="dist/img/Edamam_Badge_Transparent.svg" alt="The image of contribution of Edamam API" class="edamam_img"> -->
   </main>
 
-  <footer class="footer">
-    <p class="footer__copyright">
-      Copyright &copy; FindMeRecipe <span class="footer__year"></span>
-    </p>
-  </footer>
+  <Footer />
 </Layout>
 
 <style></style>

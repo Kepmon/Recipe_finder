@@ -17,7 +17,12 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    text-decoration: none;
+  }
+
+  :root {
+    --black-color: 0 0% 10%;
+    --white-color: 0 0% 90%;
+    --yellow-color: 38 90% 69%;
   }
 
   html {
@@ -25,60 +30,24 @@
   }
 
   body {
-    background-color: #f7c469;
+    background-color: hsl(var(--yellow-color));
     font-family: sans-serif;
-    color: #252525;
-    overflow-x: hidden;
+    font-size: clamp(0.8rem, 0.7311rem + 0.3939vw, 1.125rem);
+    color: hsl(var(--black-color));
   }
 
-  .header {
-    height: 100vh;
+  img {
+    display: block;
+    max-width: 100%;
+  }
 
-    &__background {
-      position: relative;
-      height: 100%;
-      background-image: url('../img/food_big.jpg');
-      background-position: center;
-      background-attachment: fixed;
-      background-size: cover;
-    }
+  a {
+    text-decoration: none;
+  }
 
-    &__shadow {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      text-align: center;
-    }
-
-    &__title,
-    &__text {
-      color: #dfdfdf;
-    }
-
-    &__title {
-      margin-bottom: 2rem;
-      font-size: 3rem;
-    }
-
-    &__text {
-      max-width: 1200px;
-      font-size: 1.1rem;
-    }
-
-    &__arrow {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      padding: 0.3rem;
-      font-size: 3rem;
-      color: #dfdfdf;
-      transform: translateX(-50%);
-      cursor: pointer;
-    }
+  .wrapper {
+    margin-inline: auto;
+    width: min((100% - 3rem), 1200px);
   }
 
   .main {
@@ -101,13 +70,11 @@
       .hint {
         margin-bottom: 1rem;
         color: #515151;
-        font-size: 0.9rem;
       }
 
       &-title {
         margin-bottom: 0.5rem;
         text-align: center;
-        font-size: 1.5rem;
       }
 
       &-options {
@@ -145,9 +112,8 @@
           margin-bottom: 5px;
           border: none;
           border-radius: 5px;
-          color: #252525;
-          font-size: 0.85rem;
-          background-color: #dfdfdf;
+          color: hsl(var(--black-color));
+          background-color: hsl(var(--white-color));
           transition: background-color 0.3s;
           cursor: pointer;
 
@@ -208,8 +174,7 @@
         margin-top: 2rem;
         border: none;
         border-radius: 10px;
-        font-size: 1.2rem;
-        color: #252525;
+        color: hsl(var(--black-color));
         font-weight: bold;
         background-color: #f7c469;
         outline: none;
@@ -218,12 +183,11 @@
       }
 
       &-find:hover {
-        background-color: #dfdfdf;
+        background-color: hsl(var(--white-color));
       }
 
       &-error {
         margin-top: 1rem;
-        font-size: 0.9rem;
         font-weight: bold;
         color: #900;
       }
@@ -244,8 +208,7 @@
 
       &-header {
         margin-top: 5rem;
-        color: #dfdfdf;
-        font-size: 2rem;
+        color: hsl(var(--white-color));
       }
     }
 
@@ -276,7 +239,6 @@
         justify-content: center;
         align-items: center;
         height: 5rem;
-        font-size: 1.3rem;
         font-weight: bold;
       }
 
@@ -327,12 +289,11 @@
       padding: 3rem 0 1rem 0;
       width: 100vw;
       background-color: #333;
-      color: #dfdfdf;
+      color: hsl(var(--white-color));
 
       &-header {
         margin-bottom: 2rem;
-        color: #dfdfdf;
-        font-size: 2rem;
+        color: hsl(var(--white-color));
       }
 
       .clicked-food {
@@ -394,10 +355,6 @@
         box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
         border-radius: 5px;
 
-        .nutrition-facts-header {
-          font-size: 1.6rem;
-        }
-
         .black-block {
           height: 10px;
           background-color: #000;
@@ -441,7 +398,6 @@
       }
 
       .see-recipe {
-        font-size: 1.3rem;
         font-weight: bold;
         color: #f7c469;
         cursor: pointer;
@@ -474,7 +430,6 @@
 
   .fa-square-plus {
     margin-left: 5px;
-    font-size: 1.2rem;
   }
 
   .pointer {
@@ -488,11 +443,11 @@
     justify-content: space-between;
     padding: 3px 8px;
     width: 200px;
-    color: #252525;
+    color: hsl(var(--black-color));
     font-weight: bold;
     background: none;
     border-radius: 10px;
-    border: 2px solid #252525;
+    border: 2px solid hsl(var(--black-color));
     outline: none;
     cursor: pointer;
   }
@@ -505,42 +460,10 @@
     font-weight: normal;
   }
 
-  .footer {
-    padding: 2rem;
-    background-color: #151515;
-    text-align: center;
-
-    &__copyright {
-      color: #dfdfdf;
-    }
-  }
-
   @media (max-width: 768px) {
-    body {
-      font-size: 0.9rem;
-    }
-
-    .header {
-      &__title {
-        font-size: 2.6rem;
-      }
-
-      &__text {
-        font-size: 0.9rem;
-      }
-
-      &__arrow {
-        font-size: 2rem;
-      }
-    }
-
     .main {
       &__form {
         max-width: 80vw;
-
-        &-title {
-          font-size: 1.3rem;
-        }
       }
 
       &__contribution,
@@ -550,7 +473,6 @@
 
       &__results-header {
         margin-top: 3rem;
-        font-size: 1.3rem;
       }
 
       &__result {
@@ -560,7 +482,6 @@
 
         &-card-title {
           height: 3rem;
-          font-size: 1.1rem;
         }
       }
 
@@ -593,35 +514,9 @@
   }
 
   @media (max-width: 575px) {
-    body {
-      font-size: 0.8rem;
-    }
-
-    .header {
-      &__background {
-        background-image: url('../img/food_small.jpg');
-      }
-
-      &__title {
-        font-size: 2.3rem;
-      }
-
-      &__text {
-        font-size: 0.8rem;
-      }
-    }
-
     .main {
       &__form {
         border-radius: 15px;
-
-        .hint {
-          font-size: 0.8rem;
-        }
-
-        &-title {
-          font-size: 1.2rem;
-        }
       }
 
       &__contribution {

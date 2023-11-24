@@ -52,6 +52,7 @@ import DownChevron from './svgs/DownChevron.astro'
       & a {
         --icon-width: 40px;
         --icon-padding: 1rem;
+        --chevron-fill: hsl(var(--white-color));
         display: grid;
         place-content: center;
         position: absolute;
@@ -59,7 +60,14 @@ import DownChevron from './svgs/DownChevron.astro'
         left: calc(50% - calc(var(--icon-width) / 2) - var(--icon-padding));
         padding: var(--icon-padding);
         width: max-content;
+        animation: jump 1200ms ease-in-out infinite;
       }
+    }
+  }
+
+  @keyframes jump {
+    50% {
+      translate: 0 -0.8rem;
     }
   }
 </style>

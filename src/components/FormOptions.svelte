@@ -10,7 +10,7 @@
   <div data-expanded={options.isExpanded} class="items-wrapper">
     <ul>
       {#each options.items as item}
-        <li><button>{item}</button></li>
+        <li><button tabindex={options.isExpanded ? 0 : -1}>{item}</button></li>
       {/each}
     </ul>
   </div>
@@ -21,12 +21,13 @@
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows var(--transition-duration);
-
+    
     &[data-expanded="true"] {
       grid-template-rows: 1fr;
-
+      
       ul {
         margin-block-start: calc(var(--spacer) / 2);
+        padding-block: calc(var(--spacer) / 4);
       }
     }
 

@@ -13,6 +13,10 @@
   const removeInput = (inputID: string) => {
     $formData.ingredients = $formData.ingredients.filter(({ id }) => inputID !== id)
   }
+
+  const addFocusToNewInput = (input: HTMLInputElement) => {
+    input.focus()
+  }
 </script>
 
 <div class="form__group">
@@ -20,7 +24,7 @@
   <div class="form__ingredient-inputs">
     {#each $formData.ingredients as ingredient}
       <div class="form__ingredient-input">
-        <input bind:value={ingredient.name} type="text" name="ingredients" class="main__form-option-input" />
+        <input use:addFocusToNewInput bind:value={ingredient.name} type="text" name="ingredients" class="main__form-option-input" />
         <button on:click={() => removeInput(ingredient.id)} aria-label="click here to remove this field" type="button">
           <CloseIcon />
         </button>

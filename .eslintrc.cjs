@@ -33,6 +33,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     semi: ['error', 'never'],
     'import/extensions': ['error', 'never'],
+    'import/prefer-default-export': 'off',
     'no-tabs': ['error', { allowIndentationTabs: true }],
     'no-param-reassign': ['error', { props: false }]
   },

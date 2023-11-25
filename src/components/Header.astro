@@ -1,0 +1,73 @@
+---
+import DownChevron from './svgs/DownChevron.svelte'
+---
+
+<header class="header">
+  <div class="wrapper header__wrapper">
+    <h1 class="header__title">Welcome to our recipe finder</h1>
+    <p class="header__text">
+      Find a recipe that is most suitable for your needs. By filling a simple
+      form below you may choose different criteria, e.g. preferred ingredients,
+      cuisine type, health labels and so forth. This will allow you to find
+      recipes based on your own preferences.
+    </p>
+    <a href="#main" aria-label="click here to scroll down to the main section"
+      ><DownChevron /></a
+    >
+  </div>
+</header>
+
+<style lang="scss">
+  .header {
+    display: grid;
+    align-content: center;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    background-color: hsl(var(--black-color) / 0.9);
+    background-image: url('/img/header-img-500.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    color: hsl(var(--white-color));
+
+    @media (min-width: 896px) {
+      background-image: url('/img/header-img-1000.webp');
+    }
+
+    @media (min-width: 1408px) {
+      background-image: url('/img/header-img-1500.webp');
+    }
+
+    &__wrapper {
+      text-align: center;
+
+      & h1 {
+        font-size: clamp(1.5rem, 1.1818rem + 1.8182vw, 3rem);
+        margin-block-end: 2rem;
+      }
+
+      & a {
+        --chevron-width: clamp(1.25rem, 0.8854rem + 2.0833vw, 2.5rem);
+        --icon-padding: 1em;
+        --chevron-fill: hsl(var(--white-color));
+        display: grid;
+        place-content: center;
+        position: absolute;
+        bottom: var(--icon-padding);
+        left: calc(50% - calc(var(--chevron-width) / 2) - var(--icon-padding));
+        padding: var(--icon-padding);
+        width: max-content;
+        animation: jump 1200ms ease-in-out infinite;
+      }
+    }
+  }
+
+  @keyframes jump {
+    50% {
+      translate: 0 -0.8rem;
+    }
+  }
+</style>

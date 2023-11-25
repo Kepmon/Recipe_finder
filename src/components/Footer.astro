@@ -1,0 +1,21 @@
+---
+const currentYear = new Date().getFullYear()
+---
+
+<footer class="footer">
+  <p class="footer__copyright">
+    Copyright &copy; FindMeRecipe {currentYear}
+  </p>
+</footer>
+
+<style lang="scss">
+  .footer {
+    padding: 2rem;
+    background-color: hsl(var(--black-color));
+    text-align: center;
+
+    &__copyright {
+      color: hsl(var(--white-color));
+    }
+  }
+</style>

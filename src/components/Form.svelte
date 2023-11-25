@@ -34,9 +34,9 @@ import FormOptionsList from "./FormOptionsList.svelte"
     display: grid;
     margin-inline: auto;
     padding: var(--spacer);
-    width: min(100% - 2rem, 50rem);
+    width: var(--form-width);
     background-color: hsl(var(--pink-color));
-    border-radius: 1.5rem;
+    border-radius: var(--form-radius);
     text-align: center;
     box-shadow: 1px 1px 5px hsl(var(--black-color) / 0.4);
 

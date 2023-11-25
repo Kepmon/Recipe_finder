@@ -1,5 +1,8 @@
+// eslint-disable-next-line import/no-unresolved
 import { writable } from 'svelte/store'
 import { nanoid } from 'nanoid'
+
+export const isFormSubmitted = writable(false)
 
 export const formData = writable({
   name: '',

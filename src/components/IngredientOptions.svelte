@@ -15,7 +15,9 @@
   }
 
   const addFocusToNewInput = (input: HTMLInputElement) => {
-    input.focus()
+    if ($formData.ingredients.length > 1) {
+      input.focus()
+    }
   }
 </script>
 

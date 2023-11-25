@@ -107,6 +107,14 @@
       font-weight: 500;
     }
 
+    &__group {
+      --transition-duration: 200ms;
+
+      > button {
+        background: none;
+      }
+    }
+
     &__group:not(:first-child) {
       padding-block: calc(var(--spacer) / 2);
     }

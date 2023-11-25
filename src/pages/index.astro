@@ -2,21 +2,18 @@
 import Layout from '../layouts/Layout.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import DownChevron from '../components/svgs/DownChevron.astro'
 import Form from '../components/Form.svelte'
 ---
 
 <Layout>
   <Header />
   <main id="main">
-    <Form client:only="svelte">
-      <DownChevron slot="chevron" />
-    </Form>
+    <Form client:only="svelte" />
   </main>
   <Footer />
 </Layout>
 
-<style>
+<style lang="scss">
   main {
     --main-spacer: 2rem;
     --chevron-width: 0.85rem;

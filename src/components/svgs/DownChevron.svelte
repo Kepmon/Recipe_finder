@@ -17,7 +17,7 @@
   </g>
 </svg>
 
-<style>
+<style lang="scss">
   svg {
     width: var(--chevron-width);
     aspect-ratio: 1;

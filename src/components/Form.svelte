@@ -1,7 +1,6 @@
 <script lang="ts">
-import FormOptions from "./FormOptions.svelte"
-import IngredientOptions from "./IngredientOptions.svelte";
-import { formData } from "../stores/formData"
+import IngredientOptions from "./IngredientOptions.svelte"
+import FormOptionsList from "./FormOptionsList.svelte"
 </script>
 
 <form class="form">
@@ -24,54 +23,7 @@ import { formData } from "../stores/formData"
       <input type="number" name="calories" /> - <input type="number" name="calories" />
     </div>
   </div>
-  <div class="form__group">
-    <button
-      on:click={() => $formData.dietType.isExpanded = !($formData.dietType.isExpanded)}
-      aria-label="click here to choose one or more options"
-      aria-expanded={$formData.dietType.isExpanded}
-      type="button"
-      class="form__group-title"
-    >
-      Diet type <slot name="chevron"></slot>
-    </button>
-    <FormOptions options={$formData.dietType} />
-  </div>
-  <div class="form__group">
-    <button
-      on:click={() => $formData.dishType.isExpanded = !($formData.dishType.isExpanded)}
-      aria-label="click here to choose one or more options"
-      aria-expanded={$formData.dishType.isExpanded}
-      type="button"
-      class="form__group-title"
-    >
-      Dish type <slot name="chevron"></slot>
-    </button>
-    <FormOptions options={$formData.dishType} />
-  </div>
-  <div class="form__group">
-    <button
-      on:click={() => $formData.cuisineType.isExpanded = !($formData.cuisineType.isExpanded)}
-      aria-label="click here to choose one or more options"
-      aria-expanded={$formData.cuisineType.isExpanded}
-      type="button"
-      class="form__group-title"
-    >
-      Cuisine type <slot name="chevron"></slot>
-    </button>
-    <FormOptions options={$formData.cuisineType} />
-  </div>
-  <div class="form__group">
-    <button
-      on:click={() => $formData.healthLabel.isExpanded = !($formData.healthLabel.isExpanded)}
-      aria-label="click here to choose one or more options"
-      aria-expanded={$formData.healthLabel.isExpanded}
-      type="button"
-      class="form__group-title"
-    >
-      Health label <slot name="chevron"></slot>
-    </button>
-    <FormOptions options={$formData.healthLabel} />
-  </div>
+  <FormOptionsList />
   <IngredientOptions />
   <button class="form__submit-btn">Find recipes</button>
 </form>
@@ -113,22 +65,6 @@ import { formData } from "../stores/formData"
       input {
         max-width: 6rem;
       }
-    }
-
-    &__group {
-      --transition-duration: 200ms;
-
-      > button {
-        background: none;
-      }
-    }
-
-    &__group-title {
-      display: flex;
-      gap: 0.25rem;
-      align-items: center;
-      justify-content: center;
-      margin-inline: auto;
     }
 
     &__submit-btn {

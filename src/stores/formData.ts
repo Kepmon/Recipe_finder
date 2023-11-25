@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import { nanoid } from 'nanoid'
 
 export const formData = writable({
   name: '',
@@ -95,5 +96,10 @@ export const formData = writable({
       'Wheat-free'
     ]
   },
-  ingredients: ['']
+  ingredients: [
+    {
+      name: '',
+      id: nanoid()
+    }
+  ]
 })

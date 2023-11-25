@@ -50,8 +50,8 @@ import DownChevron from './svgs/DownChevron.svelte'
       }
 
       & a {
-        --chevron-width: 40px;
-        --icon-padding: 1rem;
+        --chevron-width: clamp(1.25rem, 0.8854rem + 2.0833vw, 2.5rem);
+        --icon-padding: 1em;
         --chevron-fill: hsl(var(--white-color));
         display: grid;
         place-content: center;

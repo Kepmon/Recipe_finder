@@ -48,7 +48,7 @@
     }
 
     &__ingredient-input {
-      --close-icon-width: 1rem;
+      --close-icon-width: 0.9rem;
       display: inline-flex;
       align-items: center;
 

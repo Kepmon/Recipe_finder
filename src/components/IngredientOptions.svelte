@@ -1,17 +1,23 @@
 <script lang="ts">
-  import CloseIcon from './svgs/CloseIcon.svelte';
-  import { formData } from '../stores/formData'
-  import { nanoid } from 'nanoid'
+  import CloseIcon from "./svgs/CloseIcon.svelte"
+  import { formData } from "../stores/formStore"
+  import { scale } from "svelte/transition"
+  import { nanoid } from "nanoid"
 
   const addNewInput = () => {
-    $formData.ingredients = [...$formData.ingredients, {
-      name: '',
-      id: nanoid()
-    }]
+    $formData.ingredients = [
+      ...$formData.ingredients,
+      {
+        name: "",
+        id: nanoid(),
+      }
+    ]
   }
 
   const removeInput = (inputID: string) => {
-    $formData.ingredients = $formData.ingredients.filter(({ id }) => inputID !== id)
+    $formData.ingredients = $formData.ingredients.filter(
+      ({ id }) => inputID !== id,
+    )
   }
 
   const addFocusToNewInput = (input: HTMLInputElement) => {
@@ -24,15 +30,28 @@
 <div class="form__group">
   <p class="form__input-label">Ingredients</p>
   <div class="form__ingredient-inputs">
-    {#each $formData.ingredients as ingredient}
+    {#each $formData.ingredients as ingredient (ingredient.id)}
       <div class="form__ingredient-input">
-        <input use:addFocusToNewInput bind:value={ingredient.name} type="text" name="ingredients" class="main__form-option-input" />
-        <button on:click={() => removeInput(ingredient.id)} aria-label="click here to remove this field" type="button">
+        <input
+          use:addFocusToNewInput
+          transition:scale={{ duration: 150 }}
+          bind:value={ingredient.name}
+          type="text"
+          name="ingredients"
+          class="main__form-option-input"
+        />
+        <button
+          on:click={() => removeInput(ingredient.id)}
+          aria-label="click here to remove this field"
+          type="button"
+        >
           <CloseIcon />
         </button>
       </div>
     {/each}
-    <button on:click={addNewInput} type="button" class="add-more">Add more ingredients</button>
+    <button on:click={addNewInput} type="button" class="add-more"
+      >Add more ingredients</button
+    >
   </div>
 </div>
 
@@ -42,11 +61,11 @@
     &__ingredient-inputs > * {
       margin-block-end: var(--spacer);
     }
-    
+
     &__ingredient-inputs {
       display: inline-grid;
     }
-    
+
     &__ingredient-inputs > :last-child {
       display: block;
       margin-inline: auto;

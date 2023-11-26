@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isFormSubmitted } from "../stores/formData";
+  import { isFormSubmitted } from "../stores/formStore"
 </script>
 
 <div class="contribution" data-change-color={$isFormSubmitted}>
@@ -8,7 +8,10 @@
     target="_blank"
     aria-label="click here to go to the edamam's website"
   >
-    <img src="/img/svgs/edamam_contribution.svg" alt="logo of edamam - the recipes data provider">
+    <img
+      src="/img/svgs/edamam_contribution.svg"
+      alt="logo of edamam - the recipes data provider"
+    />
   </a>
 </div>
 

@@ -1,16 +1,29 @@
 <script lang="ts">
-  type Options = {
-    isExpanded: boolean,
-    items: string[]
+  type Item = {
+    name: string,
+    isChosen: boolean
   }
-  export let options: Options
+  type Option = {
+    isExpanded: boolean,
+    items: Item[]
+  }
+
+  export let options: Option
 </script>
 
 {#if options.items.length > 0}
   <div data-expanded={options.isExpanded} class="items-wrapper">
     <ul>
-      {#each options.items as item}
-        <li><button tabindex={options.isExpanded ? 0 : -1}>{item}</button></li>
+      {#each options.items as { name, isChosen } (name)}
+        <li>
+          <button
+            on:click={() => isChosen = !isChosen}
+            tabindex={options.isExpanded ? 0 : -1}
+            class:chosen-option={isChosen}
+          >
+            {name}
+          </button>
+        </li>
       {/each}
     </ul>
   </div>
@@ -43,5 +56,10 @@
       font-size: 0.85em;
       font-weight: normal;
     }
+  }
+
+  .chosen-option {
+    background-color: hsl(var(--black-color));
+    color: hsl(var(--white-color));
   }
 </style>

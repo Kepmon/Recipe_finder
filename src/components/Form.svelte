@@ -1,26 +1,29 @@
 <script lang="ts">
-import IngredientOptions from "./IngredientOptions.svelte"
-import FormOptionsList from "./FormOptionsList.svelte"
+  import IngredientOptions from "./IngredientOptions.svelte"
+  import FormOptionsList from "./FormOptionsList.svelte"
+  import { formData, handleSubmit } from "../stores/formStore"
+
+  
 </script>
 
-<form class="form">
+<form on:submit|preventDefault={handleSubmit} class="form">
   <header class="form__group">
-    <h2 class="form__title">
-      Choose desired criteria for your recipe
-    </h2>
+    <h2 class="form__title">Choose desired criteria for your recipe</h2>
     <p class="form__hint">HINT: You need to fill at least one form field</p>
   </header>
   <div class="form__input-pair form__group">
     <label for="name" class="form__input-label">Name</label>
-    <input type="text" id="name" name="name" class="form-input" />
+    <input bind:value={$formData.q} type="text" id="name" name="name" class="form-input" />
   </div>
   <div class="form__input-pair form__group">
     <header>
-      <label for="calorie" class="form__input-label">Caloric range (kcal)</label>
+      <label for="calorie" class="form__input-label">Caloric range (kcal)</label
+      >
       <p class="form__hint">HINT: You need to fill in both fields</p>
     </header>
     <div class="form__input-range">
-      <input type="number" name="calories" /> - <input type="number" name="calories" />
+      <input bind:value={$formData.calories.from} type="number" name="calories" /> -
+      <input bind:value={$formData.calories.to} type="number" name="calories" />
     </div>
   </div>
   <FormOptionsList />
@@ -69,7 +72,7 @@ import FormOptionsList from "./FormOptionsList.svelte"
 
     &__submit-btn {
       margin-inline: auto;
-      margin-block-start: calc(var(--spacer) * 1.5 );
+      margin-block-start: calc(var(--spacer) * 1.5);
       margin-block-end: calc(var(--spacer) / 2);
       width: max-content;
     }

@@ -37,7 +37,7 @@
           transition:scale={{ duration: 150 }}
           bind:value={ingredient.name}
           type="text"
-          name="ingredients"
+          name={`ingredient-${ingredient.id}`}
           class="main__form-option-input"
         />
         <button
@@ -78,12 +78,11 @@
       align-items: center;
 
       button {
-        --outline-width: calc(var(--spacer) / 4);
         all: initial;
         display: grid;
         translate: 0.25em 0;
         padding: calc(var(--spacer) / 2);
-        border-radius: var(--outline-width);
+        border-radius: 4px;
         cursor: pointer;
       }
 

@@ -1,28 +1,27 @@
 <script lang="ts">
-  type Item = {
-    name: string,
-    isChosen: boolean
-  }
   type Option = {
     isExpanded: boolean,
-    items: Item[]
+    items: string[]
   }
 
-  export let options: Option
+  export let nameAttr: string
+  export let option: Option
 </script>
 
-{#if options.items.length > 0}
-  <div data-expanded={options.isExpanded} class="items-wrapper">
+{#if option.items.length > 0}
+  <div data-expanded={option.isExpanded} class="items-wrapper">
     <ul>
-      {#each options.items as { name, isChosen } (name)}
+      {#each option.items as item, index (item)}
         <li>
-          <button
-            on:click={() => isChosen = !isChosen}
-            tabindex={options.isExpanded ? 0 : -1}
-            class:chosen-option={isChosen}
+          <input
+            type="checkbox"
+            name={`${nameAttr}-${index}`}
+            id={item}
+            tabindex={option.isExpanded ? 0 : -1}
           >
-            {name}
-          </button>
+          <label for={item}>
+            {item}
+          </label>
         </li>
       {/each}
     </ul>
@@ -50,16 +49,37 @@
       gap: 0.5rem;
       justify-content: center;
       overflow: hidden;
-    }
-    
-    ul button {
-      font-size: 0.85em;
-      font-weight: normal;
-    }
-  }
 
-  .chosen-option {
-    background-color: hsl(var(--black-color));
-    color: hsl(var(--white-color));
+      li {
+        position: relative;
+        isolation: isolate;
+        padding: 0.25em 1.5em;
+      }
+      
+      label {
+        font-size: 0.85em;
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        inset: 0;
+        border-radius: 100vmax;
+        background-color: hsl(var(--yellow-color));
+        z-index: -1;
+        appearance: none;
+      }
+      
+      input[type="checkbox"]:checked {
+        background-color: hsl(var(--black-color));
+      }
+      
+      input[type="checkbox"]:checked + label {
+        color: hsl(var(--white-color));
+      }
+      
+      input[type="checkbox"]:focus-visible {
+        outline: 2px solid hsl(var(--black-color));
+      }
+    }
   }
 </style>

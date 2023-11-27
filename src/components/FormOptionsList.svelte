@@ -5,25 +5,29 @@
 
   const options = [
     {
+      name: 'diet',
       label: "Diet Type",
       data: $formData.diet,
     },
     {
+      name: 'dishType',
       label: "Dish Type",
       data: $formData.dishType,
     },
     {
+      name: 'cuisineType',
       label: "Cuisine Type",
       data: $formData.cuisineType,
     },
     {
+      name: 'health',
       label: "Health Label",
       data: $formData.health,
     }
   ]
 </script>
 
-{#each options as { label, data } (label)}
+{#each options as { name, label, data } (label)}
   <div class="form__group">
     <button
       on:click={() => (data.isExpanded = !data.isExpanded)}
@@ -35,6 +39,6 @@
       {label}
       <DownChevron />
     </button>
-    <FormOptions options={data} />
+    <FormOptions nameAttr={name} option={data} />
   </div>
 {/each}

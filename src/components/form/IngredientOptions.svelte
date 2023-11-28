@@ -1,8 +1,8 @@
 <script lang="ts">
-  import CloseIcon from "./svgs/CloseIcon.svelte"
-  import { formData } from "../stores/formStore"
-  import { scale } from "svelte/transition"
-  import { nanoid } from "nanoid"
+  import CloseIcon from "../svgs/CloseIcon.svelte";
+  import { formData } from "../../stores/formStore";
+  import { scale } from "svelte/transition";
+  import { nanoid } from "nanoid";
 
   const addNewInput = () => {
     $formData.ingredients = [
@@ -10,21 +10,21 @@
       {
         name: "",
         id: nanoid(),
-      }
-    ]
-  }
+      },
+    ];
+  };
 
   const removeInput = (inputID: string) => {
     $formData.ingredients = $formData.ingredients.filter(
       ({ id }) => inputID !== id,
-    )
-  }
+    );
+  };
 
   const addFocusToNewInput = (input: HTMLInputElement) => {
     if ($formData.ingredients.length > 1) {
-      input.focus()
+      input.focus();
     }
-  }
+  };
 </script>
 
 <div class="form__group">
@@ -69,7 +69,7 @@
     &__ingredient-inputs > :last-child {
       display: block;
       margin-inline: auto;
-      margin-block-end: calc(var(--spacer) / 2);
+      margin-block-end: var(--half-spacer);
     }
 
     &__ingredient-input {
@@ -81,7 +81,7 @@
         all: initial;
         display: grid;
         translate: 0.25em 0;
-        padding: calc(var(--spacer) / 2);
+        padding: var(--half-spacer);
         border-radius: 4px;
         cursor: pointer;
       }

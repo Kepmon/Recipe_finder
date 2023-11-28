@@ -19,7 +19,7 @@
   .contribution {
     display: grid;
     place-items: center;
-    padding: 0.5rem;
+    padding: var(--spacer);
     margin-block-start: 5rem;
     margin-inline: auto;
     width: var(--form-width);

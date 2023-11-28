@@ -1,7 +1,7 @@
 <script lang="ts">
-  import DownChevron from "../components/svgs/DownChevron.svelte"
+  import DownChevron from "../svgs/DownChevron.svelte"
   import FormOptions from "./FormOptions.svelte"
-  import { formData } from "../stores/formStore"
+  import { formData } from "../../stores/formStore"
 
   const options = [
     {

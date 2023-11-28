@@ -114,8 +114,7 @@ export const formData = writable({
   ]
 })
 
-// eslint-disable-next-line no-undef
-const validateForm = (formDataObj: { [k: string]: FormDataEntryValue }) => {
+const validateForm = (formDataObj: Record<string, string>) => {
   const formDataKeys = Object.keys(formDataObj)
 
   formErrors.set({
@@ -151,8 +150,7 @@ const validateForm = (formDataObj: { [k: string]: FormDataEntryValue }) => {
 }
 
 export const makeQueryLink = (
-  // eslint-disable-next-line no-undef
-  formDataObj: { [k: string]: FormDataEntryValue },
+  formDataObj: Record<string, string>,
   base: string
 ) => {
   const formDataKeys = Object.keys(formDataObj)
@@ -205,7 +203,10 @@ export const makeQueryLink = (
 export const handleSubmit = async (e: Event) => {
   const form = e.target as HTMLFormElement
   const formDataInstance = new FormData(form)
-  const formDataObj = Object.fromEntries(formDataInstance)
+  const formDataObj = Object.fromEntries(formDataInstance) as Record<
+    string,
+    string
+  >
 
   const isFormValid = validateForm(formDataObj)
 

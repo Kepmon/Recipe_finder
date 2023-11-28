@@ -1,7 +1,7 @@
+import type { RecipeResponse } from '../types/recipes'
 import { makeQueryLink } from '../stores/formStore'
 
-// eslint-disable-next-line no-undef
-let formDataObj: { [k: string]: FormDataEntryValue }
+let formDataObj: Record<string, string>
 let hasNextPage = false
 let nextPageUrl = ''
 
@@ -20,7 +20,7 @@ export const GET: () => Promise<Response | undefined> = async () => {
 
   const queryLink = makeQueryLink(formDataObj, base)
   const response = await fetch(queryLink)
-  const data = await response.json()
+  const data = (await response.json()) as RecipeResponse
 
   hasNextPage = Object.keys(data._links).length > 0
   nextPageUrl = hasNextPage ? data._links.next.href : ''
@@ -28,7 +28,16 @@ export const GET: () => Promise<Response | undefined> = async () => {
   return new Response(
     JSON.stringify({
       hasNextPage,
-      recipes: data.hits.map(({ recipe }) => recipe)
+      recipes: data.hits.map(({ recipe }) => ({
+        label: recipe.label,
+        images: recipe.images,
+        calories: recipe.calories,
+        totalWeight: recipe.totalWeight,
+        ingredientLines: recipe.ingredientLines,
+        url: recipe.url,
+        totalTime: recipe.totalTime,
+        yield: recipe.yield
+      }))
     }),
     {
       status: 200,

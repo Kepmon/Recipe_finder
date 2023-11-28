@@ -34,7 +34,6 @@
 
 <style lang="scss">
   .form {
-    --spacer: 1rem;
     display: grid;
     margin-inline: auto;
     padding: var(--spacer);
@@ -43,10 +42,6 @@
     border-radius: var(--form-radius);
     text-align: center;
     box-shadow: 1px 1px 5px hsl(var(--black-color) / 0.4);
-
-    h2 {
-      font-size: clamp(1.125rem, 0.9924rem + 0.7576vw, 1.75rem);
-    }
 
     &__hint {
       color: hsl(var(--gray-color));

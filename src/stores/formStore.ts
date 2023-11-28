@@ -6,7 +6,10 @@ export const formErrors = writable({
   noFieldFilled: '',
   negativeCalories: ''
 })
-export const recipes = writable([])
+export const recipesData = writable({
+  hasNextPage: false,
+  recipes: []
+})
 
 export const formData = writable({
   q: '',
@@ -219,5 +222,5 @@ export const handleSubmit = async (e: Event) => {
   const response = await fetch('/index.json')
   const data = await response.json()
 
-  recipes.set(data)
+  recipesData.set(data)
 }

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { isFormSubmitted } from "../stores/formStore"
+  import { recipesData } from "../stores/formStore"
 </script>
 
-<div class="contribution" data-change-color={$isFormSubmitted}>
+<div class="contribution" data-change-color={$recipesData.recipes.length > 0}>
   <a
     href="https://www.edamam.com/"
     target="_blank"
@@ -20,6 +20,7 @@
     display: grid;
     place-items: center;
     padding: 0.5rem;
+    margin-block-start: 5rem;
     margin-inline: auto;
     width: var(--form-width);
     background-color: hsl(var(--pink-color));

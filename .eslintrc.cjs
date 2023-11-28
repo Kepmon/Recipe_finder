@@ -36,7 +36,8 @@ module.exports = {
     'import/extensions': ['error', 'never'],
     'import/prefer-default-export': 'off',
     'no-tabs': ['error', { allowIndentationTabs: true }],
-    'no-param-reassign': ['error', { props: false }]
+    'no-param-reassign': ['error', { props: false }],
+    'no-underscore-dangle': ['error', { allow: ['_links'] }]
   },
   settings: {
     'import/resolver': {

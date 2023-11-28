@@ -37,7 +37,7 @@
           transition:scale={{ duration: 150 }}
           bind:value={ingredient.name}
           type="text"
-          name={`ingredient-${ingredient.id}`}
+          name={`ingredients-${ingredient.id}`}
           class="main__form-option-input"
         />
         <button

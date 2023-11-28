@@ -12,7 +12,7 @@
   </header>
   <div class="form__input-pair form__group">
     <label for="name" class="form__input-label">Name</label>
-    <input bind:value={$formData.q} type="text" id="name" name="name" class="form-input" />
+    <input bind:value={$formData.q} type="text" id="name" name="q" class="form-input" />
   </div>
   <div class="form__input-pair form__group">
     <label for="calories" class="form__input-label">Caloric range (kcal per serving)</label>

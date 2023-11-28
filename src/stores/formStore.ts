@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-unresolved
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import { nanoid } from 'nanoid'
 
-export const isFormSubmitted = writable(false)
 export const formErrors = writable({
   noFieldFilled: '',
   negativeCalories: ''
 })
+export const recipes = writable([])
 
 export const formData = writable({
   q: '',
@@ -147,7 +147,59 @@ const validateForm = (formDataObj: { [k: string]: FormDataEntryValue }) => {
   return true
 }
 
-export const handleSubmit = (e: Event) => {
+export const makeQueryLink = (
+  // eslint-disable-next-line no-undef
+  formDataObj: { [k: string]: FormDataEntryValue },
+  base: string
+) => {
+  const formDataKeys = Object.keys(formDataObj)
+  const writableFormData = get(formData)
+
+  return formDataKeys.reduce((acc, key) => {
+    const keyParts = key.split('-')
+    const respectiveObj =
+      writableFormData[keyParts[0] as keyof typeof writableFormData]
+
+    if (
+      formDataObj[key] !== '' &&
+      (key === 'q' || key.includes('ingredient'))
+    ) {
+      return `${acc}&${keyParts[0]}=${formDataObj[key]}`
+    }
+
+    if (formDataObj[key] !== '' && !key.includes('calories')) {
+      const respectiveValue =
+        typeof respectiveObj !== 'string' && 'items' in respectiveObj
+          ? respectiveObj.items.find(
+              (_, index) => index === parseInt(keyParts[1], 10)
+            )
+          : ''
+
+      if (typeof respectiveObj !== 'string' && 'items' in respectiveObj) {
+        return `${acc}&${keyParts[0]}=${respectiveValue
+          ?.toLowerCase()
+          .replaceAll(' ', '+')}`
+      }
+    }
+
+    if (
+      formDataObj[key] !== '' &&
+      key.includes('calories') &&
+      !acc.includes('calories')
+    ) {
+      const caloriesObj = writableFormData[keyParts[0] as 'calories']
+
+      const respectiveFromValue = caloriesObj.from || 0
+      const respectiveToValue = caloriesObj.to || 1000
+
+      return `${acc}&${keyParts[0]}=${respectiveFromValue}-${respectiveToValue}`
+    }
+
+    return acc
+  }, base)
+}
+
+export const handleSubmit = async (e: Event) => {
   const form = e.target as HTMLFormElement
   const formDataInstance = new FormData(form)
   const formDataObj = Object.fromEntries(formDataInstance)
@@ -155,4 +207,17 @@ export const handleSubmit = (e: Event) => {
   const isFormValid = validateForm(formDataObj)
 
   if (!isFormValid) return
+
+  await fetch('/index.json', {
+    method: 'POST',
+    body: JSON.stringify({ formDataObj }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  const response = await fetch('/index.json')
+  const data = await response.json()
+
+  recipes.set(data)
 }

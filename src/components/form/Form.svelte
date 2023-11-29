@@ -1,11 +1,20 @@
 <script lang="ts">
   import IngredientOptions from "./IngredientOptions.svelte";
   import FormOptionsList from "./FormOptionsList.svelte";
+  import Spinner from "../Spinner.svelte";
   import { formData, formErrors, handleSubmit } from "../../stores/formStore";
   import { scale, fade } from "svelte/transition";
+
+  let isFormSubmitted = false
+
+  const submit = async (e: Event) => {
+    isFormSubmitted = true
+    await handleSubmit(e)
+    isFormSubmitted = false
+  } 
 </script>
 
-<form on:submit|preventDefault={handleSubmit} class="form">
+<form on:submit|preventDefault={submit} class="form">
   <header class="form__group">
     <h2 class="form__title">Choose desired criteria for your recipe</h2>
     <p class="form__hint">
@@ -43,8 +52,13 @@
     </div>
   </div>
   <FormOptionsList />
-  <IngredientOptions />
-  <button class="form__submit-btn">Find recipes</button>
+  <IngredientOptions {isFormSubmitted} />
+  <button class="form__submit-btn bigger-btn-padding" disabled={isFormSubmitted}>
+    {#if isFormSubmitted}
+      <Spinner />
+    {/if}
+    { isFormSubmitted ? 'Loading...' : 'Find recipes' }
+  </button>
 
   {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
     <p
@@ -59,6 +73,9 @@
 
 <style lang="scss">
   .form {
+    --spinner-width: 1.5rem;
+    --spinner-border: 4px;
+    --spinner-color: hsl(var(--black-color) / 0.8);
     display: grid;
     margin-inline: auto;
     padding: var(--spacer);
@@ -92,13 +109,16 @@
     }
 
     &__submit-btn {
+      display: flex;
+      gap: var(--half-spacer);
+      align-items: center;
       margin-inline: auto;
       margin-block-start: calc(var(--spacer) * 1.5);
       margin-block-end: var(--half-spacer);
       width: max-content;
       transition: scale 300ms ease-in;
 
-      &:hover {
+      &:not(:disabled):hover {
         scale: 1.125;
       }
     }

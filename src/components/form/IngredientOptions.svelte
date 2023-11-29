@@ -4,6 +4,8 @@
   import { scale } from "svelte/transition";
   import { nanoid } from "nanoid";
 
+  export let isFormSubmitted: boolean
+
   const addNewInput = () => {
     $formData.ingredients = [
       ...$formData.ingredients,
@@ -49,7 +51,7 @@
         </button>
       </div>
     {/each}
-    <button on:click={addNewInput} type="button" class="add-more"
+    <button on:click={addNewInput} disabled={isFormSubmitted} type="button" class="add-more bigger-btn-padding"
       >Add more ingredients</button
     >
   </div>
@@ -92,7 +94,7 @@
     }
 
   }
-  button {
+  button:not(:disabled) {
     transition: scale 300ms ease-in;
 
     &:hover {

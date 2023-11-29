@@ -44,7 +44,9 @@
     background-color: hsl(var(--gray-color) / 0.75);
   }
 
-  * {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -142,6 +144,14 @@
 
     &__group {
       border-block-end: 2px solid hsl(var(--black-color) / 0.2);
+    }
+
+    .bigger-btn-padding {
+      padding-block: 0.5em;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
     }
 
     button[aria-expanded='true'] svg {

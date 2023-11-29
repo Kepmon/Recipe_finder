@@ -37,7 +37,22 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-tabs': ['error', { allowIndentationTabs: true }],
     'no-param-reassign': ['error', { props: false }],
-    'no-underscore-dangle': ['error', { allow: ['_links'] }]
+    'no-underscore-dangle': ['error', { allow: ['_links'] }],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'object',
+          'index',
+          'type',
+          'builtin',
+          'internal',
+          'sibling',
+          'parent',
+          'external'
+        ]
+      }
+    ]
   },
   settings: {
     'import/resolver': {

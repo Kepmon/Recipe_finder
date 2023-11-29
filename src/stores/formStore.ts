@@ -1,3 +1,4 @@
+import type { Recipe } from '../types/recipes'
 // eslint-disable-next-line import/no-unresolved
 import { writable, get } from 'svelte/store'
 import { nanoid } from 'nanoid'
@@ -8,7 +9,7 @@ export const formErrors = writable({
 })
 export const recipesData = writable({
   hasNextPage: false,
-  recipes: []
+  recipes: [] as Recipe[]
 })
 
 export const formData = writable({
@@ -212,7 +213,7 @@ export const handleSubmit = async (e: Event) => {
 
   if (!isFormValid) return
 
-  await fetch('/index.json', {
+  await fetch('/recipes.json', {
     method: 'POST',
     body: JSON.stringify({ formDataObj }),
     headers: {
@@ -220,7 +221,7 @@ export const handleSubmit = async (e: Event) => {
     }
   })
 
-  const response = await fetch('/index.json')
+  const response = await fetch('/recipes.json')
   const data = await response.json()
 
   recipesData.set(data)

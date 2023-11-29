@@ -94,7 +94,7 @@
         transition: scale 200ms ease-in;
       }
 
-      &:is(:hover, :focus-visible)::after {
+      &:where(:hover, :focus-visible)::after {
         scale: 1;
       }
     }

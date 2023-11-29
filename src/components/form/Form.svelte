@@ -96,6 +96,11 @@
       margin-block-start: calc(var(--spacer) * 1.5);
       margin-block-end: var(--half-spacer);
       width: max-content;
+      transition: scale 300ms ease-in;
+
+      &:hover {
+        scale: 1.125;
+      }
     }
 
     &__error-message {

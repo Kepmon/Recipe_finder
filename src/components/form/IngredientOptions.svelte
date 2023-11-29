@@ -84,11 +84,19 @@
         padding: var(--half-spacer);
         border-radius: 4px;
         cursor: pointer;
+        
+        &:focus-visible {
+          outline: 2px solid hsl(var(--black-color));
+        }
       }
+    }
 
-      button:focus-visible {
-        outline: 2px solid hsl(var(--black-color));
-      }
+  }
+  button {
+    transition: scale 300ms ease-in;
+
+    &:hover {
+      scale: 1.125;
     }
   }
 </style>

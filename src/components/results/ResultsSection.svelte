@@ -1,13 +1,20 @@
 <script lang="ts">
-  import type { RecipesData } from "../../types/recipes";
-  import { recipesData } from "../../stores/formStore";
-  import RecipeCard from "./RecipeCard.svelte";
+  import type { RecipesData } from "../../types/recipes"
+  import { recipesData } from "../../stores/formStore"
+  import RecipeCard from "./RecipeCard.svelte"
 
-  $: recipes = $recipesData.recipes as RecipesData["recipes"];
+  $: recipes = $recipesData.recipes as RecipesData["recipes"]
 
   const scrollIntoView = (section: HTMLElement) => {
-    section.scrollIntoView();
-  };
+    section.scrollIntoView()
+  }
+
+  const loadMoreRecipes = async () => {
+    const response = await fetch('/recipes.json')
+    const data = await response.json() as RecipesData
+
+    $recipesData.recipes = [...$recipesData.recipes, ...data.recipes]
+  }
 </script>
 
 {#if recipes.length > 0}
@@ -22,7 +29,7 @@
     </div>
 
     {#if $recipesData.hasNextPage}
-      <button> Load More </button>
+      <button on:click={loadMoreRecipes}> Load More </button>
     {/if}
   </section>
 {/if}
@@ -31,6 +38,7 @@
   section {
     --border-radius: var(--half-spacer);
     padding-block: 2em;
+    isolation: isolate;
     background-color: hsl(var(--brown-color));
     color: hsl(var(--white-color));
 
@@ -48,12 +56,19 @@
 
     button {
       display: block;
+      position: relative;
       margin-inline: auto;
       margin-block-start: var(--double-spacer);
+      padding: 0.5em 1.25em;
       width: max-content;
       background-color: hsl(var(--yellow-color));
       color: hsl(var(--black-color));
       border-radius: var(--border-radius);
+      transition: scale 300ms ease-in;
+
+      &:hover {
+        scale: 1.125;
+      }
     }
   }
 </style>

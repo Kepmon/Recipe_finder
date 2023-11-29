@@ -54,6 +54,10 @@
         position: relative;
         isolation: isolate;
         padding: 0.25em 1.5em;
+        
+        > * {
+          cursor: pointer;
+        }
       }
 
       label {

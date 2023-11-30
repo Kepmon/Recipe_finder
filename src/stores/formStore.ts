@@ -13,7 +13,7 @@ export const recipesData = writable({
 })
 
 export const isFormSubmitted = writable(false)
-export const isRecipesError = writable(false)
+export const recipesError = writable('')
 
 export const formData = writable({
   q: '',
@@ -230,19 +230,19 @@ export const handleSubmit = async (e: Event) => {
   })
 
   const response = await fetch('/recipes.json')
+  const data = await response.json()
 
   if (!response.ok) {
     isFormSubmitted.set(false)
-    isRecipesError.set(true)
+    recipesError.set(data.error)
 
     setTimeout(() => {
-      isRecipesError.set(false)
+      recipesError.set('')
     }, 2500)
     return
   }
 
-  const data = await response.json()
   recipesData.set(data)
-  isRecipesError.set(false)
+  recipesError.set('')
   isFormSubmitted.set(false)
 }

@@ -9,7 +9,10 @@ export const fetchRecipes = async (url: string) => {
     const response = await fetch(url)
     const data = (await response.json()) as RecipeResponse
 
-    if ('status' in data && data.status === 'error') throw new Error()
+    if ('status' in data && data.status === 'error')
+      throw new Error('sth-wrong')
+
+    if ('hits' in data && data.hits.length === 0) throw new Error('no-results')
 
     const hasNextPage = Object.keys(data._links).length > 0
     nextPageUrl = hasNextPage ? data._links.next.href : ''
@@ -38,12 +41,17 @@ export const fetchRecipes = async (url: string) => {
     )
   } catch (err) {
     nextPageUrl = ''
-    recipesResponse = new Response(null, {
-      status: 404,
-      headers: {
-        'Content-Type': 'application/json'
+    recipesResponse = new Response(
+      JSON.stringify({
+        error: err instanceof Error ? err.message : 'sth-wrong'
+      }),
+      {
+        status: 404,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
   }
 
   return { nextPageUrl, recipesResponse }

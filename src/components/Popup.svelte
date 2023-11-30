@@ -1,12 +1,18 @@
 <script lang="ts">
-  import { isRecipesError } from '../stores/formStore'
+  import { recipesError } from '../stores/formStore'
   import { slide } from 'svelte/transition'
 </script>
 
-{#if $isRecipesError}
+{#if $recipesError !== ''}
   <div transition:slide>
-    <p>Ooops, something went wrong...</p>
-    <p>Try again later</p>
+    {#if $recipesError === 'sth-wrong'}
+      <p>Ooops, something went wrong...</p>
+      <p>Try again later</p>
+    {/if}
+    {#if $recipesError === 'no-results'}
+      <p>No results have been found...</p>
+      <p>Try search for another query</p>
+    {/if}
   </div>
 {/if}
 

@@ -1,20 +1,20 @@
 <script lang="ts">
-  import type { RecipesData } from "../../types/recipes"
-  import { recipesData } from "../../stores/formStore"
-  import RecipeCard from "./RecipeCard.svelte"
+  import type { RecipesData } from "../../types/recipes";
+  import { recipesData } from "../../stores/formStore";
+  import RecipeCard from "./RecipeCard.svelte";
 
-  $: recipes = $recipesData.recipes as RecipesData["recipes"]
+  $: recipes = $recipesData.recipes as RecipesData["recipes"];
 
   const scrollIntoView = (section: HTMLElement) => {
-    section.scrollIntoView()
-  }
+    section.scrollIntoView();
+  };
 
   const loadMoreRecipes = async () => {
-    const response = await fetch('/recipes.json')
-    const data = await response.json() as RecipesData
+    const response = await fetch("/recipes.json");
+    const data = (await response.json()) as RecipesData;
 
-    $recipesData.recipes = [...$recipesData.recipes, ...data.recipes]
-  }
+    $recipesData.recipes = [...$recipesData.recipes, ...data.recipes];
+  };
 </script>
 
 {#if recipes.length > 0}
@@ -67,7 +67,7 @@
       transition: scale 300ms ease-in;
 
       &:hover {
-        scale: 1.125;
+        scale: 1.1;
       }
     }
   }

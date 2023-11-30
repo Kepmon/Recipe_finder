@@ -1,4 +1,5 @@
 export type Recipe = {
+  id: string
   label: string
   images: {
     SMALL: {

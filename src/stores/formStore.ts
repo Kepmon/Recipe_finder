@@ -12,6 +12,9 @@ export const recipesData = writable({
   recipes: [] as Recipe[]
 })
 
+export const isFormSubmitted = writable(false)
+export const isRecipesError = writable(false)
+
 export const formData = writable({
   q: '',
   calories: {
@@ -209,9 +212,14 @@ export const handleSubmit = async (e: Event) => {
     string
   >
 
+  isFormSubmitted.set(true)
+
   const isFormValid = validateForm(formDataObj)
 
-  if (!isFormValid) return
+  if (!isFormValid) {
+    isFormSubmitted.set(false)
+    return
+  }
 
   await fetch('/recipes.json', {
     method: 'POST',
@@ -222,7 +230,19 @@ export const handleSubmit = async (e: Event) => {
   })
 
   const response = await fetch('/recipes.json')
-  const data = await response.json()
 
+  if (!response.ok) {
+    isFormSubmitted.set(false)
+    isRecipesError.set(true)
+
+    setTimeout(() => {
+      isRecipesError.set(false)
+    }, 2500)
+    return
+  }
+
+  const data = await response.json()
   recipesData.set(data)
+  isRecipesError.set(false)
+  isFormSubmitted.set(false)
 }

@@ -1,20 +1,15 @@
 <script lang="ts">
+  import Popup from '../Popup.svelte'
   import IngredientOptions from "./IngredientOptions.svelte";
   import FormOptionsList from "./FormOptionsList.svelte";
   import Spinner from "../Spinner.svelte";
   import { formData, formErrors, handleSubmit } from "../../stores/formStore";
   import { scale, fade } from "svelte/transition";
-
-  let isFormSubmitted = false
-
-  const submit = async (e: Event) => {
-    isFormSubmitted = true
-    await handleSubmit(e)
-    isFormSubmitted = false
-  } 
+  import { isFormSubmitted } from '../../stores/formStore'
 </script>
 
-<form on:submit|preventDefault={submit} class="form">
+<Popup />
+<form on:submit|preventDefault={handleSubmit} class="form">
   <header class="form__group">
     <h2 class="form__title">Choose desired criteria for your recipe</h2>
     <p class="form__hint">
@@ -52,12 +47,15 @@
     </div>
   </div>
   <FormOptionsList />
-  <IngredientOptions {isFormSubmitted} />
-  <button class="form__submit-btn bigger-btn-padding" disabled={isFormSubmitted}>
-    {#if isFormSubmitted}
+  <IngredientOptions />
+  <button
+    class="form__submit-btn bigger-btn-padding"
+    disabled={$isFormSubmitted}
+  >
+    {#if $isFormSubmitted}
       <Spinner />
     {/if}
-    { isFormSubmitted ? 'Loading...' : 'Find recipes' }
+    {$isFormSubmitted ? "Loading..." : "Find recipes"}
   </button>
 
   {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
@@ -119,7 +117,7 @@
       transition: scale 300ms ease-in;
 
       &:not(:disabled):hover {
-        scale: 1.125;
+        scale: 1.1;
       }
     }
 

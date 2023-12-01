@@ -1,24 +1,13 @@
 <script lang="ts">
   import type { RecipesData } from "../../types/recipes";
-  import { recipesData } from "../../stores/formStore";
+  import { recipesData, loadMoreRecipes, scrollIntoResults } from "../../stores/formStore";
   import RecipeCard from "./RecipeCard.svelte";
 
   $: recipes = $recipesData.recipes as RecipesData["recipes"];
-
-  const scrollIntoView = (section: HTMLElement) => {
-    section.scrollIntoView();
-  };
-
-  const loadMoreRecipes = async () => {
-    const response = await fetch("/recipes.json");
-    const data = (await response.json()) as RecipesData;
-
-    $recipesData.recipes = [...$recipesData.recipes, ...data.recipes];
-  };
 </script>
 
 {#if recipes.length > 0}
-  <section use:scrollIntoView aria-labelledby="section-title">
+  <section use:scrollIntoResults aria-labelledby="section-title" data-section="recipe-results">
     <div class="wrapper">
       <h2 id="section-title">Here are your search results:</h2>
       <div class="results__cards">

@@ -1,4 +1,4 @@
-import type { Recipe } from '../types/recipes'
+import type { Recipe, RecipesData } from '../types/recipes'
 // eslint-disable-next-line import/no-unresolved
 import { writable, get } from 'svelte/store'
 import { nanoid } from 'nanoid'
@@ -15,7 +15,7 @@ export const recipesData = writable({
 export const isFormSubmitted = writable(false)
 export const recipesError = writable('')
 
-const returnFormData = () => ({
+const returnFormData = (currentID?: string) => ({
   q: '',
   calories: {
     from: '',
@@ -113,7 +113,7 @@ const returnFormData = () => ({
   ingredients: [
     {
       name: '',
-      id: nanoid()
+      id: currentID || nanoid()
     }
   ]
 })
@@ -206,6 +206,18 @@ export const makeQueryLink = (
   }, base)
 }
 
+export const scrollIntoResults = (section?: HTMLElement) => {
+  const resultsSection =
+    section ||
+    (document.querySelector(
+      '[data-section="recipe-results"]'
+    ) as null | HTMLDivElement)
+
+  if (resultsSection != null) {
+    resultsSection.scrollIntoView()
+  }
+}
+
 export const handleSubmit = async (e: Event) => {
   const form = e.target as HTMLFormElement
   const formDataInstance = new FormData(form)
@@ -223,15 +235,13 @@ export const handleSubmit = async (e: Event) => {
     return
   }
 
-  await fetch('/recipes.json', {
+  const response = await fetch('/recipes.json', {
     method: 'POST',
-    body: JSON.stringify({ formDataObj }),
+    body: JSON.stringify({ formDataObj, moreRecipes: false }),
     headers: {
       'Content-Type': 'application/json'
     }
   })
-
-  const response = await fetch('/recipes.json')
   const data = await response.json()
 
   if (!response.ok) {
@@ -247,10 +257,35 @@ export const handleSubmit = async (e: Event) => {
   recipesData.set(data)
   recipesError.set('')
   isFormSubmitted.set(false)
+
+  scrollIntoResults()
+}
+
+export const loadMoreRecipes = async () => {
+  const response = await fetch('/recipes.json', {
+    method: 'POST',
+    body: JSON.stringify({ moreRecipes: true }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const data = (await response.json()) as RecipesData
+
+  recipesData.update((currentData) => ({
+    hasNextPage: currentData.hasNextPage,
+    recipes: [...currentData.recipes, ...data.recipes]
+  }))
 }
 
 export const resetFormData = () => {
-  formData.set(returnFormData())
+  const clearFormDataString = JSON.stringify(returnFormData()).split('"id"')[0]
+  const currentFormDataString = JSON.stringify(get(formData)).split('"id"')[0]
+
+  const firstIngredientInputID = get(formData).ingredients[0].id
+
+  if (clearFormDataString === currentFormDataString) return
+
+  formData.set(returnFormData(firstIngredientInputID))
   const checkboxes = [
     ...document.querySelectorAll('input[type="checkbox"]')
   ] as HTMLInputElement[]

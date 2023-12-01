@@ -22,7 +22,7 @@
     <div class="wrapper">
       <h2 id="section-title">Here are your search results:</h2>
       <div class="results__cards">
-        {#each recipes as recipe (recipe.label)}
+        {#each recipes as recipe (recipe.id)}
           <RecipeCard {recipe} />
         {/each}
       </div>

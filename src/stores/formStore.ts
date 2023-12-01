@@ -15,7 +15,7 @@ export const recipesData = writable({
 export const isFormSubmitted = writable(false)
 export const recipesError = writable('')
 
-export const formData = writable({
+const returnFormData = () => ({
   q: '',
   calories: {
     from: '',
@@ -117,6 +117,8 @@ export const formData = writable({
     }
   ]
 })
+
+export const formData = writable(returnFormData())
 
 const validateForm = (formDataObj: Record<string, string>) => {
   const formDataKeys = Object.keys(formDataObj)
@@ -245,4 +247,17 @@ export const handleSubmit = async (e: Event) => {
   recipesData.set(data)
   recipesError.set('')
   isFormSubmitted.set(false)
+}
+
+export const resetFormData = () => {
+  formData.set(returnFormData())
+  const checkboxes = [
+    ...document.querySelectorAll('input[type="checkbox"]')
+  ] as HTMLInputElement[]
+
+  if (checkboxes.length > 0) {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false
+    })
+  }
 }

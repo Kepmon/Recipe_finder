@@ -3,7 +3,7 @@
   import FormOptions from "./FormOptions.svelte"
   import { formData } from "../../stores/formStore"
 
-  const options = [
+  $: options = [
     {
       name: 'diet',
       label: "Diet Type",

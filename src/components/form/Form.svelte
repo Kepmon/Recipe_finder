@@ -3,7 +3,7 @@
   import IngredientOptions from "./IngredientOptions.svelte";
   import FormOptionsList from "./FormOptionsList.svelte";
   import Spinner from "../Spinner.svelte";
-  import { formData, formErrors, handleSubmit } from "../../stores/formStore";
+  import { formData, formErrors, handleSubmit, resetFormData } from "../../stores/formStore";
   import { scale, fade } from "svelte/transition";
   import { isFormSubmitted } from '../../stores/formStore'
 </script>
@@ -48,15 +48,25 @@
   </div>
   <FormOptionsList />
   <IngredientOptions />
-  <button
-    class="form__submit-btn bigger-btn-padding"
-    disabled={$isFormSubmitted}
-  >
-    {#if $isFormSubmitted}
-      <Spinner />
-    {/if}
-    {$isFormSubmitted ? "Loading..." : "Find recipes"}
-  </button>
+  <div class="form__buttons">
+    <button
+      class="form__submit-btn bigger-btn-padding"
+      disabled={$isFormSubmitted}
+    >
+      {#if $isFormSubmitted}
+        <Spinner />
+      {/if}
+      {$isFormSubmitted ? "Loading..." : "Find Recipes"}
+    </button>
+    <button
+    on:click={resetFormData}
+      class="form__submit-btn bigger-btn-padding"
+      disabled={$isFormSubmitted}
+      type="button"
+    >
+      Reset Form
+    </button>
+  </div>
 
   {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
     <p
@@ -104,6 +114,13 @@
       input {
         max-width: 6rem;
       }
+    }
+
+    &__buttons {
+      display: flex;
+      gap: var(--spacer);
+      margin-inline: auto;
+      width: max-content;
     }
 
     &__submit-btn {

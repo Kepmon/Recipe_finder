@@ -44,7 +44,9 @@
     background-color: hsl(var(--gray-color) / 0.75);
   }
 
-  * {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -53,17 +55,24 @@
   :root {
     --black-color: 0 0% 10%;
     --brown-color: 16 38% 32%;
+    --dark-red: 0 100% 24%;
     --gray-color: 0 0% 40%;
     --light-black-color: 0 0% 20%;
     --pink-color: 13 100% 70%;
+    --red-color: 357 75% 35%;
     --white-color: 0 0% 90%;
     --yellow-color: 39 100% 71%;
+    --half-spacer: calc(var(--spacer) / 2);
+    --spacer: 1rem;
+    --double-spacer: calc(var(--spacer) * 2);
     --form-width: min(100% - 2rem, 50rem);
     --form-radius: 1.5rem;
   }
 
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -81,6 +90,10 @@
 
   a {
     text-decoration: none;
+  }
+
+  h2 {
+    font-size: clamp(1.125rem, 0.9924rem + 0.7576vw, 1.75rem);
   }
 
   button {
@@ -123,7 +136,7 @@
     }
 
     &__group:not(:first-child) {
-      padding-block: calc(var(--spacer) / 2);
+      padding-block: var(--half-spacer);
     }
 
     &__group:first-child {
@@ -134,11 +147,19 @@
       border-block-end: 2px solid hsl(var(--black-color) / 0.2);
     }
 
-    button[aria-expanded='true'] svg {
-      --chevron-rotate: 180deg;
+    .bigger-btn-padding {
+      padding-block: 0.5em;
     }
 
-    input {
+    button:disabled {
+      cursor: not-allowed;
+    }
+
+    button[aria-expanded='true'] svg {
+      --chevron-rotate: -0.5turn;
+    }
+
+    input:not([type='checkbox']) {
       display: block;
       padding: 0.25rem;
       margin-inline: auto;

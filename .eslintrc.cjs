@@ -1,6 +1,7 @@
 module.exports = {
   env: {
-    node: true
+    node: true,
+    browser: true
   },
   extends: [
     'plugin:@typescript-eslint/recommended',
@@ -35,7 +36,23 @@ module.exports = {
     'import/extensions': ['error', 'never'],
     'import/prefer-default-export': 'off',
     'no-tabs': ['error', { allowIndentationTabs: true }],
-    'no-param-reassign': ['error', { props: false }]
+    'no-param-reassign': ['error', { props: false }],
+    'no-underscore-dangle': ['error', { allow: ['_links'] }],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'object',
+          'index',
+          'type',
+          'builtin',
+          'internal',
+          'sibling',
+          'parent',
+          'external'
+        ]
+      }
+    ]
   },
   settings: {
     'import/resolver': {

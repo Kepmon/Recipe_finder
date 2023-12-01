@@ -1,14 +1,17 @@
 <script lang="ts">
-  import { isFormSubmitted } from "../stores/formData";
+  import { recipesData } from "../stores/formStore"
 </script>
 
-<div class="contribution" data-change-color={$isFormSubmitted}>
+<div class="contribution" data-change-color={$recipesData.recipes.length > 0}>
   <a
     href="https://www.edamam.com/"
     target="_blank"
     aria-label="click here to go to the edamam's website"
   >
-    <img src="/img/svgs/edamam_contribution.svg" alt="logo of edamam - the recipes data provider">
+    <img
+      src="/img/svgs/edamam_contribution.svg"
+      alt="logo of edamam - the recipes data provider"
+    />
   </a>
 </div>
 
@@ -16,7 +19,8 @@
   .contribution {
     display: grid;
     place-items: center;
-    padding: 0.5rem;
+    padding: var(--spacer);
+    margin-block-start: 5rem;
     margin-inline: auto;
     width: var(--form-width);
     background-color: hsl(var(--pink-color));

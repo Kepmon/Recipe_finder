@@ -14,6 +14,8 @@ export const recipesData = writable({
 
 export const isFormSubmitted = writable(false)
 export const recipesError = writable('')
+export const isRecipeDetailsSectionShown = writable(false)
+export const idOfClickedRecipe = writable<null | string>(null)
 
 const returnFormData = (currentID?: string) => ({
   q: '',
@@ -206,12 +208,8 @@ export const makeQueryLink = (
   }, base)
 }
 
-export const scrollIntoResults = (section?: HTMLElement) => {
-  const resultsSection =
-    section ||
-    (document.querySelector(
-      '[data-section="recipe-results"]'
-    ) as null | HTMLDivElement)
+export const scrollIntoResults = (section: HTMLElement) => {
+  const resultsSection = section || document.querySelector('section')
 
   if (resultsSection != null) {
     resultsSection.scrollIntoView()
@@ -235,6 +233,8 @@ export const handleSubmit = async (e: Event) => {
     return
   }
 
+  isRecipeDetailsSectionShown.set(false)
+
   const response = await fetch('/recipes.json', {
     method: 'POST',
     body: JSON.stringify({ formDataObj, moreRecipes: false }),
@@ -257,8 +257,6 @@ export const handleSubmit = async (e: Event) => {
   recipesData.set(data)
   recipesError.set('')
   isFormSubmitted.set(false)
-
-  scrollIntoResults()
 }
 
 export const loadMoreRecipes = async () => {

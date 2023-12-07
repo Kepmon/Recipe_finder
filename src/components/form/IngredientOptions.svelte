@@ -54,7 +54,7 @@
       on:click={addNewInput}
       disabled={$isFormSubmitted}
       type="button"
-      class="add-more bigger-btn-padding">Add more ingredients</button
+      class="add-more bigger-btn-padding scale-on-hover">Add more ingredients</button
     >
   </div>
 </div>
@@ -93,13 +93,6 @@
           outline: 2px solid hsl(var(--black-color));
         }
       }
-    }
-  }
-  button:not(:disabled) {
-    transition: scale 300ms ease-in;
-
-    &:hover {
-      scale: 1.1;
     }
   }
 </style>

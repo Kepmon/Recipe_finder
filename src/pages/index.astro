@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro'
 import Form from '../components/form/Form.svelte'
 import ContributionBanner from '../components/ContributionBanner.svelte'
 import ResultsSection from '../components/results/ResultsSection.svelte'
+import RecipeDetailsSection from '../components/details/RecipeDetailsSection.svelte'
 ---
 
 <Layout>
@@ -13,6 +14,7 @@ import ResultsSection from '../components/results/ResultsSection.svelte'
     <Form client:only="svelte" />
     <ContributionBanner client:only="svelte" />
     <ResultsSection client:only="svelte" />
+    <RecipeDetailsSection client:only="svelte" />
   </main>
   <Footer />
 </Layout>

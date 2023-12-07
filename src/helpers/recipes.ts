@@ -29,7 +29,8 @@ export const fetchRecipes = async (url: string) => {
           ingredientLines: recipe.ingredientLines,
           url: recipe.url,
           totalTime: recipe.totalTime,
-          yield: recipe.yield
+          yield: recipe.yield,
+          totalNutrients: recipe.totalNutrients
         }))
       }),
       {

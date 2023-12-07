@@ -1,12 +1,23 @@
+type ImgProperties = {
+  width: number
+  height: number
+  url: string
+}
+
+type NutrientProperties = {
+  label: string
+  quantity: number
+  unit: string
+}
+
 export type Recipe = {
   id: string
   label: string
   images: {
-    SMALL: {
-      width: number
-      height: number
-      url: string
-    }
+    THUMBNAIL: ImgProperties
+    SMALL: ImgProperties
+    REGULAR: ImgProperties
+    LARGE: ImgProperties
   }
   calories: number
   totalWeight: number
@@ -14,6 +25,15 @@ export type Recipe = {
   url: string
   totalTime: number
   yield: number
+  totalNutrients: {
+    FAT: NutrientProperties
+    FASAT: NutrientProperties
+    FATRN: NutrientProperties
+    CHOCDF: NutrientProperties
+    SUGAR: NutrientProperties
+    PROCNT: NutrientProperties
+    FIBTG: NutrientProperties
+  }
 }
 
 export type RecipesData = {

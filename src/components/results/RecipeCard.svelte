@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Recipe } from "../../types/recipes";
+  import { isRecipeDetailsSectionShown, idOfClickedRecipe } from "../../stores/formStore";
 
   export let recipe: Recipe;
 
@@ -21,6 +22,11 @@
       value: recipe.totalTime,
     },
   ];
+
+  const showRecipeDetails = () => {
+    $isRecipeDetailsSectionShown = true
+    $idOfClickedRecipe = recipe.id
+  }
 </script>
 
 <article>
@@ -38,7 +44,7 @@
       </p>
     {/each}
   </div>
-  <a href={recipe.url} target="_blank">Read More</a>
+  <button on:click={showRecipeDetails} class="scale-on-hover">Read More</button>
 </article>
 
 <style lang="scss">
@@ -73,30 +79,11 @@
       object-fit: cover;
     }
 
-    a {
+    button {
       position: relative;
       margin-inline: auto;
-      width: max-content;
-      color: hsl(var(--brown-color));
+      font-size: 0.95em;
       font-weight: 500;
-      outline: 2px solid transparent;
-
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -0.1em;
-        width: 100%;
-        height: 0.15em;
-        background-color: hsl(var(--brown-color));
-        scale: 0 1;
-        transform-origin: center left;
-        transition: scale 200ms ease-in;
-      }
-
-      &:where(:hover, :focus-visible)::after {
-        scale: 1;
-      }
     }
   }
 

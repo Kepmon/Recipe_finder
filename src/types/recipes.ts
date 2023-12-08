@@ -33,6 +33,7 @@ export type Recipe = {
     SUGAR: NutrientProperties
     PROCNT: NutrientProperties
     FIBTG: NutrientProperties
+    NA: NutrientProperties
   }
   dietLabels: string[]
   healthLabels: string[]

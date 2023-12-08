@@ -20,12 +20,19 @@
     stroke: 'hsl(var(--brown-color))'
   }
 
-  const returnCalculatedNutrients = (quantity: number, unit = "kcal") => {
-    return recipe != null
-      ? `${Math.round((quantity / recipe.totalWeight) * 100)} ${
-          unit !== "kcal" ? unit : ""
-        }`
-      : 0;
+  const returnCalculatedNutrients = (nutrient: string, quantity: number) => {
+    let value = recipe != null ? quantity / recipe.totalWeight * 100 : 0
+    let unit = 'g'
+  
+    if (nutrient === 'kcal') {
+      unit = ''
+    }
+
+    if (nutrient === 'salt') {
+      value = recipe != null ? quantity / 1000 * 2.54 / recipe.totalWeight * 100 : 0
+    }
+
+    return `${Math.round(value)} ${unit}`
   };
 
   const returnImgSize = () => {
@@ -51,6 +58,7 @@
     ["sugars", "SUGAR"],
     ["protein", "PROCNT"],
     ["fibre", "FIBTG"],
+    ["salt", "NA"]
   ];
 </script>
 
@@ -73,21 +81,23 @@
     />
     <section aria-labelledby="nutrition-data">
       <h3 id="nutrition-data">Nutrition data (per 100 g):</h3>
-      <div class="nutrients-wrapper">
+      <ul data-list="nutrients-wrapper">
         {#each recipeNutrients as nutrientPair (nutrientPair[0])}
-          <div class="nutrient">
-            <p>{nutrientPair[0]}</p>
-            <p>
-              {nutrientPair[1] === "calories"
-                ? returnCalculatedNutrients(recipe.calories)
-                : returnCalculatedNutrients(
-                    recipe.totalNutrients[nutrientPair[1]].quantity,
-                    recipe.totalNutrients[nutrientPair[1]].unit,
-                  )}
+          <li class="nutrient">
+            <p class="nutrient__label">{nutrientPair[0].toUpperCase()}</p>
+            <p class="nutrient__value">
+              {
+                returnCalculatedNutrients(
+                  nutrientPair[0],
+                  nutrientPair[1] === 'calories'
+                    ? recipe.calories
+                    : recipe.totalNutrients[nutrientPair[1]].quantity
+                )
+              }
             </p>
-          </div>
+          </li>
         {/each}
-      </div>
+      </ul>
     </section>
     <section aria-labelledby="ingredients">
       <h3 id="ingredients">Ingredients:</h3>
@@ -117,6 +127,7 @@
 <style lang="scss">
   section {
     &[data-section="recipe-details"] {
+      --border-radius: var(--half-spacer);
       padding-block: 2em;
     }
 
@@ -135,23 +146,46 @@
       }
     }
 
+    h3 {
+      margin-block-end: var(--half-spacer);
+    }
+
     img {
       margin-inline: auto;
       object-fit: cover;
     }
 
-    .nutrients-wrapper {
-      display: flex;
-      flex-wrap: wrap;
+    [data-list="nutrients-wrapper"],
+    [data-list="nutrition-labels"] {
+      display: grid;
       gap: var(--half-spacer);
+
+      > * {
+        padding: var(--half-spacer);
+        background-color: hsl(var(--brown-color));
+        color: hsl(var(--white-color));
+        text-align: center;
+        border-radius: var(--border-radius);
+      }
+    }
+    
+    [data-list="nutrients-wrapper"] {
+      grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    }
+    
+    [data-list="nutrition-labels"] {
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     }
 
     .nutrient {
-      flex: 1;
-      padding: var(--half-spacer);
-      background-color: hsl(var(--brown-color));
-      color: hsl(var(--white-color));
-      text-align: center;
+      &__label {
+        font-size: 0.75em;
+        letter-spacing: 1.5px;
+      }
+
+      &__value {
+        font-weight: 500;
+      }
     }
 
     ul {
@@ -160,12 +194,8 @@
         list-style-type: disc;
       }
 
-      &[data-list="nutrition-labels"] {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--spacer);
-        background-color: hsl(var(--brown-color));
-        color: hsl(var(--white-color));
+      ::marker {
+        color: hsl(var(--brown-color));
       }
     }
 
@@ -175,7 +205,8 @@
       margin-block-start: var(--spacer);
       justify-self: center;
       color: var(--color);
-      font-weight: 500;
+      font-size: 1.2em;
+      font-weight: 600;
 
       &::after {
         content: '';

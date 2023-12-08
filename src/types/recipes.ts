@@ -34,6 +34,8 @@ export type Recipe = {
     PROCNT: NutrientProperties
     FIBTG: NutrientProperties
   }
+  dietLabels: string[]
+  healthLabels: string[]
 }
 
 export type RecipesData = {

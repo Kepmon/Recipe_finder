@@ -38,7 +38,9 @@ export const fetchRecipes = async (url: string) => {
             SUGAR: recipe.totalNutrients.SUGAR,
             PROCNT: recipe.totalNutrients.PROCNT,
             FIBTG: recipe.totalNutrients.FIBTG
-          }
+          },
+          dietLabels: recipe.dietLabels,
+          healthLabels: recipe.healthLabels
         }))
       }),
       {

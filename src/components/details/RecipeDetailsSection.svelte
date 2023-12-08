@@ -1,55 +1,67 @@
 <script lang="ts">
-  import { recipesData, isRecipeDetailsSectionShown, idOfClickedRecipe } from "../../stores/formStore"
-  import { scrollIntoResults } from "../../stores/formStore"
+  import type { Recipe } from '../../types/recipes'
+  import {
+  recipesData,
+  isRecipeDetailsSectionShown,
+  idOfClickedRecipe,
+  scrollIntoResults
+} from '../../stores/formStore'
 
-  $: recipe = $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) || $recipesData.recipes[0]
-  
+type NutrientsPair = [string, 'calories' | keyof Recipe['totalNutrients']]
+
+$: recipe =
+  $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) ||
+  $recipesData.recipes[0]
 
   const returnCalculatedNutrients = (quantity: number, unit = 'kcal') => {
     return `${Math.round(quantity / recipe.totalWeight * 100)} ${unit !== 'kcal' ? unit : ''}`
   }
+
+  const returnImgSize = () => {
+    return (
+      ['SMALL', 'REGULAR', 'LARGE'] as (keyof typeof recipe.images)[]
+    ).reduce((finalSize, currentSize) => {
+      if (currentSize in recipe.images) return currentSize
+      
+      return finalSize
+    }, 'SMALL')
+  }
+
+  const recipeNutrients: NutrientsPair[] = [
+    ['kcal', 'calories'],
+    ['fat', 'FAT'],
+    ['saturates', 'FASAT'],
+    ['trans', 'FATRN'],
+    ['carbs', 'CHOCDF'],
+    ['sugars', 'SUGAR'],
+    ['protein', 'PROCNT'],
+    ['fibre', 'FIBTG'],
+  ]
 </script>
 
 {#if $isRecipeDetailsSectionShown}
   <section use:scrollIntoResults aria-labelledby="recipe-details" id="recipe-details">
     <div class="wrapper">
       <h2 id="recipe-details">Details on <span>{recipe.label}</span> recipe:</h2>
-      <img src={recipe.images.LARGE.url} alt="clicked meal">
+      <img src={recipe.images[returnImgSize()].url} alt="clicked meal" width="600" height="600">
       <section aria-labelledby="nutritional-data">
         <h3 id="nutritional-data">Nutritional data (per 100 g):</h3>
         <div class="nutrients-wrapper">
-          <div class="nutrient">
-            <p>kcal</p>
-            <p>{returnCalculatedNutrients(recipe.calories)}</p>
-          </div>
-          <div class="nutrient">
-            <p>fat</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.FAT.quantity, recipe.totalNutrients.FAT.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>saturates</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.FASAT.quantity, recipe.totalNutrients.FASAT.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>trans</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.FATRN.quantity, recipe.totalNutrients.FATRN.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>carbs</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.CHOCDF.quantity, recipe.totalNutrients.CHOCDF.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>sugars</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.SUGAR.quantity, recipe.totalNutrients.SUGAR.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>protein</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.PROCNT.quantity, recipe.totalNutrients.PROCNT.unit)}</p>
-          </div>
-          <div class="nutrient">
-            <p>fiber</p>
-            <p>{returnCalculatedNutrients(recipe.totalNutrients.FIBTG.quantity, recipe.totalNutrients.FIBTG.unit)}</p>
-          </div>
+          {#each recipeNutrients as nutrientPair (nutrientPair[0])}
+            <div class="nutrient">
+              <p>{nutrientPair[0]}</p>
+              <p>
+                {
+                  nutrientPair[1] === 'calories'
+                    ? returnCalculatedNutrients(recipe.calories)
+                    : returnCalculatedNutrients(
+                        recipe.totalNutrients[nutrientPair[1]].quantity,
+                        recipe.totalNutrients[nutrientPair[1]].unit
+                      )
+                }
+              </p>
+            </div>
+          {/each}
         </div>
       </section>
       <section aria-labelledby="ingredients">
@@ -66,8 +78,8 @@
 
 <style lang="scss">
   section {
-    &:first-of-type {
-      padding-block-start: 2em;
+    &[id="recipe-details"] {
+      padding-block: 2em;
     }
 
     .wrapper {
@@ -82,6 +94,10 @@
       span {
         color: hsl(var(--brown-color));
       }
+    }
+
+    img {
+      margin-inline: auto;
     }
 
     .nutrients-wrapper {

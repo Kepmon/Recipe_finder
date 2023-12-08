@@ -30,7 +30,15 @@ export const fetchRecipes = async (url: string) => {
           url: recipe.url,
           totalTime: recipe.totalTime,
           yield: recipe.yield,
-          totalNutrients: recipe.totalNutrients
+          totalNutrients: {
+            FAT: recipe.totalNutrients.FAT,
+            FASAT: recipe.totalNutrients.FASAT,
+            FATRN: recipe.totalNutrients.FATRN,
+            CHOCDF: recipe.totalNutrients.CHOCDF,
+            SUGAR: recipe.totalNutrients.SUGAR,
+            PROCNT: recipe.totalNutrients.PROCNT,
+            FIBTG: recipe.totalNutrients.FIBTG
+          }
         }))
       }),
       {

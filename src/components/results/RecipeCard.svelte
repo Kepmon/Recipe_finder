@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Recipe } from "../../types/recipes";
-  import { isRecipeDetailsSectionShown, idOfClickedRecipe } from "../../stores/formStore";
+  import { showRecipeDetails } from "../../stores/formStore";
 
   export let recipe: Recipe;
 
@@ -22,11 +22,6 @@
       value: recipe.totalTime,
     },
   ];
-
-  const showRecipeDetails = () => {
-    $isRecipeDetailsSectionShown = true
-    $idOfClickedRecipe = recipe.id
-  }
 </script>
 
 <article>
@@ -44,7 +39,9 @@
       </p>
     {/each}
   </div>
-  <button on:click={showRecipeDetails} class="scale-on-hover">Read More</button>
+  <button on:click={() => showRecipeDetails(recipe.id)} class="scale-on-hover">
+    Read More
+  </button>
 </article>
 
 <style lang="scss">

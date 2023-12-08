@@ -1,13 +1,17 @@
 <script lang="ts">
   import type { RecipesData } from "../../types/recipes";
-  import { recipesData, loadMoreRecipes, scrollIntoResults } from "../../stores/formStore";
+  import {
+    recipesData,
+    loadMoreRecipes,
+    scrollIntoSection,
+  } from "../../stores/formStore";
   import RecipeCard from "./RecipeCard.svelte";
 
   $: recipes = $recipesData.recipes as RecipesData["recipes"];
 </script>
 
 {#if recipes.length > 0}
-  <section use:scrollIntoResults aria-labelledby="recipe-results">
+  <section use:scrollIntoSection aria-labelledby="recipe-results" data-section="recipe-results">
     <div class="wrapper">
       <h2 id="recipe-results">Here are your search results:</h2>
       <div class="results__cards">
@@ -18,7 +22,9 @@
     </div>
 
     {#if $recipesData.hasNextPage}
-      <button on:click={loadMoreRecipes} class="scale-on-hover"> Load More </button>
+      <button on:click={loadMoreRecipes} class="scale-on-hover">
+        Load More
+      </button>
     {/if}
   </section>
 {/if}

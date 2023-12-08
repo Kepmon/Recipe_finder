@@ -112,6 +112,14 @@
     outline: 2px solid hsl(var(--black-color));
   }
 
+  button.scale-on-hover:not(:disabled) {
+    transition: scale 300ms ease-in;
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
+
   ul {
     list-style-type: none;
   }

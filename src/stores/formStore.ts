@@ -14,6 +14,7 @@ export const recipesData = writable({
 
 export const isFormSubmitted = writable(false)
 export const recipesError = writable('')
+export const idOfClickedRecipe = writable<null | string>(null)
 
 const returnFormData = (currentID?: string) => ({
   q: '',
@@ -206,15 +207,9 @@ export const makeQueryLink = (
   }, base)
 }
 
-export const scrollIntoResults = (section?: HTMLElement) => {
-  const resultsSection =
-    section ||
-    (document.querySelector(
-      '[data-section="recipe-results"]'
-    ) as null | HTMLDivElement)
-
-  if (resultsSection != null) {
-    resultsSection.scrollIntoView()
+export const scrollIntoSection = (section: null | HTMLElement) => {
+  if (section != null) {
+    section.scrollIntoView()
   }
 }
 
@@ -258,7 +253,10 @@ export const handleSubmit = async (e: Event) => {
   recipesError.set('')
   isFormSubmitted.set(false)
 
-  scrollIntoResults()
+  const section = document.querySelector(
+    '[data-section="recipe-results"]'
+  ) as null | HTMLDivElement
+  scrollIntoSection(section)
 }
 
 export const loadMoreRecipes = async () => {
@@ -295,4 +293,13 @@ export const resetFormData = () => {
       checkbox.checked = false
     })
   }
+}
+
+export const showRecipeDetails = (id: string) => {
+  idOfClickedRecipe.set(id)
+
+  const section = document.querySelector(
+    '[data-section="recipe-details"]'
+  ) as null | HTMLDivElement
+  scrollIntoSection(section)
 }

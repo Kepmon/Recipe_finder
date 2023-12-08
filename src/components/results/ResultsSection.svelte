@@ -1,15 +1,19 @@
 <script lang="ts">
   import type { RecipesData } from "../../types/recipes";
-  import { recipesData, loadMoreRecipes, scrollIntoResults } from "../../stores/formStore";
+  import {
+    recipesData,
+    loadMoreRecipes,
+    scrollIntoSection,
+  } from "../../stores/formStore";
   import RecipeCard from "./RecipeCard.svelte";
 
   $: recipes = $recipesData.recipes as RecipesData["recipes"];
 </script>
 
 {#if recipes.length > 0}
-  <section use:scrollIntoResults aria-labelledby="section-title" data-section="recipe-results">
+  <section use:scrollIntoSection aria-labelledby="recipe-results" data-section="recipe-results">
     <div class="wrapper">
-      <h2 id="section-title">Here are your search results:</h2>
+      <h2 id="recipe-results">Here are your search results:</h2>
       <div class="results__cards">
         {#each recipes as recipe (recipe.id)}
           <RecipeCard {recipe} />
@@ -18,7 +22,9 @@
     </div>
 
     {#if $recipesData.hasNextPage}
-      <button on:click={loadMoreRecipes}> Load More </button>
+      <button on:click={loadMoreRecipes} class="scale-on-hover">
+        Load More
+      </button>
     {/if}
   </section>
 {/if}
@@ -53,11 +59,6 @@
       background-color: hsl(var(--yellow-color));
       color: hsl(var(--black-color));
       border-radius: var(--border-radius);
-      transition: scale 300ms ease-in;
-
-      &:hover {
-        scale: 1.1;
-      }
     }
   }
 </style>

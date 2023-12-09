@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte"
+
   type Option = {
     isExpanded: boolean;
     items: string[];
@@ -6,6 +8,18 @@
 
   export let nameAttr: string;
   export let option: Option;
+
+  onMount(() => {
+    const checkboxInputs = [
+      ...document.querySelectorAll('[type="checkbox"]')
+    ] as HTMLInputElement[]
+  
+    checkboxInputs.forEach((checkbox) => {
+      checkbox.addEventListener('change', () => {
+        checkbox.setAttribute('aria-checked', checkbox.checked.toString())
+      })
+    })
+  })
 </script>
 
 {#if option.items.length > 0}
@@ -18,6 +32,7 @@
             name={`${nameAttr}-${index}`}
             id={item}
             tabindex={option.isExpanded ? 0 : -1}
+            aria-checked="false"
           />
           <label for={item}>
             {item}

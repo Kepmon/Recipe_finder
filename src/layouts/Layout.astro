@@ -90,6 +90,12 @@
 
   a {
     text-decoration: none;
+    border-radius: var(--half-spacer);
+
+    &:focus-visible {
+      outline: 2px solid hsl(var(--black-color));
+      outline-offset: var(--half-spacer);
+    }
   }
 
   h2 {

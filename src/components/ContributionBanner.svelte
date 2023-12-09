@@ -7,6 +7,7 @@
     href="https://www.edamam.com/"
     target="_blank"
     aria-label="click here to go to the edamam's website"
+    data-link="contribution"
   >
     <img
       src="/img/svgs/edamam_contribution.svg"
@@ -28,6 +29,10 @@
 
     &[data-change-color="true"] {
       background-color: hsl(var(--brown-color));
+
+      a {
+        outline-color: hsl(var(--white-color));
+      }
     }
 
     &[data-change-color="false"] img {

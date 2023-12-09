@@ -36,6 +36,7 @@
         type="number"
         id="calories"
         name="calories-from"
+        min="0"
       />
       -
       <input

@@ -5,7 +5,10 @@
   import { nanoid } from "nanoid";
   import { isFormSubmitted } from '../../stores/formStore'
 
+  $: isNewInputAdded = false
+
   const addNewInput = () => {
+    isNewInputAdded = true
     $formData.ingredients = [
       ...$formData.ingredients,
       {
@@ -16,16 +19,44 @@
   };
 
   const removeInput = (inputID: string) => {
+    const indexOfRemovedInput = $formData.ingredients.findIndex(({ id }) => id === inputID)
+
     $formData.ingredients = $formData.ingredients.filter(
       ({ id }) => inputID !== id,
     );
+
+    addFocusToAnotherRemoveBtn(indexOfRemovedInput)
   };
 
   const addFocusToNewInput = (input: HTMLInputElement) => {
-    if ($formData.ingredients.length > 1) {
+    if (isNewInputAdded) {
       input.focus();
     }
-  };
+  }
+
+  const addFocusToAnotherRemoveBtn = (indexOfRemovedInput: number) => {
+    const removeBtns = [
+      ...document.querySelectorAll('[data-button="remove-ingredient"]')
+    ] as HTMLButtonElement[]
+
+    if (indexOfRemovedInput === 0 && removeBtns.length === 1) {
+      const addNewIngredientBtn = document.querySelector(
+        '[data-button="add-ingredient"]'
+      ) as null | HTMLButtonElement
+
+      if (addNewIngredientBtn != null) addNewIngredientBtn.focus()
+      return
+    }
+
+    if (indexOfRemovedInput === 0) {
+      if (removeBtns[1] != null) removeBtns[1].focus()
+      return
+    }
+
+    if (removeBtns[indexOfRemovedInput - 1] != null) {
+      removeBtns[indexOfRemovedInput - 1].focus()
+    }
+  }
 </script>
 
 <div class="form__group">
@@ -45,6 +76,7 @@
           on:click={() => removeInput(ingredient.id)}
           aria-label="click here to remove this field"
           type="button"
+          data-button="remove-ingredient"
         >
           <CloseIcon />
         </button>
@@ -54,8 +86,11 @@
       on:click={addNewInput}
       disabled={$isFormSubmitted}
       type="button"
-      class="add-more bigger-btn-padding scale-on-hover">Add more ingredients</button
+      class="add-more bigger-btn-padding scale-on-hover"
+      data-button="add-ingredient"
     >
+      Add more ingredients
+    </button>
   </div>
 </div>
 

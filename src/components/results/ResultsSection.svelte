@@ -62,7 +62,6 @@
 
       &:focus-visible {
         outline-color: hsl(var(--white-color));
-        outline-offset: var(--half-spacer);
         outline-offset: calc(var(--spacer) / 4);
       }
     }

@@ -9,16 +9,28 @@
 
   type NutrientsPair = [string, "calories" | keyof Recipe["totalNutrients"]];
 
-  $: recipe =
-    $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) || null;
-
-  $: nutritialLabels =
-    recipe != null ? [...recipe.dietLabels, ...recipe.healthLabels] : [];
-
   const externalLinkProps = {
     width: '1rem',
     stroke: 'hsl(var(--brown-color))'
   }
+
+  const recipeNutrients: NutrientsPair[] = [
+    ["kcal", "calories"],
+    ["fat", "FAT"],
+    ["saturates", "FASAT"],
+    ["trans", "FATRN"],
+    ["carbs", "CHOCDF"],
+    ["sugars", "SUGAR"],
+    ["protein", "PROCNT"],
+    ["fibre", "FIBTG"],
+    ["salt", "NA"]
+  ];
+
+  
+  $: recipe =
+    $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) || null;
+  $: nutritionLabels =
+    recipe != null ? [...recipe.dietLabels, ...recipe.healthLabels] : [];
 
   const returnCalculatedNutrients = (nutrient: string, quantity: number) => {
     let value = recipe != null ? quantity / recipe.totalWeight * 100 : 0
@@ -48,18 +60,6 @@
 
     return "SMALL";
   };
-
-  const recipeNutrients: NutrientsPair[] = [
-    ["kcal", "calories"],
-    ["fat", "FAT"],
-    ["saturates", "FASAT"],
-    ["trans", "FATRN"],
-    ["carbs", "CHOCDF"],
-    ["sugars", "SUGAR"],
-    ["protein", "PROCNT"],
-    ["fibre", "FIBTG"],
-    ["salt", "NA"]
-  ];
 </script>
 
 {#if recipe != null}
@@ -80,12 +80,12 @@
       height="600"
     />
     <section aria-labelledby="nutrition-data">
-      <h3 id="nutrition-data">Nutrition data (per 100 g):</h3>
+      <h3 aria-label="Nutrition data (per 100 grams)" id="nutrition-data">Nutrition data (per 100 g):</h3>
       <ul data-list="nutrients-wrapper">
         {#each recipeNutrients as nutrientPair (nutrientPair[0])}
           <li class="nutrient">
-            <p class="nutrient__label">{nutrientPair[0].toUpperCase()}</p>
-            <p class="nutrient__value">
+            <p aria-hidden="true" class="nutrient__label">{nutrientPair[0].toUpperCase()}</p>
+            <p aria-hidden="true" class="nutrient__value">
               {
                 returnCalculatedNutrients(
                   nutrientPair[0],
@@ -107,11 +107,11 @@
         {/each}
       </ul>
     </section>
-    {#if nutritialLabels.length > 0}
+    {#if nutritionLabels.length > 0}
       <section aria-labelledby="nutrition-labels">
         <h3 id="nutrition-labels">Nutrition labels:</h3>
         <ul data-list="nutrition-labels">
-          {#each nutritialLabels as label}
+          {#each nutritionLabels as label}
             <li>{label}</li>
           {/each}
         </ul>

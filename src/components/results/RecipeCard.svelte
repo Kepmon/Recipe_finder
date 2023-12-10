@@ -20,6 +20,7 @@
     {
       label: "Prep Time (mins)",
       value: recipe.totalTime,
+      ariaLabel: 'Preparation time in minutes'
     },
   ];
 </script>
@@ -32,10 +33,13 @@
     class="whole-width"
   />
   <div>
-    {#each basicRecipeInfo as { label, value }}
-      <p>
-        <span class="bold">{label}:</span>
-        {value}
+    {#each basicRecipeInfo as { label, value, ariaLabel }}
+    <p>
+        <span class="sr-only">
+          {ariaLabel != null ?`${ariaLabel}: ${value}` : `${label}: ${value}`}
+        </span>
+        <span aria-hidden="true" class="bold">{label}:</span>
+        <span aria-hidden="true">{value}</span>
       </p>
     {/each}
   </div>

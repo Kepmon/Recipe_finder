@@ -31,7 +31,7 @@
   <div class="form__group">
     <button
       on:click={() => (data.isExpanded = !data.isExpanded)}
-      aria-label="click here to choose one or more options"
+      aria-label={`click here to choose one or more ${label} options`}
       aria-expanded={data.isExpanded}
       type="button"
       class="form__group-title"

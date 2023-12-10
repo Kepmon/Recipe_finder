@@ -23,7 +23,7 @@
 </script>
 
 {#if option.items.length > 0}
-  <div data-expanded={option.isExpanded} class="items-wrapper">
+  <div aria-hidden={!option.isExpanded} data-expanded={option.isExpanded} class="items-wrapper">
     <ul>
       {#each option.items as item, index (item)}
         <li>

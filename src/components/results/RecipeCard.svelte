@@ -18,7 +18,7 @@
       value: (recipe.calories / recipe.yield).toFixed(0),
     },
     {
-      label: "Prep Time (mins)",
+      label: "Prep time (mins)",
       value: recipe.totalTime,
       ariaLabel: 'Preparation time in minutes'
     },
@@ -29,7 +29,7 @@
   <h3>{recipe.label}</h3>
   <img
     src={recipe.images.SMALL.url}
-    alt={`The visual presentation of the ${recipe.label} meal`}
+    alt={`The photo of the ${recipe.label} meal`}
     class="whole-width"
   />
   <div>

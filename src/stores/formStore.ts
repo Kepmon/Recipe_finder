@@ -210,6 +210,7 @@ export const makeQueryLink = (
 export const scrollIntoSection = (section: null | HTMLElement) => {
   if (section != null) {
     section.scrollIntoView()
+    section.focus()
   }
 }
 

@@ -11,14 +11,16 @@
 </script>
 
 {#if recipes.length > 0}
-  <section use:scrollIntoSection aria-labelledby="recipe-results" data-section="recipe-results">
+  <section use:scrollIntoSection aria-labelledby="recipe-results" data-section="recipe-results" tabindex="-1">
     <div class="wrapper">
       <h2 id="recipe-results">Here are your search results:</h2>
-      <div class="results__cards">
+      <ul class="results__cards">
         {#each recipes as recipe (recipe.id)}
-          <RecipeCard {recipe} />
+          <li>
+            <RecipeCard {recipe} />
+          </li>
         {/each}
-      </div>
+      </ul>
     </div>
 
     {#if $recipesData.hasNextPage}
@@ -47,6 +49,10 @@
       gap: 3rem;
       flex-wrap: wrap;
       justify-content: center;
+
+      li {
+        width: min(90%, 18rem);
+      }
     }
 
     button {

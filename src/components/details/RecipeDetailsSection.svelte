@@ -56,9 +56,9 @@
     const cookingUnits = [
       ['g ', 'grams'],
       ['c.', 'cups'],
-      ['tsp', 'teaspoon'],
-      ['tbsp', 'tablespoon'],
-      ['pt.', 'pint'],
+      ['tsp', 'teaspoons'],
+      ['tbsp', 'tablespoons'],
+      ['pt.', 'pints'],
       ['x', 'times']
     ]
 
@@ -88,6 +88,7 @@
   <section
     use:scrollIntoSection
     aria-labelledby="recipe-details"
+    tabindex="-1"
     data-section="recipe-details"
     class="wrapper"
   >

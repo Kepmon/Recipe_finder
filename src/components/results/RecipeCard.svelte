@@ -54,7 +54,6 @@
     gap: (var(--spacer));
     grid-template-columns: var(--half-spacer) 1fr var(--half-spacer);
     padding-block: var(--spacer);
-    width: min(90%, 18rem);
     background-color: hsl(var(--white-color));
     color: hsl(var(--black-color));
     text-align: center;

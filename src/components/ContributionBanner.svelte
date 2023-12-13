@@ -6,7 +6,7 @@
   <a
     href="https://www.edamam.com/"
     target="_blank"
-    aria-label="click here to go to the edamam's website"
+    aria-label="the recipes below were provided by edamam - click here to go to their page"
     data-link="contribution"
   >
     <img
@@ -21,7 +21,7 @@
     display: grid;
     place-items: center;
     padding: var(--spacer);
-    margin-block-start: 5rem;
+    padding-block-end: 4em;
     margin-inline: auto;
     width: var(--form-width);
     background-color: hsl(var(--pink-color));

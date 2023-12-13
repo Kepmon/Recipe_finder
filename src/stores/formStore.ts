@@ -208,10 +208,19 @@ export const makeQueryLink = (
 }
 
 export const scrollIntoSection = (section: null | HTMLElement) => {
+  const contribution = document.querySelector(
+    '[data-link="contribution"]'
+  ) as null | HTMLAnchorElement
+
+  if (section != null && contribution != null) {
+    contribution.focus()
+  }
+
   if (section != null) {
-    section.scrollIntoView()
     section.focus()
   }
+
+  section.scrollIntoView()
 }
 
 export const handleSubmit = async (e: Event) => {

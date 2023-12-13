@@ -6,14 +6,16 @@
     scrollIntoSection,
   } from "../../stores/formStore";
   import RecipeCard from "./RecipeCard.svelte";
+  import ContributionBanner from "../ContributionBanner.svelte";
 
   $: recipes = $recipesData.recipes as RecipesData["recipes"];
 </script>
 
 {#if recipes.length > 0}
-  <section use:scrollIntoSection aria-labelledby="recipe-results" data-section="recipe-results" tabindex="-1">
+  <section use:scrollIntoSection aria-label="recipe results section" data-section="recipe-results" tabindex="-1">
+    <ContributionBanner />
     <div class="wrapper">
-      <h2 id="recipe-results">Here are your search results:</h2>
+      <h2>Here are your search results:</h2>
       <ul class="results__cards">
         {#each recipes as recipe (recipe.id)}
           <li>
@@ -34,7 +36,7 @@
 <style lang="scss">
   section {
     --border-radius: var(--half-spacer);
-    padding-block: 2em;
+    padding-block: var(--section-spacer);
     isolation: isolate;
     background-color: hsl(var(--brown-color));
     color: hsl(var(--white-color));

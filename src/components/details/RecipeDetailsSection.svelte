@@ -54,7 +54,6 @@
 
   const returnIngredientLine = (ingredientLine: string) => {
     const cookingUnits = [
-      ['g ', 'grams'],
       ['c.', 'cups'],
       ['tsp', 'teaspoons'],
       ['tbsp', 'tablespoons'],
@@ -169,7 +168,7 @@
   section {
     &[data-section="recipe-details"] {
       --border-radius: var(--half-spacer);
-      padding-block: 2em;
+      padding-block: var(--section-spacer);
     }
 
     &.wrapper {

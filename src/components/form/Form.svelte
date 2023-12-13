@@ -9,78 +9,84 @@
 </script>
 
 <Popup />
-<form on:submit|preventDefault={handleSubmit} class="form">
-  <header class="form__group">
-    <h2 class="form__title">Choose desired criteria for your recipe</h2>
-    <p class="form__hint">
-      HINT: You need to fill in at least one form section
-    </p>
-  </header>
-  <div class="form__input-pair form__group">
-    <label for="name" class="form__input-label">Name</label>
-    <input
-      bind:value={$formData.q}
-      type="text"
-      id="name"
-      name="q"
-      class="form-input"
-    />
-  </div>
-  <div class="form__input-pair form__group">
-    <label for="calories" class="form__input-label"
-      >Caloric range (kcal per serving)</label
-    >
-    <div class="form__input-range">
+<section aria-labelledby="form-title">
+  <form on:submit|preventDefault={handleSubmit} class="form">
+    <header class="form__group">
+      <h2 class="form__title" id="form-title">Choose desired criteria for your recipe</h2>
+      <p class="form__hint">
+        HINT: You need to fill in at least one form section
+      </p>
+    </header>
+    <div class="form__input-pair form__group">
+      <label for="name" class="form__input-label">Name</label>
       <input
-        bind:value={$formData.calories.from}
-        type="number"
-        id="calories"
-        name="calories-from"
-        min="0"
-      />
-      -
-      <input
-        bind:value={$formData.calories.to}
-        type="number"
-        id="calories"
-        name="calories-to"
+        bind:value={$formData.q}
+        type="text"
+        id="name"
+        name="q"
+        class="form-input"
       />
     </div>
-  </div>
-  <FormOptionsList />
-  <IngredientOptions />
-  <div class="form__buttons">
-    <button
-      class="form__submit-btn bigger-btn-padding scale-on-hover"
-      disabled={$isFormSubmitted}
-    >
-      {#if $isFormSubmitted}
-        <Spinner />
-      {/if}
-      {$isFormSubmitted ? "Loading..." : "Find Recipes"}
-    </button>
-    <button
-    on:click={resetFormData}
-      class="form__submit-btn bigger-btn-padding scale-on-hover"
-      disabled={$isFormSubmitted}
-      type="button"
-    >
-      Reset Form
-    </button>
-  </div>
-
-  {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
-    <p
-      in:scale={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
-      class="form__error-message"
-    >
-      {$formErrors.noFieldFilled}{$formErrors.negativeCalories}
-    </p>
-  {/if}
-</form>
+    <div class="form__input-pair form__group">
+      <label for="calories" class="form__input-label"
+        >Caloric range (kcal per serving)</label
+      >
+      <div class="form__input-range">
+        <input
+          bind:value={$formData.calories.from}
+          type="number"
+          id="calories"
+          name="calories-from"
+          min="0"
+        />
+        -
+        <input
+          bind:value={$formData.calories.to}
+          type="number"
+          id="calories"
+          name="calories-to"
+        />
+      </div>
+    </div>
+    <FormOptionsList />
+    <IngredientOptions />
+    <div class="form__buttons">
+      <button
+        class="form__submit-btn bigger-btn-padding scale-on-hover"
+        disabled={$isFormSubmitted}
+      >
+        {#if $isFormSubmitted}
+          <Spinner />
+        {/if}
+        {$isFormSubmitted ? "Loading..." : "Find Recipes"}
+      </button>
+      <button
+      on:click={resetFormData}
+        class="form__submit-btn bigger-btn-padding scale-on-hover"
+        disabled={$isFormSubmitted}
+        type="button"
+      >
+        Reset Form
+      </button>
+    </div>
+  
+    {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
+      <p
+        in:scale={{ duration: 200 }}
+        out:fade={{ duration: 200 }}
+        class="form__error-message"
+      >
+        {$formErrors.noFieldFilled}{$formErrors.negativeCalories}
+      </p>
+    {/if}
+  </form>
+</section>
 
 <style lang="scss">
+  section {
+    padding-block: var(--section-spacer);
+  }
+
   .form {
     --spinner-width: 1.5rem;
     --spinner-border: 4px;

@@ -5,9 +5,11 @@ import Footer from '../components/Footer.astro'
 import Form from '../components/form/Form.svelte'
 import ResultsSection from '../components/results/ResultsSection.svelte'
 import RecipeDetailsSection from '../components/details/RecipeDetailsSection.svelte'
+import SkipToMain from '../components/SkipToMain.astro'
 ---
 
 <Layout>
+  <SkipToMain />
   <Header />
   <main id="main">
     <Form client:only="svelte" />

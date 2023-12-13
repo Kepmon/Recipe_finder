@@ -86,14 +86,12 @@
 {#if recipe != null}
   <section
     use:scrollIntoSection
-    aria-labelledby="recipe-details"
+    aria-label="recipe details"
     tabindex="-1"
     data-section="recipe-details"
     class="wrapper"
   >
-    <h2 id="recipe-details">
-      Details on the <span>{recipe.label}</span> recipe:
-    </h2>
+    <h2>Details on the <span>{recipe.label}</span> recipe:</h2>
     <img
       src={recipe.images[returnImgSize()].url}
       alt={`The photo of the ${recipe.label}`}

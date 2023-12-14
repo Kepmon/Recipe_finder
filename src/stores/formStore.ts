@@ -207,23 +207,27 @@ export const makeQueryLink = (
   }, base)
 }
 
-export const scrollIntoSection = (section: null | HTMLElement) => {
+export const scrollIntoSection = (section: HTMLElement) => {
   const contribution = document.querySelector(
     '[data-link="contribution"]'
   ) as null | HTMLAnchorElement
+  const isContributionInThisSection =
+    contribution?.closest('section') === section
 
-  if (section != null && contribution != null) {
+  if (section != null && isContributionInThisSection) {
     contribution.focus()
+    section.scrollIntoView()
+    return
   }
 
-  if (section != null) {
-    section.focus()
-  }
-
+  section.focus()
   section.scrollIntoView()
 }
 
 export const handleSubmit = async (e: Event) => {
+  const section = document.querySelector(
+    '[data-section="recipe-results"]'
+  ) as null | HTMLDivElement
   const form = e.target as HTMLFormElement
   const formDataInstance = new FormData(form)
   const formDataObj = Object.fromEntries(formDataInstance) as Record<
@@ -263,10 +267,9 @@ export const handleSubmit = async (e: Event) => {
   recipesError.set('')
   isFormSubmitted.set(false)
 
-  const section = document.querySelector(
-    '[data-section="recipe-results"]'
-  ) as null | HTMLDivElement
-  scrollIntoSection(section)
+  if (section != null) {
+    scrollIntoSection(section)
+  }
 }
 
 export const loadMoreRecipes = async () => {
@@ -306,10 +309,13 @@ export const resetFormData = () => {
 }
 
 export const showRecipeDetails = (id: string) => {
-  idOfClickedRecipe.set(id)
-
   const section = document.querySelector(
     '[data-section="recipe-details"]'
   ) as null | HTMLDivElement
-  scrollIntoSection(section)
+
+  idOfClickedRecipe.set(id)
+
+  if (section != null) {
+    scrollIntoSection(section)
+  }
 }

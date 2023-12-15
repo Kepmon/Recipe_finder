@@ -54,6 +54,29 @@
 
       li {
         width: min(90%, 18rem);
+        transition: scale 300ms ease-in;
+
+        &:hover,
+        &:focus-within {
+          scale: 1.075;
+        }
+
+      }
+
+      @supports (selector(:has(div)) and selector(:not(div))) {
+        &:has(:hover, :focus-within) {
+          li {
+            &:not(:hover, :focus-within) {
+              scale: 0.95;
+              filter: grayscale(0.4);
+            }
+
+            &:hover,
+            &:focus-within {
+              scale: 1;
+            }
+          }
+        }
       }
     }
 

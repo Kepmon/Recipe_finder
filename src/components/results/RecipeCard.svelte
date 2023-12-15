@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Recipe } from "../../types/recipes";
-  import { showRecipeDetails } from "../../stores/formStore";
+  import { recipesData, showRecipeDetails } from "../../stores/formStore";
 
   export let recipe: Recipe;
 
@@ -23,9 +23,19 @@
       ariaLabel: 'Preparation time in minutes'
     },
   ];
+
+  const focusFirstNewRecipe = (article: HTMLElement) => {
+    const indexOfFirstRecipeInChunk = (($recipesData.recipes.length / 20) - 1) * 20
+    const firstRecipeId = $recipesData.recipes[indexOfFirstRecipeInChunk].id
+    const isFirstNewRecipe = $recipesData.recipes.length >= 40 && article.getAttribute('data-id') === firstRecipeId
+    
+    if (isFirstNewRecipe) {
+      article.focus()
+    }
+  }
 </script>
 
-<article>
+<article use:focusFirstNewRecipe tabindex="-1" data-id={recipe.id}>
   <h3>{recipe.label}</h3>
   <img
     src={recipe.images.SMALL.url}
@@ -58,6 +68,7 @@
     color: hsl(var(--black-color));
     text-align: center;
     border-radius: var(--border-radius);
+    outline: 2px solid transparent;
 
     > * {
       grid-column: 2 / -2;

@@ -118,8 +118,27 @@ const returnFormData = (currentID?: string) => ({
     }
   ]
 })
-
 export const formData = writable(returnFormData())
+
+export const focusErrorMessage = (errorMessage?: HTMLElement) => {
+  const errorText =
+    errorMessage == null
+      ? (document.querySelector(
+          '[data-message="form-error"]'
+        ) as null | HTMLParagraphElement)
+      : errorMessage
+  const firstFormInput = document.querySelector(
+    '[name="q"]'
+  ) as null | HTMLInputElement
+
+  if (errorText != null && firstFormInput != null) {
+    errorText.focus()
+
+    setTimeout(() => {
+      firstFormInput.focus()
+    }, 2500)
+  }
+}
 
 const validateForm = (formDataObj: Record<string, string>) => {
   const formDataKeys = Object.keys(formDataObj)
@@ -142,7 +161,6 @@ const validateForm = (formDataObj: Record<string, string>) => {
       noFieldFilled: '',
       negativeCalories: 'The caloric range values cannot be negative'
     })
-    return false
   }
 
   if (formDataKeys.every((key) => formDataObj[key] === '')) {
@@ -150,6 +168,17 @@ const validateForm = (formDataObj: Record<string, string>) => {
       noFieldFilled: 'At least one form section has to be filled in',
       negativeCalories: ''
     })
+  }
+
+  const formErrorsKeys = Object.keys(get(formErrors))
+  const formErrorsData = get(formErrors)
+
+  if (
+    formErrorsKeys.some(
+      (key) => formErrorsData[key as keyof typeof formErrorsData] !== ''
+    )
+  ) {
+    focusErrorMessage()
     return false
   }
 

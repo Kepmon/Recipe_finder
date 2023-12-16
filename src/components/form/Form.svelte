@@ -5,7 +5,7 @@
   import Spinner from "../Spinner.svelte";
   import { formData, formErrors, handleSubmit, resetFormData } from "../../stores/formStore";
   import { scale, fade } from "svelte/transition";
-  import { isFormSubmitted } from '../../stores/formStore'
+  import { isFormSubmitted, focusErrorMessage } from '../../stores/formStore'
 </script>
 
 <Popup />
@@ -72,9 +72,12 @@
   
     {#if $formErrors.noFieldFilled !== "" || $formErrors.negativeCalories !== ""}
       <p
+        use:focusErrorMessage
         in:scale={{ duration: 200 }}
         out:fade={{ duration: 200 }}
+        tabindex="-1"
         class="form__error-message"
+        data-message="form-error"
       >
         {$formErrors.noFieldFilled}{$formErrors.negativeCalories}
       </p>
@@ -145,6 +148,12 @@
       color: hsl(var(--dark-red));
       font-weight: 500;
       font-size: 0.9em;
+      transition: scale 0.3s ease-in;
+
+      &:focus-visible {
+        scale: 1.2;
+        outline: 2px solid transparent;
+      }
     }
   }
 </style>

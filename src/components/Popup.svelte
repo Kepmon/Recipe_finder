@@ -1,10 +1,18 @@
 <script lang="ts">
   import { recipesError } from '../stores/formStore'
   import { slide } from 'svelte/transition'
+
+  const focusPopup = (popup: HTMLElement) => {
+    popup.focus()
+
+    setTimeout(() => {
+      popup.blur()
+    }, 100)
+  }
 </script>
 
 {#if $recipesError !== ''}
-  <div transition:slide>
+  <div use:focusPopup transition:slide tabindex="-1">
     {#if $recipesError === 'sth-wrong'}
       <p>Ooops, something went wrong...</p>
       <p>Try again later</p>
@@ -29,6 +37,10 @@
     text-wrap: balance;
     border-radius: 0.5em;
     z-index: 100;
+
+    &:focus-visible {
+      outline: 2px solid transparent;
+    }
     
     p:first-child {
       font-weight: 500;

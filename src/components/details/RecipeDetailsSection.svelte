@@ -72,15 +72,15 @@
     if (recipe != null) {
       return (
         ["SMALL", "REGULAR", "LARGE"] as (keyof typeof recipe.images)[]
-      ).reduce((finalSize, currentSize) => {
-        if (recipe != null && currentSize in recipe.images) return currentSize;
-
-        return finalSize;
-      }, "SMALL");
-    }
-
-    return "SMALL";
-  };
+        ).reduce((finalSize, currentSize) => {
+          if (recipe != null && currentSize in recipe.images) return currentSize;
+          
+          return finalSize;
+        }, "SMALL");
+      }
+      
+      return "SMALL";
+    };
 </script>
 
 {#if recipe != null}
@@ -191,6 +191,7 @@
     img {
       margin-inline: auto;
       object-fit: cover;
+      height: clamp(13.375rem, 5.3333rem + 51.4667vw, 37.5rem);;
     }
 
     [data-list="nutrients-wrapper"],

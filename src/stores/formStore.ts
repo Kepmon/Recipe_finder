@@ -273,6 +273,15 @@ export const handleSubmit = async (e: Event) => {
     return
   }
 
+  const url = new URL(window.location.origin)
+  const formDataKeys = Object.keys(formDataObj)
+  formDataKeys.forEach((key) => {
+    if (formDataObj[key] !== '') {
+      url.searchParams.set(key, formDataObj[key])
+    }
+  })
+  window.history.pushState({}, '', url)
+
   const response = await fetch('/recipes.json', {
     method: 'POST',
     body: JSON.stringify({ formDataObj, moreRecipes: false }),
@@ -343,6 +352,11 @@ export const showRecipeDetails = (id: string) => {
   ) as null | HTMLDivElement
 
   idOfClickedRecipe.set(id)
+
+  const searchParams = new URLSearchParams(
+    `${window.location.search}&recipe=${id}`
+  )
+  window.history.pushState({}, '', searchParams)
 
   if (section != null) {
     scrollIntoSection(section)

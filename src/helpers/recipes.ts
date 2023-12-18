@@ -68,3 +68,20 @@ export const fetchRecipes = async (url: string) => {
 
   return { nextPageUrl, recipesResponse }
 }
+
+export const getRecipesOnPageLoad = async () => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const paramsObj = Object.fromEntries(urlParams)
+
+  if (Object.keys(paramsObj).length === 0) return null
+
+  const response = await fetch('/recipes.json', {
+    method: 'POST',
+    body: JSON.stringify({ formDataObj: paramsObj, moreRecipes: false }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  return response.json()
+}

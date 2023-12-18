@@ -33,11 +33,11 @@ import DownChevron from './svgs/DownChevron.svelte'
     background-blend-mode: overlay;
     color: hsl(var(--white-color));
 
-    @media (min-width: 896px) {
+    @media (min-width: 56rem) {
       background-image: url('/img/header-img-1000.webp');
     }
 
-    @media (min-width: 1408px) {
+    @media (min-width: 88rem) {
       background-image: url('/img/header-img-1500.webp');
     }
 
@@ -61,7 +61,16 @@ import DownChevron from './svgs/DownChevron.svelte'
         padding: var(--icon-padding);
         width: max-content;
         animation: jump 1200ms ease-in-out infinite;
+
+        &:focus-visible {
+          outline-color: hsl(var(--white-color));
+        }
       }
+    }
+
+    &__text {
+      margin-inline: auto;
+      max-width: 80ch;
     }
   }
 

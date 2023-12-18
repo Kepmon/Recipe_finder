@@ -1,37 +1,22 @@
-<script lang="ts">
-  import { recipesData } from "../stores/formStore"
-</script>
-
-<div class="contribution" data-change-color={$recipesData.recipes.length > 0}>
-  <a
-    href="https://www.edamam.com/"
-    target="_blank"
-    aria-label="click here to go to the edamam's website"
-  >
-    <img
-      src="/img/svgs/edamam_contribution.svg"
-      alt="logo of edamam - the recipes data provider"
-    />
-  </a>
-</div>
+<a
+  href="https://www.edamam.com/"
+  target="_blank"
+  aria-label="the recipes below were provided by edamam - click here to go to their page"
+  data-link="contribution"
+>
+  <img
+    src="/img/svgs/edamam_contribution.svg"
+    alt="logo of edamam - the recipes data provider"
+  />
+</a>
 
 <style lang="scss">
-  .contribution {
+  a {
     display: grid;
     place-items: center;
-    padding: var(--spacer);
-    margin-block-start: 5rem;
     margin-inline: auto;
+    margin-block-end: 4em;
     width: var(--form-width);
-    background-color: hsl(var(--pink-color));
-    border-radius: var(--form-radius) var(--form-radius) 0 0;
-
-    &[data-change-color="true"] {
-      background-color: hsl(var(--brown-color));
-    }
-
-    &[data-change-color="false"] img {
-      filter: brightness(0.8);
-    }
+    outline-color: hsl(var(--white-color));
   }
 </style>

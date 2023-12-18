@@ -7,93 +7,130 @@
   } from "../../stores/formStore";
   import ExternalLink from "../svgs/ExternalLink.svelte";
 
-  type NutrientsPair = [string, "calories" | keyof Recipe["totalNutrients"]];
-
-  $: recipe =
-    $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) || null;
-
-  $: nutritialLabels =
-    recipe != null ? [...recipe.dietLabels, ...recipe.healthLabels] : [];
+  type NutrientsPair = [string, "calories" | keyof Recipe["totalNutrients"], string];
 
   const externalLinkProps = {
     width: '1rem',
     stroke: 'hsl(var(--brown-color))'
   }
 
-  const returnCalculatedNutrients = (nutrient: string, quantity: number) => {
-    let value = recipe != null ? quantity / recipe.totalWeight * 100 : 0
-    let unit = 'g'
+  const recipeNutrients: NutrientsPair[] = [
+    ["kcal", "calories", 'calories'],
+    ["fat", "FAT", 'fats'],
+    ["saturates", "FASAT", 'saturated fats'],
+    ["trans", "FATRN", 'trans fats'],
+    ["carbs", "CHOCDF", 'carbohydrates'],
+    ["sugars", "SUGAR", 'sugars'],
+    ["protein", "PROCNT", 'protein'],
+    ["fibre", "FIBTG", 'fibre'],
+    ["salt", "NA", 'salt']
+  ];
+
+  $: recipe =
+    $recipesData.recipes.find(({ id }) => id === $idOfClickedRecipe) || null;
+  $: nutritionLabels =
+    recipe != null ? [...recipe.dietLabels, ...recipe.healthLabels] : [];
   
-    if (nutrient === 'kcal') {
-      unit = ''
-    }
+  const returnNutrientValue = (nutrient: string, quantity: number) => {
+    let value = recipe != null ? quantity / recipe.totalWeight * 100 : 0
 
     if (nutrient === 'salt') {
       value = recipe != null ? quantity / 1000 * 2.54 / recipe.totalWeight * 100 : 0
     }
 
-    return `${Math.round(value)} ${unit}`
+    return isNaN(value) ? 0 : Math.round(value)
   };
+  
+  const returnAccessibleUnit = (nutrient: string, value: number) => {
+    const pluralFormatter = new Intl.PluralRules('en-US')
+    let unit = pluralFormatter.select(Math.round(value)) === 'one' ? 'gram' : 'grams'
+
+    if (nutrient === 'kcal') {
+      unit = ''
+    }
+  
+    return unit
+  };
+
+  const returnIngredientLine = (ingredientLine: string) => {
+    const cookingUnits = [
+      ['c.', 'cups'],
+      ['tsp', 'teaspoons'],
+      ['tbsp', 'tablespoons'],
+      ['pt.', 'pints'],
+      ['x', 'times']
+    ]
+
+    return cookingUnits.reduce((currentLine, unitPair) => {
+      if (currentLine.includes(unitPair[0])) return currentLine.replaceAll(unitPair[0], unitPair[1])
+
+      return currentLine
+    }, ingredientLine)
+  }
 
   const returnImgSize = () => {
     if (recipe != null) {
       return (
         ["SMALL", "REGULAR", "LARGE"] as (keyof typeof recipe.images)[]
-      ).reduce((finalSize, currentSize) => {
-        if (recipe != null && currentSize in recipe.images) return currentSize;
-
-        return finalSize;
-      }, "SMALL");
-    }
-
-    return "SMALL";
-  };
-
-  const recipeNutrients: NutrientsPair[] = [
-    ["kcal", "calories"],
-    ["fat", "FAT"],
-    ["saturates", "FASAT"],
-    ["trans", "FATRN"],
-    ["carbs", "CHOCDF"],
-    ["sugars", "SUGAR"],
-    ["protein", "PROCNT"],
-    ["fibre", "FIBTG"],
-    ["salt", "NA"]
-  ];
+        ).reduce((finalSize, currentSize) => {
+          if (recipe != null && currentSize in recipe.images) return currentSize;
+          
+          return finalSize;
+        }, "SMALL");
+      }
+      
+      return "SMALL";
+    };
 </script>
 
 {#if recipe != null}
   <section
     use:scrollIntoSection
-    aria-labelledby="recipe-details"
-    id="recipe-details"
+    aria-label="recipe details"
+    tabindex="-1"
     data-section="recipe-details"
     class="wrapper"
   >
-    <h2 id="recipe-details">
-      Details on the <span>{recipe.label}</span> recipe:
-    </h2>
+    <h2>Details on the <span>{recipe.label}</span> recipe:</h2>
     <img
       src={recipe.images[returnImgSize()].url}
-      alt="clicked meal"
+      alt={`The photo of the ${recipe.label}`}
       width="600"
       height="600"
     />
     <section aria-labelledby="nutrition-data">
-      <h3 id="nutrition-data">Nutrition data (per 100 g):</h3>
+      <h3 aria-label="Nutrition data (per 100 grams)" id="nutrition-data">Nutrition data (per 100 g):</h3>
       <ul data-list="nutrients-wrapper">
         {#each recipeNutrients as nutrientPair (nutrientPair[0])}
           <li class="nutrient">
-            <p class="nutrient__label">{nutrientPair[0].toUpperCase()}</p>
-            <p class="nutrient__value">
+            <p class="sr-only">
+              {nutrientPair[2]}: 
               {
-                returnCalculatedNutrients(
+                returnNutrientValue(
                   nutrientPair[0],
                   nutrientPair[1] === 'calories'
                     ? recipe.calories
-                    : recipe.totalNutrients[nutrientPair[1]].quantity
+                    : recipe.totalNutrients[nutrientPair[1]]?.quantity
                 )
               }
+              {returnAccessibleUnit(nutrientPair[0], returnNutrientValue(
+                nutrientPair[0],
+                nutrientPair[1] === 'calories'
+                  ? recipe.calories
+                  : recipe.totalNutrients[nutrientPair[1]]?.quantity
+              ))}
+            </p>
+            <p aria-hidden="true" class="nutrient__label">{nutrientPair[0].toUpperCase()}</p>
+            <p aria-hidden="true" class="nutrient__value">
+              {
+                returnNutrientValue(
+                  nutrientPair[0],
+                  nutrientPair[1] === 'calories'
+                    ? recipe.calories
+                    : recipe.totalNutrients[nutrientPair[1]]?.quantity
+                )
+              }
+              {nutrientPair[0] === 'kcal' ? '' : 'g'}
             </p>
           </li>
         {/each}
@@ -103,15 +140,16 @@
       <h3 id="ingredients">Ingredients:</h3>
       <ul data-list="ingredients" class="list-style-disc">
         {#each recipe.ingredientLines as ingredient}
-          <li>{ingredient.replaceAll(" ,", ",")}</li>
+          <li class="sr-only">{returnIngredientLine(ingredient)}</li>
+          <li aria-hidden="true">{ingredient.replaceAll(" ,", ",")}</li>
         {/each}
       </ul>
     </section>
-    {#if nutritialLabels.length > 0}
+    {#if nutritionLabels.length > 0}
       <section aria-labelledby="nutrition-labels">
         <h3 id="nutrition-labels">Nutrition labels:</h3>
         <ul data-list="nutrition-labels">
-          {#each nutritialLabels as label}
+          {#each nutritionLabels as label}
             <li>{label}</li>
           {/each}
         </ul>
@@ -128,7 +166,7 @@
   section {
     &[data-section="recipe-details"] {
       --border-radius: var(--half-spacer);
-      padding-block: 2em;
+      padding-block: var(--section-spacer);
     }
 
     &.wrapper {
@@ -153,6 +191,7 @@
     img {
       margin-inline: auto;
       object-fit: cover;
+      height: clamp(13.375rem, 5.3333rem + 51.4667vw, 37.5rem);;
     }
 
     [data-list="nutrients-wrapper"],

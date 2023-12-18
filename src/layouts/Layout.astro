@@ -24,6 +24,7 @@
   @supports (scrollbar-width: thin) {
     * {
       scrollbar-width: thin;
+      scrollbar-color: hsl(var(--gray-color)) hsl(var(--light-black-color));
     }
   }
 
@@ -83,6 +84,12 @@
     line-height: 1.5;
   }
 
+  section {
+    &:focus-visible {
+      outline: 2px solid transparent;
+    }
+  }
+
   img {
     display: block;
     max-width: 100%;
@@ -90,6 +97,12 @@
 
   a {
     text-decoration: none;
+    border-radius: var(--half-spacer);
+
+    &:focus-visible {
+      outline: 2px solid hsl(var(--black-color));
+      outline-offset: var(--half-spacer);
+    }
   }
 
   h2 {
@@ -122,6 +135,16 @@
 
   ul {
     list-style-type: none;
+  }
+
+  ::selection {
+    background-color: hsl(var(--black-color));
+    color: hsl(var(--white-color));
+  }
+
+  :where(.header, footer) ::selection {
+    background-color: hsl(var(--white-color));
+    color: hsl(var(--black-color));
   }
 
   .wrapper {
@@ -175,10 +198,23 @@
       border: none;
       border-radius: 0.25rem;
       background-color: hsl(var(--yellow-color));
+      font-size: 0.9em;
     }
 
     input:focus-visible {
       outline: 2px solid hsl(var(--black-color) / 0.5);
     }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>

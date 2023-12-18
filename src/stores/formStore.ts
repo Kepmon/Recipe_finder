@@ -118,8 +118,27 @@ const returnFormData = (currentID?: string) => ({
     }
   ]
 })
-
 export const formData = writable(returnFormData())
+
+export const focusErrorMessage = (errorMessage?: HTMLElement) => {
+  const errorText =
+    errorMessage == null
+      ? (document.querySelector(
+          '[data-message="form-error"]'
+        ) as null | HTMLParagraphElement)
+      : errorMessage
+  const firstFormInput = document.querySelector(
+    '[name="q"]'
+  ) as null | HTMLInputElement
+
+  if (errorText != null && firstFormInput != null) {
+    errorText.focus()
+
+    setTimeout(() => {
+      firstFormInput.focus()
+    }, 2500)
+  }
+}
 
 const validateForm = (formDataObj: Record<string, string>) => {
   const formDataKeys = Object.keys(formDataObj)
@@ -142,7 +161,6 @@ const validateForm = (formDataObj: Record<string, string>) => {
       noFieldFilled: '',
       negativeCalories: 'The caloric range values cannot be negative'
     })
-    return false
   }
 
   if (formDataKeys.every((key) => formDataObj[key] === '')) {
@@ -150,6 +168,17 @@ const validateForm = (formDataObj: Record<string, string>) => {
       noFieldFilled: 'At least one form section has to be filled in',
       negativeCalories: ''
     })
+  }
+
+  const formErrorsKeys = Object.keys(get(formErrors))
+  const formErrorsData = get(formErrors)
+
+  if (
+    formErrorsKeys.some(
+      (key) => formErrorsData[key as keyof typeof formErrorsData] !== ''
+    )
+  ) {
+    focusErrorMessage()
     return false
   }
 
@@ -177,13 +206,19 @@ export const makeQueryLink = (
 
     if (formDataObj[key] !== '' && !key.includes('calories')) {
       const respectiveValue =
-        typeof respectiveObj !== 'string' && 'items' in respectiveObj
+        respectiveObj != null &&
+        typeof respectiveObj !== 'string' &&
+        'items' in respectiveObj
           ? respectiveObj.items.find(
               (_, index) => index === parseInt(keyParts[1], 10)
             )
           : ''
 
-      if (typeof respectiveObj !== 'string' && 'items' in respectiveObj) {
+      if (
+        respectiveObj != null &&
+        typeof respectiveObj !== 'string' &&
+        'items' in respectiveObj
+      ) {
         return `${acc}&${keyParts[0]}=${respectiveValue
           ?.toLowerCase()
           .replaceAll(' ', '+')}`
@@ -207,13 +242,27 @@ export const makeQueryLink = (
   }, base)
 }
 
-export const scrollIntoSection = (section: null | HTMLElement) => {
-  if (section != null) {
+export const scrollIntoSection = (section: HTMLElement) => {
+  const contribution = document.querySelector(
+    '[data-link="contribution"]'
+  ) as null | HTMLAnchorElement
+  const isContributionInThisSection =
+    contribution?.closest('section') === section
+
+  if (section != null && isContributionInThisSection) {
+    contribution.focus()
     section.scrollIntoView()
+    return
   }
+
+  section.focus()
+  section.scrollIntoView()
 }
 
 export const handleSubmit = async (e: Event) => {
+  const section = document.querySelector(
+    '[data-section="recipe-results"]'
+  ) as null | HTMLDivElement
   const form = e.target as HTMLFormElement
   const formDataInstance = new FormData(form)
   const formDataObj = Object.fromEntries(formDataInstance) as Record<
@@ -229,6 +278,17 @@ export const handleSubmit = async (e: Event) => {
     isFormSubmitted.set(false)
     return
   }
+
+  const url = new URL(window.location.origin)
+  const formDataKeys = Object.keys(formDataObj)
+
+  formDataKeys.forEach((key) => {
+    if (formDataObj[key] !== '') {
+      url.searchParams.set(key, formDataObj[key])
+    }
+  })
+
+  window.history.pushState({}, '', url)
 
   const response = await fetch('/recipes.json', {
     method: 'POST',
@@ -253,10 +313,9 @@ export const handleSubmit = async (e: Event) => {
   recipesError.set('')
   isFormSubmitted.set(false)
 
-  const section = document.querySelector(
-    '[data-section="recipe-results"]'
-  ) as null | HTMLDivElement
-  scrollIntoSection(section)
+  if (section != null) {
+    scrollIntoSection(section)
+  }
 }
 
 export const loadMoreRecipes = async () => {
@@ -296,10 +355,13 @@ export const resetFormData = () => {
 }
 
 export const showRecipeDetails = (id: string) => {
-  idOfClickedRecipe.set(id)
-
   const section = document.querySelector(
     '[data-section="recipe-details"]'
   ) as null | HTMLDivElement
-  scrollIntoSection(section)
+
+  idOfClickedRecipe.set(id)
+
+  if (section != null) {
+    scrollIntoSection(section)
+  }
 }

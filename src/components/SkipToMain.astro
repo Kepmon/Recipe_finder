@@ -1,0 +1,21 @@
+<a href="#main">Skip To Main</a>
+
+<style lang="scss">
+  a {
+    position: absolute;
+    top: var(--spacer);
+    left: var(--spacer);
+    padding: var(--spacer) var(--double-spacer);
+    background-color: hsl(var(--yellow-color));
+    color: hsl(var(--brown-color));
+    font-weight: 500;
+    z-index: 100;
+    translate: 0 -100px;
+    transition: translate 300ms ease-in;
+  }
+
+  a:focus-visible {
+    translate: 0;
+    outline-color: transparent;
+  }
+</style>

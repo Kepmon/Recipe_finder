@@ -22,7 +22,8 @@ Nevertheless, I still decided to use this particular API simply because I wasn't
 
 ### Sources
 1. Nutrition data provider: [edamam.com](https://www.edamam.com/)
-2. Favicon: [svgrepo.com/](https://www.svgrepo.com/svg/276548/recipe)
+2. Favicon: [svgrepo.com](https://www.svgrepo.com/svg/276548/recipe)
 3. Header background image: [pixabay.com](https://pixabay.com/)
 4. Down chevron icon: [svgrepo.com](https://www.svgrepo.com/svg/158537/down-chevron)
 5. Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)
+6.External link icon: [svgrepo.com](https://www.svgrepo.com/svg/442483/external-link)

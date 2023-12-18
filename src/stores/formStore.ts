@@ -206,13 +206,19 @@ export const makeQueryLink = (
 
     if (formDataObj[key] !== '' && !key.includes('calories')) {
       const respectiveValue =
-        typeof respectiveObj !== 'string' && 'items' in respectiveObj
+        respectiveObj != null &&
+        typeof respectiveObj !== 'string' &&
+        'items' in respectiveObj
           ? respectiveObj.items.find(
               (_, index) => index === parseInt(keyParts[1], 10)
             )
           : ''
 
-      if (typeof respectiveObj !== 'string' && 'items' in respectiveObj) {
+      if (
+        respectiveObj != null &&
+        typeof respectiveObj !== 'string' &&
+        'items' in respectiveObj
+      ) {
         return `${acc}&${keyParts[0]}=${respectiveValue
           ?.toLowerCase()
           .replaceAll(' ', '+')}`
@@ -275,11 +281,13 @@ export const handleSubmit = async (e: Event) => {
 
   const url = new URL(window.location.origin)
   const formDataKeys = Object.keys(formDataObj)
+
   formDataKeys.forEach((key) => {
     if (formDataObj[key] !== '') {
       url.searchParams.set(key, formDataObj[key])
     }
   })
+
   window.history.pushState({}, '', url)
 
   const response = await fetch('/recipes.json', {
@@ -352,11 +360,6 @@ export const showRecipeDetails = (id: string) => {
   ) as null | HTMLDivElement
 
   idOfClickedRecipe.set(id)
-
-  const searchParams = new URLSearchParams(
-    `${window.location.search}&recipe=${id}`
-  )
-  window.history.pushState({}, '', searchParams)
 
   if (section != null) {
     scrollIntoSection(section)

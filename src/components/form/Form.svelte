@@ -3,9 +3,26 @@
   import IngredientOptions from "./IngredientOptions.svelte";
   import FormOptionsList from "./FormOptionsList.svelte";
   import Spinner from "../Spinner.svelte";
-  import { formData, formErrors, handleSubmit, resetFormData } from "../../stores/formStore";
-  import { scale, fade } from "svelte/transition";
-  import { isFormSubmitted, focusErrorMessage } from '../../stores/formStore'
+  import {
+  formData,
+  recipesData,
+  isFormSubmitted,
+  formErrors,
+  handleSubmit,
+  resetFormData,
+  focusErrorMessage
+} from '../../stores/formStore'
+import { getRecipesOnPageLoad } from '../../helpers/recipes';
+import { scale, fade } from "svelte/transition";
+import { onMount } from 'svelte';
+
+onMount(async () => {
+  const data = await getRecipesOnPageLoad()
+  
+  if (data != null) {
+    $recipesData = data
+  }
+})
 </script>
 
 <Popup />

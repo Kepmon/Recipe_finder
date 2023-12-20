@@ -1,29 +1,41 @@
-### Live Preview
-[Old Link](https://kepmon.github.io/Recipe_finder/)  
-[New Link](https://coruscating-toffee-43cf1a.netlify.app/)
+[This website](https://coruscating-toffee-43cf1a.netlify.app/) was first created at the very early stage of my programming learning process, using HTML, SCSS, and vanilla JS. Almost a year afterwards, I decided to refactor it, by essentialy writing it from scratch, using, this time, Astro, Svelte, Typescript, and SCSS.
 
-### UPDATE
-As a part of my 'remove-all-crappy-code-from-my-github' goal, this project is currently being refactored, using Astro, Svelte, TypeScript, and SCSS. It's being rewriting from scratch, with the following goals in mind:
-* add non-existent accessibility
-* improve on CSS/SCSS
-* improve on best practices of writing JS/TS, with particular emphasis on maintability
-* improve on design, at least a little bit
+### Description
+The website **allows a user** to fill in a form that specifies various recipe's criteria, namely the meal name, its ingredients, diet/dish/cuisine types, caloric range, and health labels. All fields are optional but at least one needs to be filled in. After submitted the (correctly filled) form, the page is scrolled (unless a user has the [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) CSS media feature enbaled - in this case the page is "jumped") to the results section that displays 20 recipe results. The pagination was applied for this in the current version of the website, so a user can load more results if needed.  
+**Unfortunately**, the API I used as the recipes source doesn't really provide with the recipes themselves but, instead, they share a link to the external website with a given recipe. No all of them work anymore, though. Therefore, when clicking the 'Read More' button on a recipe card, the website again scrolls (or jumps) to the recipe details that includes some additional info regarding the chosen recipe as well as previously mentioned link to the recipe itself.
 
-Due to the new version of the website being on a very early stage of development, I'm sharing two links for the live preview:
-* 'Old Link' - containing the old version of the website (not fully working as it turns out 🙈)
-* 'New Link' - containing the most recent version of the website but not containing a significant part of its functionality, since it is still being developed
+### Improvements made in current version
+As compared to the very first version of it, **basically everything has been improved**:
+* **design** - the results and recipe details sections were designed from scratch in order to avoid various layout issues that ocurred in the old version of the project as well as simply make it a bit nicer to look. On top of that, small changes has been made, like changing some colors, so at least the contrast ratio is on point.
+* **code** - even though I'm pretty sure there are still many parts of it that could be improved, the current code is certainly incomparably better than the old one
+* **accessibility** - it didn't really exist in the previous version, so its existence in the current one is a big improvement already. I tried my best to make this website accessible for all users including, but not limited to, the keyboard- and screen-reader-navigating users. I did have some issues, that I didn't see coming, with making it as good as I wish it were, due to the "scrolling nature" of the website (details on that below). Nonetheless, I think it's not that bad overall, but if I ever find a way to do certain things better, I'll surely come back here and improve on them. Same thing with the [prefers-reduced-data](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-data) media query that I really could use on this website since I could spot much "data" that is not absolutely nessecary if a user doesn't want them (e.g. custom font, header img or maybe even recipe images if I plan for it well enough). But, as currently [no browser supports this feature](https://caniuse.com/?search=prefers-reduced-data) I decided not to implement it right now but, instead, wait for better support and come back here to refactor it then.
 
-When I'm done with this project's refactoring, only a new link will be available and the content of this README will be appropriately adjusted.
-
-### Old Content
-Due to certain limitations regarding the API response, I wasn't able to design this website exactly the way I wanted. For example, the actual recipe (meaning the step-by-step cooking description) was not provided in this API response, therefore, I couln't put it up on my website. Instead, one can see this recipe by going to an external website (linked at the end of "Read more" section); hovewer, some links are not available anymore. I believe, the abovementioned issue is the main drawback of this website but, unfortunately, I can't really do anything to change it. Moreover, the results section consists of only 20 recipes, again, due to the limitations of the API response.
-
-Nevertheless, I still decided to use this particular API simply because I wasn't really able to find a better (free) one.
-
-### Sources
-1. Nutrition data provider: [edamam.com](https://www.edamam.com/)
-2. Favicon: [svgrepo.com](https://www.svgrepo.com/svg/276548/recipe)
-3. Header background image: [pixabay.com](https://pixabay.com/)
-4. Down chevron icon: [svgrepo.com](https://www.svgrepo.com/svg/158537/down-chevron)
-5. Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)
-6.External link icon: [svgrepo.com](https://www.svgrepo.com/svg/442483/external-link)
+### Issues to be taken care of in the future
+I'm not fully happy with the end result of the website due to certain issues (mostly related to accessibility) that I was able to handle in some way but I believe this wasn't the best approach, however, I couldn't come up with a better one at this point. Nonetheless, I faced some other issues as well and all of them are described below:
+* **CSS nesting** - currently, I'm using SCSS to handle styles for my website, however, the only "SCSSy" feature I've actually been using is nesting. That being so, I was considering throwing SCSS away and replace all styles-related code with just vanilla CSS. But, ultimately, I've never done that because I do like nesting. That's when I thought about using CSS nesting, which seems to perfectly fill my needs. However, I'm not fully content with its [current support](https://caniuse.com/?search=css%20nesting), so I decided to wait for a while for a better support, especially that I'll be probably coming back to refactor certain things on this website anyway, so I can take care of that then.
+* **Query params** - currently, users can share link to the recipe results section but not to the recipe details section.
+    - this is because the results I get from the API don't include any recipe ids (🙈)
+    - that's why I used the [nanoid package](https://www.npmjs.com/package/nanoid) to add them myself since I obviously need an id assigned to each recipe
+    - the thing, though, is that, with this approach, the id is assigned every time new data is fetched
+    - therefore, I can't allow users to go directly to the recipe details section by putting the recipe's id as a query param because it would never match the current id of the same recipe
+    - so, at the moment, I don't have an idea how to manage this issue **properly** (I mean, I could target the recipe by its name instead of the id but I don't think this would be a good idea), so I'm leaving it as is for now - one day I'll probably come up with the correct solution
+    - apart from all of that, the paginated records of recipe results should probably also have respected query params, which has been missed
+* **Previously mentioned `prefers-reduced-data`**
+* **Moving focus on page scroll** - this is a tricky one, due to:
+    - let's assume, you (as an either a keyboard- or a screen-reader-navigating user) fill in the very first input field in the form and press enter to submit the form
+    - the page will then scroll to the recipe results section but your focus stays in the same input field (assumming the default, no focus movement at this point)
+    - this not only means that (as a user) you have to manually tab through all input fields (which is way too annoying in any case but especially when you have at least one collapsible form section expanded) to move your focus to the new section
+    - but also, the page will actually scroll back up to follow your focus so there was no point on it being scrolled down in the first place
+    - the same logic applies for the recipe results section - the focus would stay on the clicked card's button
+    - that's why the focus state needs to be shifted every time "something new" appears, but...
+    - the first element in the first section is actually the contribution link that's a focusable element (it wasn't so in the original design but I purposely moved it in there, to manage the accessibility) but the first focusable element in the other section is the link at the very bottom of it
+    - this means that in the recipe details section a screen reader wouldn't read almost anything but this link, whereas a keyboard-navigating user would probably need to use the up arrow to be able to see its whole section's content
+    - this in turn means that in the first section I could move focus to the contribution link which works well for both keyboard- and screen-reader users but for the other section I had to focus the whole section (using `tabindex="-1"` on the section and javascript), which is already bad (both, focusing a non-focusable element and the inconsistency of handling the same task)
+    - but there is this other issue with loading more recipes - by default, focus would stay on the 'Load More' button, at the very bottom of the section, which would be a bad UX for all users
+    - when only keyboard-navigating users are concerned, moving focus onto the first focusable element inside the first new result (card) would be fine but as this element would be a button at the end of this card, this would be obviously detrimental for screen-reader-navigating users
+    - that's why, this time, I decided to shift focus onto the first of newly appeared cards (again, using `tabindex="-1"`)
+    - what makes things even worse, there's some issue with the proper focus shift (to this new card) when using both [NVDA](https://www.nvaccess.org/download/) as well as [Microsoft Narrator](https://support.microsoft.com/en-us/windows/complete-guide-to-narrator-e4397a0d-ef4f-b386-d8ae-c172f109bdb1), but only on Chromium browsers (tested on Brave), resulting in the screen reader not reading properly the new content. It works on Firefox, though. It obviously also works for keyboard-navigating users.
+    - so, this part of coding this website was certainly the hardest one and even though I made it better than the default behavior, I still have a feeling that my approach on this was really bad
+    - on the other hand, I don't think this is due to the lack of knowledge/testing but rather... there was simply no good solution. Unless...
+    - at some point I started to think that this is actually on me because I should have probably taken the accessibility into consideration when designing the website and come up with another one
+    - unfortunately, as for now, I don't really have a good idea for this, so, again, I'm leaving it as is for now and hope that I'll be able to handle all those issues better in the future
